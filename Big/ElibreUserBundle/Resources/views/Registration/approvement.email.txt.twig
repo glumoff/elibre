@@ -1,0 +1,12 @@
+{% trans_default_domain 'messages' %}
+{% block subject %}
+{% autoescape false %}
+{{ 'register.approvement.subject'|trans({'%username%': user.username, '%adminUrl%': adminUrl, '%email%': user.email}, 'messages') }}
+{% endautoescape %}
+{% endblock %}
+{% block body_text %}
+{% autoescape false %}
+{{ 'register.approvement.message'|trans({'%username%': user.username, '%adminUrl%': adminUrl, '%email%': user.email}) }}
+{% endautoescape %}
+{% endblock %}
+{% block body_html %}{% endblock %}

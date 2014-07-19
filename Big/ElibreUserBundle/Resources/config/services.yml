@@ -1,0 +1,21 @@
+services:
+    fos_user.listener.email_confirmation:
+        class:      "Big\ElibreUserBundle\EventListener\EmailConfirmationListener"
+        arguments:  ["@fos_user.mailer", "@fos_user.util.token_generator", "@router", "@session"]
+        tags:
+            - { name: kernel.event_subscriber }
+    big_user.listener.register_confirmed:
+        class:      "Big\ElibreUserBundle\EventListener\RegisterConfirmListener"
+        #arguments:  ["@fos_user.security.login_manager", "%fos_user.firewall_name%", "@fos_user.mailer"]
+        arguments:  ["@fos_user.mailer", "@router"]
+        tags:
+            - { name: kernel.event_subscriber }
+    fos_user.listener.authentication:
+        class:      "Big\ElibreUserBundle\EventListener\AuthenticationListener"
+        arguments:  ["@fos_user.security.login_manager", "%fos_user.firewall_name%"]
+        tags:
+            - { name: kernel.event_subscriber }
+    big_user.mailer.extended:
+        class: "Big\ElibreUserBundle\Mailer\MailerEx"
+#        public: false
+        arguments: ["@mailer", "@router", "@templating", {confirmation.template: %fos_user.registration.confirmation.template%, resetting.template: %fos_user.resetting.email.template%, from_email: {confirmation: %fos_user.registration.confirmation.from_email%, resetting: %fos_user.resetting.email.from_email%} }]

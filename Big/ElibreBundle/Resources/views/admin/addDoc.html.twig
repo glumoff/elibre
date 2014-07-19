@@ -1,0 +1,59 @@
+{% extends isAjax ? 'BigElibreBundle:admin:index_ajax.html.twig' : 'BigElibreBundle:admin:index.html.twig' %}
+
+{% block additional_scripts %}
+{#<script src="{{ asset('bundles/bigelibre/js/admin/docs.js') }}"></script>#}
+{% endblock %}
+
+
+{% block content %}
+<script>
+    var fmURL = '{{ path('big_elibre_fm_actions') }}';
+    $('#openFMBtn').on('click', function(e) {
+      openFileManager(e, $('#form_path'), fmURL);
+      e.preventDefault();
+    });
+
+
+{#  function openFileManager(e, target) {
+    alert('openFileManager');
+    e.preventDefault();
+  }#}
+</script>
+
+<div id="editMenuOrderWindow" class="modalWindow">
+  <div class="modalWindowHeader">
+    Header
+  </div>
+  <div class="modalWindowContent">
+{{ form_start(addDocForm) }}
+  {{ form_errors(addDocForm) }}
+    {{ form_widget(addDocForm.id) }}
+    <table>
+      <tr>
+        <td>Path:</td>
+        <td>{{ form_widget(addDocForm.path) }} <a id="openFMBtn" href="#">Choose...</a></td>
+      </tr>
+      <tr>
+        <td>Title:</td>
+        <td>{{ form_widget(addDocForm.title) }}</td>
+      </tr>
+      <tr>
+        <td>Annotation:</td>
+        <td>{{ form_widget(addDocForm.annotation) }}</td>
+      </tr>
+      <tr>
+        <td>Tags:</td>
+        <td>{{ form_widget(addDocForm.tags) }}</td>
+      </tr>
+      <tr>
+        <td>Theme:</td>
+        <td>{{ form_widget(addDocForm.theme) }} {{ theme.title }}</td>
+      </tr>
+    </table>
+
+{{ form_end(addDocForm) }}
+
+  </div>
+</div>
+
+{% endblock %}

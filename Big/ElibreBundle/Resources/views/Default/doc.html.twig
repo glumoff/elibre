@@ -1,0 +1,57 @@
+{% extends 'BigElibreBundle:Default:index.html.twig' %}
+
+{% block content %}
+  {% if doc %}
+    <div class="docTitle">
+      {{ attribute(doc, 'title') }}
+    </div>
+    <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ">
+      {% if doc.icon %} 
+        <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon big"/>
+      {% else %}
+        <img src="{{ asset('bundles/bigelibre/images/down.png') }}" class="big"/>
+      {% endif %}
+    </a>
+
+        <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ">
+          Загрузить документ
+        </a>
+
+    <div class="docAnnotation">
+      {#<h3>Аннотация:</h3>#}
+      <p>
+        {{ attribute(doc, 'annotation')|escape('html')|replace({'\n': "<p>"})|raw }}
+      </p>
+    </div>
+
+    {#  doc.getMimeType = {{ doc.getMimeType() }};#}
+    {% if is_granted('ROLE_USER') %}
+
+      {% if doc.getMimeType() starts with 'video' %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('bundles/bigelibre/js/flowplayer/skin/minimalist.css') }}">
+        <script type="text/javascript" src="{{ asset('bundles/bigelibre/js/flowplayer/flowplayer.min.js') }}"></script>
+        <div class="flowplayer" data-adaptive-ratio="true">
+          <video>
+            <source type="{{ doc.getMimeType() }}" src="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}"/>
+          </video>
+
+        </div>
+
+        {#    <script type="text/javascript" src="{{ asset('bundles/bigelibre/js/flowplayer-flash/flowplayer-3.2.13.min.js') }}"></script>
+            <a  href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}"
+              style="display:block;width:100%;height:330px"  
+              id="player"> 
+            </a> 
+            <script>
+              flowplayer("player", "{{ asset('bundles/bigelibre/js/flowplayer-flash/flowplayer-3.2.18.swf') }}");
+            </script>
+        #}    
+        {#    <p>
+              {{ attribute(doc, 'annotation')|escape('html')|replace({'\n': "<p>"})|raw }}
+            </p>#}
+        {#      </div>#}
+
+      {% endif %}
+    {% endif %}
+  {% endif %}
+{% endblock %}

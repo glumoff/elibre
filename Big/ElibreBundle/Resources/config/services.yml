@@ -1,0 +1,5 @@
+parameters:
+     big_elibre.rootDir: /mnt/hd/work/www/elibre_data/
+     big_elibre.uploadDir: /mnt/hd/work/www/elibre_data/upload/
+
+services:

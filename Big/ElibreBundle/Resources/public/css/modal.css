@@ -1,0 +1,49 @@
+/* 
+    Created on : 2 лют 2014, 4:33:28
+    Author     : Alexander Glumoff <glumoff at gmail.com>
+*/
+
+.modalWindow {
+  background-color: white;
+  border-radius: 3px;
+  min-width: 500px;
+  min-height: 300px;
+  /*height: 300px;*/
+}
+
+.modalWindowHeader {
+  border-radius: 3px 3px 0 0;
+  background-color: whitesmoke;
+  padding: 2px;
+}
+
+a.boxclose{
+  float: right;
+  margin-top: -10px;
+  margin-right: -10px;
+  cursor: pointer;
+  color: #fff;
+  border: 1px solid #AEAEAE;
+  border-radius: 30px;
+  background: #605F61;
+  font-size: 31px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 0px;
+  padding: 11px 3px;       
+}
+
+.boxclose:before {
+  content: "×";
+}
+
+.modalWindowContent {
+  padding: 2px;
+  /*border-radius: 0 0 3px 3px;*/
+  /*background-color: white;*/
+  bottom: 0;
+  height: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+

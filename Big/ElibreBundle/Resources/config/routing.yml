@@ -1,0 +1,79 @@
+big_elibre_test:
+    pattern: /adm/test
+    defaults: { _controller: BigElibreBundle:Test:index }
+
+big_elibre_theme:
+    pattern:  /theme/{theme_code}/{action}
+    defaults: { _controller: BigElibreBundle:Theme:showTheme, action: view }
+    requirements:
+        action: view|edit|add|move|del
+      
+big_elibre_doc:
+    pattern:  /doc/{doc_id}/{action}
+    defaults: { _controller: BigElibreBundle:Document:showDoc, action: view }
+    requirements:
+        action: view|download|edit
+
+
+register_wait_approvement:
+    pattern: register/wait-approvement
+    defaults: { _controller: BigElibreBundle:Register:waitApprovement }
+
+#login:
+#    pattern:  /login
+#    defaults: { _controller: BigElibreBundle:Security:login }
+#    
+#login_check:
+#    pattern:  /login_check
+#
+#register:
+#    pattern:  /register
+#    defaults: { _controller: BigElibreBundle:Security:register }
+    
+big_elibre_admin:
+    pattern: /admin/{mode}/{action}
+    defaults: { _controller: BigElibreBundle:Admin:index, mode: board, action: view }
+    options:
+        expose: true
+    #requirements:
+        #action: view|edit|save
+        
+# File manager
+big_elibre_fm_actions:
+    pattern: /fm/{action}
+    defaults: { _controller: BigElibreBundle:FM:index, action: none }
+    options:
+        expose: true
+
+# Search
+big_elibre_search:
+    pattern: /search
+    defaults: { _controller: BigElibreBundle:Search:index }
+    options:
+        expose: true
+
+big_elibre_new_docs:
+    pattern:  /new_docs
+    defaults: { _controller: BigElibreBundle:Search:newDocs }
+
+big_elibre_fav:
+    pattern:  /fav/{action}
+    defaults: { _controller: BigElibreBundle:UserPages:favorites, action: view }
+  
+big_elibre_history:
+    pattern:  /history
+    defaults: { _controller: BigElibreBundle:UserPages:history }
+  
+        
+big_elibre_page:
+    pattern:  /{_locale}/{page}/{action}
+    defaults: { _controller: BigElibreBundle:Page:index, page: home, action: view, _locale: ru }
+    requirements:
+        action: view|edit|save
+        #_locale: en|ru|uk
+
+        
+big_elibre_cache:
+    pattern: /adm/cache/{action}
+    defaults: { _controller: BigElibreBundle:Cache:index }
+

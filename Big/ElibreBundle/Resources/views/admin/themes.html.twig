@@ -1,0 +1,48 @@
+{% extends isAjax ? 'BigElibreBundle:admin:index_ajax.html.twig' : 'BigElibreBundle:admin:index.html.twig' %}
+
+{% block additional_scripts %}
+<script src="{{ asset('bundles/bigelibre/js/jstree/jstree.min.js') }}"></script>
+<script src="{{ asset('bundles/bigelibre/js/jstree/jstreegrid.js') }}"></script>
+<script src="{{ asset('bundles/bigelibre/js/admin/themes.js') }}"></script>
+<script>
+  var pageRoot = "{{ path('big_elibre_admin', {'mode': 'themes'}) }}";
+  var themesData;
+  $(function() {
+{#    var themesData = {{ themesJSON | raw }};#}
+    themesData = {{ themesJSON | raw }};
+
+    initThemesTree($('#themesTreeContainer'), themesData);
+
+    $('#createRootButton').on('click', function(e) {
+      createRootThemeDlg(e, $('#themesTreeContainer'), this);
+{#      e.preventDefault();#}
+    });
+
+    $('#save_action').on('click', function(e) {
+{#      createRootThemeDlg(e, $('#themesTreeContainer'), this);#}
+{#      e.preventDefault();#}
+{#      var tree = treeContainer.jstree(true);
+      alert(JSON.stringify(tree.get_json(tree.get_node('#'))));#}
+      performActions();
+    });
+
+  });
+</script>
+
+<script src="{{ asset('bundles/bigelibre/js/jquery.custombox.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div id="save_action">Themes were modified: <input type="button" value="Save"/> </div>
+
+<div id="event_result"></div>
+<div class="toolbar">
+  <a id="createRootButton" href="#editThemeWindow" class="create" title="Create new root item">Create</a>
+</div>
+<div id="themesTreeContainer"></div>
+
+{% endblock %}

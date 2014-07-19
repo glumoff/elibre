@@ -1,0 +1,76 @@
+<link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />
+<link href="{{ asset('bundles/bigelibre/css/fm.css') }}" rel="stylesheet" />
+<link href="{{ asset('bundles/bigelibre/css/uploadfile.css') }}" rel="stylesheet">
+<link href="{{ asset('bundles/bigelibre/css/elibre/jquery-ui-1.10.3.custom.css') }}" rel="stylesheet" />
+<script src="{{ asset('bundles/bigelibre/js/jquery-1.9.1.js') }}"></script>
+<script src="{{ asset('bundles/bigelibre/js/jquery.uploadfile.min.js') }}"></script>
+<script src="{{ asset('bundles/bigelibre/js/admin/fm.js') }}"></script>
+<script src="{{ asset('bundles/bigelibre/js/jquery-ui-1.10.3.custom.min.js') }}"></script>  
+
+<script>
+$(function() {
+  //var FM = new FileManager();
+  new FileManager().init();
+
+{#  console.log(new FileManager().currentPath);#}
+
+  $("#fileuploader").uploadFile({
+    url: Routing.generate('big_elibre_fm_actions', { action: 'upload' }),
+//    fileName: "myfile",
+    onSubmit: function(files) {
+      this.formData.path = new FileManager().currentPath;
+      this.data.path = new FileManager().currentPath;
+    },
+    onSuccess: function(files, data, xhr)
+    {
+      new FileManager().refreshFileList();
+    },
+    dynamicFormData: function()
+    {
+      var data = {path: new FileManager().currentPath};
+      return data;
+    },
+  });
+});
+</script>
+
+
+<div class="FMBody modalWindow">
+
+    {% block header %}
+  <div class="FMHeader">
+    File manager {#<div id="closeBtn">close</div>#}
+  </div>
+    {% endblock %}
+
+    {% block toolbar %}
+  <div class="FMToolBox">
+{#    <a href="#" onclick="new FileManager().uploadDialog();return false;">Upload file...</a>#}
+{#    <a href="#" onclick="new FileManager().delete();
+        return false;">Delete</a>
+    <br>
+#}    Directory: <span id="currentPath">{{ path }}</span>
+  </div>
+    {% endblock %}
+
+    {% block content %}
+
+    {% block filelist %}
+  <div class="FMFileList">
+    <ul>
+{#      {% for file in fileList %}
+        <li>{{ file.getFileName }}</li>
+      {% endfor %}
+#}      </ul>
+  </div>
+    {% endblock %}
+
+    {% endblock %}
+
+    {% block upload %}
+  <div class="uploadFileArea">
+    <div id="fileuploader">Upload</div>
+  </div>
+    {% endblock %}
+
+</div>

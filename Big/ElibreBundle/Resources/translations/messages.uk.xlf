@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Symfony2 is great</source>
+                <target>Symfony2 це неймовірно</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>register.title</source>
+                <target>Реєстрація</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>error.404</source>
+                <target>Сторінку не знайдено</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>register.check_email</source>
+                <target>Листа надіслано на адресу %email%. У ньому міститься посилання, за яким Ви можете підтвердити свою реєстрацію.</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>register.approvement-wait</source>
+                <target>Вітаємо, ваш акаунт створено. Вам буде надіслано підтверждення від адміністратора.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>register.approvement.subject</source>
+                <target>Зареєстровано нового користувача</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>register.approvement.message</source>
+                <target>Було зареєстровано нового користувача:
+
+Ім’я:   %username%
+E-mail: %email%
+
+Щоб активувати перейдіть до адмін-консолі %adminUrl%.
+                </target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>register.account_changed</source>
+                <target>Ваш обліковий рахунок було змінено</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>register.account_activated</source>
+                <target>Ваш обліковий рахунок активовано</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>register.account_deactivated</source>
+                <target>Ваш обліковий рахунок вимкнено</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>theme.goto</source>
+                <target>Перейти до теми</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

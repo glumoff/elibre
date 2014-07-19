@@ -1,0 +1,28 @@
+{% extends 'BigElibreBundle:Default:index.html.twig' %}
+
+{% block content %}
+
+  &nbsp;
+
+  {% block search_results %}
+    {% if results %}
+      <ul class="searchResults docList">
+        {% for doc in results %}
+          <li>
+            {% if doc.getCreateDt() is defined %}
+              <div class="docDate">{{ doc.getCreateDt()|date('d.m.Y') }}</div>
+            {% endif %}
+            <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>Аннотация: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
+              {{ attribute(doc, 'title') }}
+            </a>
+            <span class="nowrap">
+              (<a href="{{ path('big_elibre_theme', {'theme_code': doc.getTheme().getCode(),  'action' : 'view' }) }}" title="{% trans %}theme.goto{% endtrans %}">{{ doc.getTheme().getTitle() }}</a>)
+            </span>
+            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
+          </li>        
+        {%endfor%}
+      </ul>
+    {%endif%}
+  {% endblock %}  
+
+{% endblock %}

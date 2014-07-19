@@ -1,0 +1,32 @@
+{% extends 'BigElibreBundle:Default:index.html.twig' %}
+
+{% block content %}
+
+  <br>
+  <center>
+    <div>
+      <form>
+        <input type="text" name="needle" value="{{ needle }}"/>
+        <input type="submit" value="Search"/>
+      </form>
+    </div>
+  </center>
+  <br>
+  <hr>
+
+  {% block search_results %}
+    {% if results %}
+      <ul class="docList">
+        {% for doc in results %}
+          <li>
+            <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>Аннотация: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
+              {{ attribute(doc, 'title') }}
+            </a>
+            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
+          </li>        
+        {%endfor%}
+      </ul>
+    {%endif%}
+  {% endblock %}  
+
+{% endblock %}

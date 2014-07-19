@@ -1,0 +1,15 @@
+{% for cur_theme in menuThemes %}
+  {% if cur_theme.children.getThemesArray() %}
+<h3 class="{% if cur_theme.id == activeThemeRoot %}active{% endif %}">{{ cur_theme.title }}</h3>
+  {% else %}
+<a class="{% if cur_theme.id == activeThemeRoot2 %}active{% endif %}" href="{{ path('big_elibre_theme', {'theme_code': cur_theme.code,  'action' : 'view' }) }}" >
+{{ cur_theme.title }}
+  {% if cur_theme.getDocsCount() %}
+    ({{ cur_theme.getDocsCount() }})
+  {% endif %}
+</a>
+  {% endif %}
+<div>
+  {% include "BigElibreBundle:Default:nav_menu.html.twig" with {'menuThemes': cur_theme.children.getThemesArray(), 'activeThemeRoot': activeThemeRoot, 'activeThemeRoot2': activeThemeRoot2}  %}
+    </div>
+{% endfor %}

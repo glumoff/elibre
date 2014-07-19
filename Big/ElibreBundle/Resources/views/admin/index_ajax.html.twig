@@ -1,0 +1,14 @@
+<link href="{{ asset('bundles/bigelibre/css/admin/admin.css') }}" rel="stylesheet" />
+<script src="{{ asset('bundles/bigelibre/js/jquery-1.9.1.js') }}"></script>
+{#<script>
+  alert('index_ajax');
+</script>#}
+{% block additional_scripts %}
+{% endblock %}
+
+{% block content %}
+{#<div style='position:relative;left:0px;top:0px; background-color: red;'>#}
+  {{ content|raw }}
+{#</div>#}
+{% endblock %}
+

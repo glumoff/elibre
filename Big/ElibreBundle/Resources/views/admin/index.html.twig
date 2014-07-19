@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>
+      Админ косоль | Электронная библиотека | Николаевский центр подготовки плавсостава
+    </title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link href="{{ asset('bundles/bigelibre/css/elibre/jquery-ui-1.10.3.custom.css') }}" rel="stylesheet" />    
+    <link href="{{ asset('bundles/bigelibre/css/admin/admin.css') }}" rel="stylesheet" />
+    <script src="{{ asset('bundles/bigelibre/js/jquery-1.9.1.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+    {% block additional_scripts %}
+    {% endblock %}
+  </head>
+
+  <body>
+    {% block header %}
+      <div class="header">
+        <h1>Admin console <a href="{{ path('big_elibre_page') }}">Электронной библиотеки</a></h1>
+      </div><!-- .header-->
+    {% endblock %}
+
+    <div class="middle">
+
+      <div class="container">
+        <div class="content">
+          {% block content %}
+            {{ content|raw }}
+          {% endblock %}
+        </div><!-- .content-->
+      </div><!-- .container-->
+
+
+      {% block menu %}
+        <div class="left-sidebar">
+          <a href="{{ path('big_elibre_admin', {'mode': 'themes'}) }}">Themes</a><br>
+{#          <a href="{{ path('big_elibre_admin', {'mode': 'docs'}) }}">Documents</a><br>#}
+          <a href="{{ path('big_elibre_admin', {'mode': 'user'}) }}">Users</a><br>
+        </div><!-- .left-sidebar -->
+      {% endblock %}
+
+    </div><!-- .middle-->
+
+
+  </body>
+</html>

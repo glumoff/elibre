@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+  <head>
+    {#    <link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />#}
+    <link href="{{ asset('bundles/bigelibre/css/elibre/jquery-ui-1.10.3.custom.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/bigelibre/css/main.css') }}" rel="stylesheet" />
+    <script src="{{ asset('bundles/bigelibre/js/jquery-1.9.1.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/js/jquery.custombox.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+    <script src="{{ asset('bundles/bigelibre/js/func.js') }}"></script>
+    <title>
+      Электронная библиотека | Николаевский центр подготовки плавсостава
+    </title>
+  </head>
+  <body>
+
+    <div id="wrapper">
+      {% block header %}
+        <div id="header">
+          <div id="headerTitle"><a href="{{ path('big_elibre_page') }}">Электронная<br>библиотека</a></div>
+          <div id="headerLinks" class="fulljustify">
+            <a href="{{ path('big_elibre_page') }}">Главная</a> | <a href="{{ path('fos_user_security_login') }}">Вход</a> | <a href="{{ path('big_elibre_search') }}">Поиск</a> | <a href="{{ path('big_elibre_page', {'page': 'contacts'}) }}">Контакты</a>
+
+            {% if is_granted('ROLE_ADMIN') %}
+              | <a href="{{ path('big_elibre_admin') }}">Админ</a>
+            {% endif %}
+          </div>
+          <div id="rightLinks">
+            <div class="new icon">
+              <a href="{{ path('big_elibre_new_docs') }}" alt="{% trans from "messages" %}New docs in library{% endtrans %}" title="{% trans from "messages" %}New docs in library{% endtrans %}">
+                {% trans from "messages" %}New docs{% endtrans %}
+              </a>
+            </div>
+            <div class="fav icon">
+              <a href="{{ path('big_elibre_fav') }}" alt="{% trans from "messages" %}Favorites{% endtrans %}" title="{% trans from "messages" %}Favorites{% endtrans %}">
+                {% trans from "messages" %}Favorites{% endtrans %}
+              </a>
+            </div>
+            <div class="history icon">
+              <a href="{{ path('big_elibre_history') }}" alt="{% trans from "messages" %}History{% endtrans %}" title="{% trans from "messages" %}History{% endtrans %}">
+                {% trans from "messages" %}History{% endtrans %}
+              </a>
+            </div>
+          </div>
+          <img class="headerImage" src="{{ asset('bundles/bigelibre/images/header.jpg') }}">
+        </div><!-- #header-->
+      {% endblock %}
+
+      <div id="middle">
+
+        <div id="container">
+          <div id="content">
+            {% block content %} 
+              {% if is_granted('ROLE_ADMIN') %}
+                <div class="toolBox">
+                  <div class="editBtn">
+                    <a href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans from "messages" %}Edit this page{% endtrans %}" title="{% trans from "messages" %}Edit this page{% endtrans %}">{% trans from "messages" %}Edit{% endtrans %}</a>
+                  </div>
+                </div>
+              {% endif %}
+
+              {{ content|raw }}
+            {% endblock %}
+          </div><!-- #content-->
+        </div><!-- #container-->
+
+        {% block navigation %}
+          <script>
+            $(function() {
+              $(document).tooltip({
+                content: function() {
+                  var element = $(this);
+                  /*alert(nl2br(element.attr('title')));*/
+                  //if (element.hasClass(''))
+                  return '<div class="tooltip">' + element.attr('title') + '</div>';
+                }
+              });
+
+              var ind = $("#menuSidebar > h3").index($("#menuSidebar > h3.active"));
+              //alert
+              $("#menuSidebar").accordion(
+                      {collapsible: true,
+                        active: (ind >= 0) ? ind : false,
+                        heightStyle: "content",
+                        /*header: "> li > :first-child, > :not(li):even"*/
+                        header: "> h3"
+                      });
+              //if (ind >= 0) {
+              //  $("#menuSidebar").accordion("option", "active", ind);
+              //}
+              var plainLinks = $("#menuSidebar > a");
+              plainLinks.addClass("ui-accordion-header ui-state-default ui-corner-all");
+              plainLinks.hover(function() {
+                $(this).addClass("ui-state-hover");
+              }, function() {
+                $(this).removeClass("ui-state-hover");
+              });
+              //alert(ind);
+
+
+            {#            $('#editMenuOrder').on('click', function(e) {
+                          $.fn.custombox(this, {
+                            effect: 'fadein',
+                            overlayClose: false
+                          });
+                          e.preventDefault();
+                        });#}
+
+            });
+          </script>
+
+          <div class="sidebar" id="menuSidebar">
+            {% include "BigElibreBundle:Default:nav_menu.html.twig" with {'menuThemes': menuThemes, 'activeThemeRoot': activeThemeRoot, 'activeThemeRoot2': activeThemeRoot2} only %}
+          </div>
+
+          {#        {% if is_granted('ROLE_ADMIN') %}
+                  <div class="menuToolBox">
+                    <div class="orderBtn">
+                      <a href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" alt="{% trans from "messages" %}Change menu items order{% endtrans %}" title="{% trans from "messages" %}Change menu items order{% endtrans %}">{% trans from "messages" %}Order{% endtrans %}</a>
+                    </div>
+                  </div>
+          
+                  <div id="editMenuOrderWindow" class="modalWindow hidden">
+                    <div class="modalWindowHeader">
+                      Header
+                    </div>
+                    <div class="modalWindowContent">
+                      А вот тут будет редактор меню<br>
+          
+                    </div>
+                  </div>
+          
+                  <script src="{{ asset('bundles/bigelibre/js/jquery.custombox.js') }}"></script>
+                  <link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>
+                  {% endif %}
+          #}
+        {% endblock %}
+
+        {% block news %}
+          <!--
+          <div class="sidebar" id="sideRight">
+            <strong>Right Sidebar:</strong> Integer velit. Vestibulum nisi nunc, accumsan ut, vehicula sit amet, porta a, mi. Nam nisl tellus, placerat eget, posuere eget, egestas eget, dui. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In elementum urna a eros. Integer iaculis. Maecenas vel elit.
+          </div><!-- .sidebar#sideRight -->
+        {% endblock %}
+
+      </div><!-- #middle-->
+
+    </div><!-- #wrapper -->
+
+    {% block footer %}
+      <div id="footer">
+        <div id="footerLinks">
+          &copy;2013 Николаевский центр подготовки плавсостава<span id="footerSeparator"></span> <a href="{{ path('big_elibre_page') }}">Электронная библиотека</a> | Вход | Поиск | Контакты
+        </div>
+
+      </div><!-- #footer -->
+    {% endblock %}
+  </body>
+</html>

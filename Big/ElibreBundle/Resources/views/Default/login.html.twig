@@ -1,0 +1,36 @@
+{% extends 'BigElibreBundle:Default:index.html.twig' %}
+
+{% block content %}
+<div id="LoginFormContainer">
+  {% if error_msg %}
+  <div class="errorMessage">{{ error_msg }}</div>
+  {% endif %}
+
+  <table>
+    <form action="{{ path('login_check') }}" method="post" id="LoginForm">
+      <tr>
+        <td>
+          <label for="username">Username:</label>
+        </td>
+        <td>
+          <input type="text" id="username" name="_username" value="{{ last_username }}" /><br>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="password">Password:</label>
+        </td>
+        <td>
+          <input type="password" id="password" name="_password" /><br>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="SubmitButtons">
+          <a href="{{ path('register') }}">{% trans from "messages" %}Registration{% endtrans %}</a>
+          <button type="submit">login</button>
+        </td>
+      </tr>
+    </form>
+  </table>
+</div>
+{% endblock %}

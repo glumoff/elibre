@@ -1,0 +1,4 @@
+bigelibre -> ../../src/Big/ElibreBundle/Resources/public
+fosjsrouting -> ../../vendor/friendsofsymfony/jsrouting-bundle/FOS/JsRoutingBundle/Resources/public
+framework -> ../../vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Resources/public
+sensiodistribution -> ../../vendor/sensio/distribution-bundle/Sensio/Bundle/DistributionBundle/Resources/public

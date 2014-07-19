@@ -1,0 +1,23 @@
+.FMBody {
+  border: 2px solid grey;
+}
+
+.FMBody > * {
+    padding: 3px;
+}
+
+.FMHeader {
+  text-align: center;
+  background-color: #98FB98;
+  border-bottom: 2px solid gray;
+}
+
+.FMToolBox {
+  /*border: 1px solid gray;*/
+  background-color: lightgray;
+}
+
+.FMFileList {
+  /*border: 1px solid gray;*/
+  background-color: white;
+}

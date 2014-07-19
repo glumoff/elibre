@@ -1,0 +1,16 @@
+{% extends isAjax ? 'BigElibreBundle:admin:index_ajax.html.twig' : 'BigElibreBundle:admin:index.html.twig' %}
+
+{% block additional_scripts %}
+<link href="{{ asset('bundles/bigelibre/js/jtable/themes/metro/lightgray/jtable.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('bundles/bigelibre/js/jtable/jquery.jtable.js') }}" type="text/javascript"></script>
+<script src="{{ asset('bundles/bigelibre/js/admin/users.js') }}"></script>
+<script>
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+<div id="UsersTableContainer"></div>
+
+{% endblock %}

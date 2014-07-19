@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Symfony2 is great</source>
+                <target>Symfony2 це неймовірно</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>register.title</source>
+                <target>Registration</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>error.404</source>
+                <target>Page not found</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>register.check_email</source>
+                <target>A letter containing registration confirmation url sent to %email%</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>register.approvement-wait</source>
+                <target>Поздравляем, ваш аккаунт создан. Вам будет выслано подтверждение от администратора.</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>register.approvement.subject</source>
+                <target>Зарегистрирован новый пользователь</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>register.approvement.message</source>
+                <target>Зарегистрирован новый пользователь:
+                  Имя:    %username%
+                  E-mail: %email%
+                  
+                  Чтобы активировать перейдите к админ-консоли %adminUrl%.
+                </target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>register.account_changed</source>
+                <target>Your account was changed</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>register.account_activated</source>
+                <target>Your account was activated</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>register.account_deactivated</source>
+                <target>Your account was deactivated</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>theme.goto</source>
+                <target>Go to theme</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
