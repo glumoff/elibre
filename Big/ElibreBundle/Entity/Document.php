@@ -283,27 +283,25 @@ class Document {
 //  }
 //
 
+  /**
+   * Set theme
+   *
+   * @param \Big\ElibreBundle\Entity\Theme $theme
+   * @return Document
+   */
+  public function setTheme(\Big\ElibreBundle\Entity\Theme $theme = null) {
+    $this->theme = $theme;
 
-    /**
-     * Set theme
-     *
-     * @param \Big\ElibreBundle\Entity\Theme $theme
-     * @return Document
-     */
-    public function setTheme(\Big\ElibreBundle\Entity\Theme $theme = null)
-    {
-        $this->theme = $theme;
-    
-        return $this;
-    }
+    return $this;
+  }
 
-    /**
-     * Get theme
-     *
-     * @return \Big\ElibreBundle\Entity\Theme 
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
+  /**
+   * Get theme
+   *
+   * @return \Big\ElibreBundle\Entity\Theme 
+   */
+  public function getTheme() {
+    return $this->theme;
+  }
+
 }

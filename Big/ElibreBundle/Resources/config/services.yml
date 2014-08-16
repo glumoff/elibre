@@ -1,5 +1,14 @@
 parameters:
-     big_elibre.rootDir: /mnt/hd/work/www/elibre_data/
-     big_elibre.uploadDir: /mnt/hd/work/www/elibre_data/upload/
+  big_elibre.rootDir: /mnt/hd/work/www/elibre_data/
+  big_elibre.uploadDir: /mnt/hd/work/www/elibre_data/upload/
+  history_manager.rotate_count: 5
+    
+    
 
 services:
+  history_manager:
+    class: Big\ElibreBundle\Utils\HistoryManager
+#    arguments: ["@doctrine.orm.entity_manager", ]
+    calls: 
+      - [ setDbm, ["@doctrine.orm.entity_manager"]]
+      - [ setRotateCount, ["%history_manager.rotate_count%"]]

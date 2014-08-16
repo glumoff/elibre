@@ -29,22 +29,20 @@
           </div>
           <div id="rightLinks">
             <div class="new icon">
-              <a href="{{ path('big_elibre_new_docs') }}" alt="{% trans from "messages" %}New docs in library{% endtrans %}" title="{% trans from "messages" %}New docs in library{% endtrans %}">
-                {% trans from "messages" %}New docs{% endtrans %}
-              </a>
+              <a href="{{ path('big_elibre_new_docs') }}" alt="{% trans from "messages" %}New docs in library{% endtrans %}"{# title="{% trans from "messages" %}New docs in library{% endtrans %}"#}>
+                <img class="icon" src="{{ asset('bundles/bigelibre/images/new.png') }}"/>
+                {#{% trans from "messages" %}New docs{% endtrans %}#}              </a>
             </div>
-            <div class="fav icon">
-              <a href="{{ path('big_elibre_fav') }}" alt="{% trans from "messages" %}Favorites{% endtrans %}" title="{% trans from "messages" %}Favorites{% endtrans %}">
-                {% trans from "messages" %}Favorites{% endtrans %}
-              </a>
-            </div>
-            <div class="history icon">
-              <a href="{{ path('big_elibre_history') }}" alt="{% trans from "messages" %}History{% endtrans %}" title="{% trans from "messages" %}History{% endtrans %}">
-                {% trans from "messages" %}History{% endtrans %}
-              </a>
-            </div>
+            {% if is_granted('ROLE_USER') %}
+              <div class="history icon">
+                <a href="{{ path('big_elibre_history') }}" alt="{% trans from "messages" %}History{% endtrans %}"{# title="{% trans from "messages" %}History{% endtrans %}"#}>
+                  <img class="icon" src="{{ asset('bundles/bigelibre/images/history.png') }}"/>
+                  {#{% trans from "messages" %}History{% endtrans %}#}
+                </a>
+              </div>
+            {% endif %}
           </div>
-          <img class="headerImage" src="{{ asset('bundles/bigelibre/images/header.jpg') }}">
+          <img class="headerImage" src="{{ asset('bundles/bigelibre/images/header.jpg') }}"/>
         </div><!-- #header-->
       {% endblock %}
 
@@ -108,7 +106,7 @@
                           e.preventDefault();
                         });#}
 
-            });
+                          });
           </script>
 
           <div class="sidebar" id="menuSidebar">

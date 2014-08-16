@@ -10,6 +10,7 @@ namespace Big\ElibreBundle\Controller;
 use Big\ElibreBundle\db\ElibreDBDelegate;
 use Symfony\Component\HttpFoundation\Response;
 use Big\ElibreBundle\Utils\FSHelper;
+use Big\ElibreBundle\Utils\HistoryManager;
 
 class DocumentController extends DefaultController {
 
@@ -19,9 +20,17 @@ class DocumentController extends DefaultController {
   public function showDocAction($action) {
     $this->docs_path = $this->container->getParameter('big_elibre.rootDir');
     //action: view|download|edit
+    
+    //update user`s history
+        
+
     switch ($action) {
       case 'download':
-        return $this->doDownloadFile();
+        /* @var $hm HistoryManager */
+        $hm = $this->get('history_manager');
+        $doc = $this->getSelectedDoc();
+        $hm->saveHistory($this->getUser(), $doc);
+        return $this->doDownloadFile($doc);
         break;
 
       default:
@@ -62,12 +71,14 @@ class DocumentController extends DefaultController {
     return $this->templateParams;
   }
 
-  protected function doDownloadFile() {
+  protected function doDownloadFile($doc = NULL) {
 //    return 
 //    return;    
 //          $response = new Response("");
 //      return $response;
-    $doc = $this->getSelectedDoc();
+    if (!$doc) {
+      $doc = $this->getSelectedDoc();
+    }
     if ($doc) {
       $themePath = $this->getThemeFullDirName($doc->getTheme()->getId());
       $fname = $this->docs_path . DIRECTORY_SEPARATOR . $themePath . DIRECTORY_SEPARATOR . $doc->getPath();
