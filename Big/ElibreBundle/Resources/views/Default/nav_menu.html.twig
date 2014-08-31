@@ -2,8 +2,8 @@
   {% if cur_theme.children.getThemesArray() %}
 <h3 class="{% if cur_theme.id == activeThemeRoot %}active{% endif %}">{{ cur_theme.title }}</h3>
   {% else %}
-<a class="{% if cur_theme.id == activeThemeRoot2 %}active{% endif %}" href="{{ path('big_elibre_theme', {'theme_code': cur_theme.code,  'action' : 'view' }) }}" >
-{{ cur_theme.title }}
+    <a class="{% if cur_theme.id == activeThemeRoot2 %}active{% endif %} {% if (cur_theme.id == activeThemeRoot2) and (cur_theme.parentID == 0) %}ui-state-active{% endif %}" href="{{ path('big_elibre_theme', {'theme_code': cur_theme.code,  'action' : 'view' }) }}" >
+      {{ cur_theme.title }}
   {% if cur_theme.getDocsCount() %}
     ({{ cur_theme.getDocsCount() }})
   {% endif %}

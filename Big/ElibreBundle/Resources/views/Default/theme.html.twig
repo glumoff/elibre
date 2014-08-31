@@ -13,10 +13,10 @@
   <div class="orderBtn">
     <a href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" alt="{% trans from "messages" %}Change themes tree{% endtrans %}" title="{% trans from "messages" %}Change themes tree{% endtrans %}">{% trans from "messages" %}Order{% endtrans %}</a>
   </div>
-  <div class="editBtn">
+{#  <div class="editBtn">
     <a href="{{ path('big_elibre_theme', {'theme_code': selectedTheme.code, 'action': 'edit'}) }}" alt="{% trans from "messages" %}Edit this theme{% endtrans %}" title="{% trans from "messages" %}Edit this theme{% endtrans %}">{% trans from "messages" %}Edit{% endtrans %}</a>
   </div>
-  <div class="addDocBtn">
+#}  <div class="addDocBtn">
 {#    <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" alt="{% trans from "messages" %}Add document to this theme{% endtrans %}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">#}
     <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">
       {% trans from "messages" %}Add{% endtrans %}

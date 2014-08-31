@@ -26,7 +26,7 @@ class History {
    *
    * @ORM\Column(name="row_id", type="integer", unique=true)
    */
-  private $row_id; // for table rotating
+//  private $row_id; // for table rotating
 
   /**
    * @var datetime

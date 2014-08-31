@@ -10,7 +10,8 @@ body {
   width: 100%;
   height: 100%;
   /*background-color: #e9e3e3;*/
-  background-color: #466999;
+  /*background-color: #9da597;*/
+  background-color: #6985ab;
 }
 a {
   color: blue;
@@ -36,13 +37,16 @@ input {
 }
 
 #wrapper {
-  width: 800px;
+  width: 1024px;
   margin: 0 auto;
   min-height: 100%;
+  /*min-height: 1500px;*/
   height: auto !important;
   height: 100%;
-  background-color: white;
-  background-image: url('./elibre/images/middle_bg.png');
+  /*background-color: #9da597;*/
+  background-color: #dedbbd;
+  /*background-image: url('./elibre/images/middle_bg.png');*/
+  /*border: 1px dashed red;*/
 }
 
 h3.themeTitle, div.docTitle {
@@ -60,37 +64,42 @@ div.docTitle {
 /* Header
 -----------------------------------------------------------------------------*/
 #header {
-  height: 304px;
+  /*height: 5px;*/
   /*background: #080808;*/
   color: white;
-  background-color: white;
-  background-image: url('./elibre/images/header_bg.png');
-  background-repeat: repeat-x;
+  /*background-color: ;*/
+  /*background-image: url('./elibre/images/header_bg.png');*/
+  /*background-repeat: repeat-x;*/
   position: relative;
 }
 
 .headerImage {
-  position: absolute;
-  bottom: 0px;
+  /*position: absolute;*/
+  /*bottom: 0px;*/
+  /*z-index: 2000;*/
 }
 
 #headerLinks {
-  background-color: #080808;
-  position: absolute;
-  height: 48px;
-  line-height: 48px;
-  width: 387px;
-  right: 65px;
-  top: 24px;
-  padding: 0 20px 0 20px;
-  border-radius: 8px 8px 0 0;
-  -webkit-border-radius: 8px 8px 0 0;
-  -moz-border-radius: 8px 8px 0 0;
-  -khtml-border-radius: 8px 8px 0 0;
+  margin-left: 329px;
+  background-color: #324c57;
+  color: #dedbbd;
+  /*    position: absolute;
+      height: 48px;
+      line-height: 48px;
+      width: 387px;
+      right: 65px;
+      top: 24px;
+      padding: 0 20px 0 20px;
+      border-radius: 8px 8px 0 0;
+      -webkit-border-radius: 8px 8px 0 0;
+      -moz-border-radius: 8px 8px 0 0;
+      -khtml-border-radius: 8px 8px 0 0;*/
 }
 
 #headerLinks a {
-  color: silver;
+  color: #dedbbd;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .fulljustify {
@@ -103,19 +112,11 @@ div.docTitle {
   width: 100%;
 }
 
-#headerTitle {
-  font-size: 30pt;
-  color: #080808;
-  line-height: 30px;
-  position: absolute;
-  right: 505px;
-  top: 10px;
-  text-align: right;
-  font-family: serif;
-}
-
-#headerTitle a {
-  color: #080808;
+#headerTop {
+  padding-top: 20px;
+  /*border: 1px dashed red;*/
+  background-color: #dedbbd;
+  /*background-color: #9da597;*/
 }
 
 #rightLinks {
@@ -123,8 +124,8 @@ div.docTitle {
   right: 3px;
   top: 75px;
   width: 59px;
-  /*border: 1px dashed red;
-  background-color: green;*/
+  /*border: 1px dashed red;*/
+  /*background-color: green;*/
   z-index: 1000;
   text-align: center;
 }
@@ -133,14 +134,100 @@ div.docTitle {
   color: white;
 }
 
+#headerMiddle {
+  /*background-color: #04263c;*/
+}
+
+#headerColorFiller {
+  /*border: 1px dashed goldenrod;*/
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 282px;
+  /*background-color: #9da597;*/
+}
+
+.color1 {
+  background-color: #04263c;
+}
+
+.color2 {
+  background-color: #324c57;
+}
+
+.color3 {
+  background-color: #4b8279;
+}
+
+.color4 {
+  /*background-color: #dedbbd;*/
+}
+
+#headerColorFiller .color1 {
+  height: 166px;
+}
+
+#headerColorFiller .color2 {
+  height: 10px;
+}
+
+#headerColorFiller .color3 {
+  height: 23px;
+}
+
+#headerColorFiller .color4 {
+  height: 14px;
+  width: 210px;
+}
+
+.corner {
+  margin: 0;
+  border: 0;
+  /*height: 100px;*/
+  vertical-align: middle;
+  background-color: #dedbbd;
+}
+
+#headerTitle {
+  /*border: 1px dashed red;*/
+  height: 50px;
+  position: absolute;
+  top: 0;
+  width: 325px;
+  font-family: serif;
+  font-size: 25pt;
+}
+
+#titlePart1 {
+  color: #04263c;
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+
+#titlePart1 a {
+  color: #04263c;
+}
+
+#titlePart2 {
+  color: #dedbbd;
+  position: absolute;
+  left: 10px;
+  top: 47px;
+}
+
+#titlePart2 a {
+  color: #dedbbd;
+}
+
 /* Middle
 -----------------------------------------------------------------------------*/
 #middle {
   /*width: 100%;*/
   margin: auto;
-  width: 665px;
-  padding: 0 0 100px;
-  /*min-height: 500px;*/
+  width: 1000px;
+  padding: 10px 0px 100px 0px;
+  /*min-height: 300px;*/
   height: 1%;
   position: relative;
   /*background-color: yellow;*/
@@ -157,8 +244,22 @@ div.docTitle {
 }
 #content {
   /*padding: 0 270px 0 270px;*/
-  padding: 0 10px 0 270px;
-  /*border: 1px solid #002557;*/
+  padding: 0 30px 0 265px;
+}
+
+.leftPageBG {
+  background-size: 20px;
+  background-image: url('./elibre/images/9da597.png');
+  background-repeat: repeat-y;
+  background-position-x: 0px;
+}
+
+.rightPageBG {
+  background-size: 20px;
+  background-image: url('./elibre/images/9da597.png');
+  background-repeat: repeat-y;
+  /*background-position-x: 0px;*/
+  background-position: right;
 }
 
 
@@ -169,7 +270,7 @@ div.docTitle {
   width: 218px;
   margin-left: -100%;
   position: relative;
-  padding-left: 10px;
+  padding-left: 20px;
   /*padding-right: 100px;*/
   /*border: 1px dashed red;*/
   /*background: #B5E3FF;*/
@@ -181,8 +282,8 @@ div.docTitle {
 #sideRight {
   float: left;
   margin-right: -3px;
-  width: 250px;
-  margin-left: -250px;
+  width: 200px;
+  margin-left: -200px;
   position: relative;
   background: #FFACAA;
 }
@@ -191,12 +292,12 @@ div.docTitle {
 /* Footer
 -----------------------------------------------------------------------------*/
 #footer {
-  width: 800px;
+  width: 1024px;
   margin: -75px auto 0;
   height: 75px;
-  background: #080808;
+  background: #04263c;
   position: relative;
-  color: white;
+  color: #dedbbd;
   overflow: hidden;
   font-size: 10px;
 }
@@ -205,15 +306,16 @@ div.docTitle {
   line-height: 30px;
   position: absolute;
   top: 20px;
-  background-color: #59585d;
+  background-color: #324c57;
   width: 100%;
   height: 30px;
   padding: 3px 20px 3px 20px;
   /*text-align:center;*/ 
+  color: #dedbbd;
 }
 
 #footerLinks a {
-  color: white;
+  color: #dedbbd;
 }
 
 #footerSeparator:after {
@@ -222,13 +324,14 @@ div.docTitle {
   visibility: hidden;
 }
 
-.ui-accordion-header {
+.ui-accordion .ui-accordion-header {
   height: 16px;
   font-size: 8pt;
+  margin-top: 5px;
 }
 
-h2.ui-accordion-header > a {
-  border: 1px dashed red;
+.ui-state-default.active {
+  /*background-color: red;*/
 }
 
 .ui-state-disabled a {
@@ -236,7 +339,7 @@ h2.ui-accordion-header > a {
     background: #555555 url(images/ui-bg_highlight-hard_20_555555_1x100.png) 50% 50% repeat-x;
     font-weight: bold;
     color: #eeeeee;*/
-  color: red;
+  /*color: red;*/
 }
 
 #menuSidebar, #menuSidebar a {
@@ -244,13 +347,15 @@ h2.ui-accordion-header > a {
 }
 
 #menuSidebar a.active {
-  color: black;
+  /*color: black;*/
   font-weight: bold;
 }
 
+
+
 ul.docList {
-  /*  list-style-type: decimal-leading-zero;
-    list-style-position: inside;*/
+    list-style-type: none;
+    /*list-style-position: inside;*/
   /*margin-left: 10px;*/
   /*border-top: 1px solid grey;*/
   /*border-bottom: 1px solid grey;*/
@@ -280,11 +385,11 @@ ul.docList li .icon {
 }
 
 ul.docList li:nth-child(odd) {
-  background-color: #e8e8e8;
+  background-color: #cecbaf;
 }
 
 ul.docList li:nth-child(even) {
-  background-color: #fafafa;
+  background-color: #dedbbd;
 }
 
 ul.themesList {
@@ -372,11 +477,11 @@ p:before {
 }
 
 #menuSidebar h3 + div > a:before {
-  /*content: "• ";*/
+  content: "• ";
   /*content: "▪ ";*/
   /*content: "○ ";*/
   /*background-color: silver;*/
-  content: url(../images/bullet.png);
+  /*content: url(../images/bullet.png);*/
   margin-left: -10px;
 }
 
@@ -456,7 +561,7 @@ p.tooltip {
 }
 
 .editBtn, .editBtn a {
-  color: white;
+  color: #dedbbd;
 }
 
 .menuToolBox {

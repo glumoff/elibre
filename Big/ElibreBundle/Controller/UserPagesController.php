@@ -29,12 +29,14 @@ class UserPagesController extends DefaultController {
   }
 
   protected function getHistoryDocs() {
+    $user = $this->getUser();
     $em = $this->getDoctrine()->getManager();
     $query = $em->createQuery(
                     'SELECT h
                       FROM BigElibreBundle:History h
+                      WHERE h.user = ?1
                       ORDER BY h.dt DESC'
-            );
+            )->setParameter(1, $user);
 //            )->setMaxResults(10);
 //WHERE create_dt + INTERVAL 30 DAY > CURRENT_DATE
     $docs = $query->getResult();
