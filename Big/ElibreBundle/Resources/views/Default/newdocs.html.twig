@@ -16,13 +16,13 @@
                 {% endblock docDate %}
               </div>
             {% endif %}
-            <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>Аннотация: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
+            <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>{% trans %}doc.annotation.label{% endtrans %}: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
               {{ attribute(doc, 'title') }}
             </a>
             <span class="nowrap">
 {#              (<a href="{{ path('big_elibre_theme', {'theme_code': doc.getTheme().getCode(),  'action' : 'view' }) }}" title="{% trans %}theme.goto{% endtrans %}">{{ doc.getTheme().getTitle() }}</a>)#}
             </span>
-            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
+            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
           </li>        
         {%endfor%}
       </ul>

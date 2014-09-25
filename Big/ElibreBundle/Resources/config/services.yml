@@ -12,3 +12,9 @@ services:
     calls: 
       - [ setDbm, ["@doctrine.orm.entity_manager"]]
       - [ setRotateCount, ["%history_manager.rotate_count%"]]
+
+  elibre_locale.locale_listener:
+        class: Big\ElibreBundle\EventListener\LocaleListener
+        arguments: ["%kernel.default_locale%"]
+        tags:
+            - { name: kernel.event_subscriber }

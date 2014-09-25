@@ -148,7 +148,8 @@ class Document {
 
   public function getIcon() {
     if (!isset($this->icon)) {
-      $this->icon = new FileIcon($this->getFileType());
+      $this->icon = new FileIcon(strtolower($this->getFileType()));
+//      $this->icon = new FileIcon($this->getFileType());
     }
     return $this->icon->getIcon();
   }

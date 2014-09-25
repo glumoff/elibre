@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% trans_default_domain "messages" %}
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
   <head>
     {#    <link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />#}
@@ -11,7 +12,7 @@
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script src="{{ asset('bundles/bigelibre/js/func.js') }}"></script>
     <title>
-      Электронная библиотека | Николаевский центр подготовки плавсостава
+      {{ "elibre.label" |trans }} | Николаевский центр подготовки плавсостава
     </title>
   </head>
   <body>
@@ -22,45 +23,38 @@
           <div id="header">
             <div id="headerTop">
               <div id="headerTitle">
-                <a id="titlePart1" href="{{ path('big_elibre_page') }}">Электронная</a>
-                <a id="titlePart2" href="{{ path('big_elibre_page') }}">библиотека</a>
+                <a id="titlePart1" href="{{ path('big_elibre_page') }}">{{ "elibre.label.part1" | trans }}</a>
+                <a id="titlePart2" href="{{ path('big_elibre_page') }}">{{ "elibre.label.part2" | trans }}</a>
               </div>
               <div id="headerLinks">
-                <img class="corner" src="{{ asset('bundles/bigelibre/images/links_corner.png') }}"/>
-                <a href="{{ path('big_elibre_page') }}">Главная</a> | <a href="{{ path('fos_user_security_login') }}">Вход</a> | <a href="{{ path('big_elibre_search') }}">Поиск</a> | <a href="{{ path('big_elibre_page', {'page': 'contacts'}) }}">Контакты</a>
-
+                {#                <img class="corner" src="{{ asset('bundles/bigelibre/images/links_corner.png') }}"/>#}
+                <a href="{{ path('big_elibre_page') }}">{% trans %}main_page.label{% endtrans %}</a> | <a href="{{ path('fos_user_security_login') }}">{% trans %}login.label{% endtrans %}</a> | <a href="{{ path('big_elibre_search') }}">{% trans %}search.label{% endtrans %}</a> | <a href="{{ path('big_elibre_page', {'page': 'contacts'}) }}">{% trans %}contacts.label{% endtrans %}</a>  | <a href="{{ path('big_elibre_new_docs') }}" title="{% trans %}new_docs.descr{% endtrans %}">{% trans %}new_docs.label{% endtrans %}</a>
+                {% if is_granted('ROLE_USER') %}
+                  | <a href="{{ path('big_elibre_history') }}">{% trans %}history.label{% endtrans %}</a>
+                {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
-                  | <a href="{{ path('big_elibre_admin') }}">Админ</a>
+                  | <a href="{{ path('big_elibre_admin') }}">{% trans %}admin_page.label{% endtrans %}</a>
                 {% endif %}
               </div>
+              <div id="langLinks">
+                <a href="{{ path('big_elibre_page', {'_locale': 'ru' }) }}"><img src="{{ asset('bundles/bigelibre/images/flags/16/ru.png') }}" title="{% trans %}lang.ru{% endtrans %}"/></a>
+                <a href="{{ path('big_elibre_page', {'_locale': 'uk' }) }}"><img src="{{ asset('bundles/bigelibre/images/flags/16/ua.png') }}" title="{% trans %}lang.uk{% endtrans %}"/></a>
+                <a href="{{ path('big_elibre_page', {'_locale': 'en' }) }}"><img src="{{ asset('bundles/bigelibre/images/flags/16/us.png') }}" title="{% trans %}lang.en{% endtrans %}"/></a>
+              </div>
             </div>
 
-            <div id="rightLinks">
-              <div class="new icon">
-                <a href="{{ path('big_elibre_new_docs') }}" alt="{% trans from "messages" %}New docs in library{% endtrans %}"{# title="{% trans from "messages" %}New docs in library{% endtrans %}"#}>
-                  <img class="icon" src="{{ asset('bundles/bigelibre/images/new.png') }}"/>
-                  {#{% trans from "messages" %}New docs{% endtrans %}#}              </a>
-              </div>
-              {% if is_granted('ROLE_USER') %}
-                <div class="history icon">
-                  <a href="{{ path('big_elibre_history') }}" alt="{% trans from "messages" %}History{% endtrans %}"{# title="{% trans from "messages" %}History{% endtrans %}"#}>
-                    <img class="icon" src="{{ asset('bundles/bigelibre/images/history.png') }}"/>
-                    {#{% trans from "messages" %}History{% endtrans %}#}
-                  </a>
-                </div>
-              {% endif %}
-            </div>
-            <div id="headerMiddle">
-              <div id="headerColorFiller">
-                <div class="color1"></div>
-                <div class="color2"></div>
-                <div class="color3"></div>
-                <div class="color4"></div>
-              </div>
-              <div class="headerImage">
-                <img class="headerImage" src="{{ asset('bundles/bigelibre/images/header_tr.png') }}"/>
-              </div>
-            </div>
+            {#            <div id="headerMiddle">#}
+            {#              <div id="headerColorFiller">
+                            <div class="color1"></div>
+                            <div class="color2"></div>
+                            <div class="color3"></div>
+                            <div class="color4"></div>
+                          </div>
+            #}              
+            {#              <div class="headerImage">#}
+            {#                <img class="headerImage" src="{{ asset('bundles/bigelibre/images/header_new.png') }}"/>#}
+            {#              </div>#}
+            {#            </div>#}
           </div><!-- #header-->
         {% endblock %}
 
@@ -71,9 +65,12 @@
               {% block content %} 
                 {% if is_granted('ROLE_ADMIN') %}
                   <div class="toolBox">
-                    <div class="editBtn">
-                      <a href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans from "messages" %}Edit this page{% endtrans %}" title="{% trans from "messages" %}Edit this page{% endtrans %}">{% trans from "messages" %}Edit{% endtrans %}</a>
-                    </div>
+{#                    <div >#}
+                      <a class="editBtn" href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans %}page.edit.descr{% endtrans %}" title="{% trans %}page.edit.descr{% endtrans %}">
+                        <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/> {% trans %}page.edit.label{% endtrans %}
+                      </a>
+                      
+{#                    </div>#}
                   </div>
                 {% endif %}
 
@@ -84,9 +81,9 @@
 
           {% block navigation %}
             <script>
-              $(function() {
+              $(function () {
                 $(document).tooltip({
-                  content: function() {
+                  content: function () {
                     var element = $(this);
                     /*alert(nl2br(element.attr('title')));*/
                     //if (element.hasClass(''))
@@ -108,60 +105,27 @@
                 //}
                 var plainLinks = $("#menuSidebar > a");
                 plainLinks.addClass("ui-accordion-header ui-state-default ui-corner-all");
-                plainLinks.hover(function() {
+                plainLinks.hover(function () {
                   $(this).addClass("ui-state-hover");
-                }, function() {
+                }, function () {
                   $(this).removeClass("ui-state-hover");
                 });
                 //alert(ind);
 
+              {#              $('#wrapper').height(100);#}
+{#                  $('#wrapper > div').height($('#wrapper').height());#}
 
-              {#            $('#editMenuOrder').on('click', function(e) {
-                            $.fn.custombox(this, {
-                              effect: 'fadein',
-                              overlayClose: false
-                            });
-                            e.preventDefault();
-                          });#}
-
-{#              $('#wrapper').height(100);#}
-{#              $('#wrapper > div').height($('#wrapper').height());#}
-              
-                            });
+                });
             </script>
 
             <div class="sidebar" id="menuSidebar">
               {% include "BigElibreBundle:Default:nav_menu.html.twig" with {'menuThemes': menuThemes, 'activeThemeRoot': activeThemeRoot, 'activeThemeRoot2': activeThemeRoot2} only %}
             </div>
 
-            {#        {% if is_granted('ROLE_ADMIN') %}
-                    <div class="menuToolBox">
-                      <div class="orderBtn">
-                        <a href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" alt="{% trans from "messages" %}Change menu items order{% endtrans %}" title="{% trans from "messages" %}Change menu items order{% endtrans %}">{% trans from "messages" %}Order{% endtrans %}</a>
-                      </div>
-                    </div>
-            
-                    <div id="editMenuOrderWindow" class="modalWindow hidden">
-                      <div class="modalWindowHeader">
-                        Header
-                      </div>
-                      <div class="modalWindowContent">
-                        А вот тут будет редактор меню<br>
-            
-                      </div>
-                    </div>
-            
-                    <script src="{{ asset('bundles/bigelibre/js/jquery.custombox.js') }}"></script>
-                    <link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>
-                    {% endif %}
-            #}
           {% endblock %}
 
           {% block news %}
-            <!--
-            <div class="sidebar" id="sideRight">
-              <strong>Right Sidebar:</strong> Integer velit. Vestibulum nisi nunc, accumsan ut, vehicula sit amet, porta a, mi. Nam nisl tellus, placerat eget, posuere eget, egestas eget, dui. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In elementum urna a eros. Integer iaculis. Maecenas vel elit.
-            </div><!-- .sidebar#sideRight -->
+
           {% endblock %}
 
         </div><!-- #middle-->
@@ -172,7 +136,16 @@
     {% block footer %}
       <div id="footer">
         <div id="footerLinks">
-          &copy;2013 Николаевский центр подготовки плавсостава<span id="footerSeparator"></span> <a href="{{ path('big_elibre_page') }}">Электронная библиотека</a> | Вход | Поиск | Контакты
+          &copy;2013 Николаевский центр подготовки плавсостава<span id="footerSeparator"></span> 
+          {#<a href="{{ path('big_elibre_page') }}">Электронная библиотека</a> | Вход | Поиск | Контакты#}
+          <a href="{{ path('big_elibre_page') }}">{% trans %}main_page.label{% endtrans %}</a> | <a href="{{ path('fos_user_security_login') }}">{% trans %}login.label{% endtrans %}</a> | <a href="{{ path('big_elibre_search') }}">{% trans %}search.label{% endtrans %}</a> | <a href="{{ path('big_elibre_page', {'page': 'contacts'}) }}">{% trans %}contacts.label{% endtrans %}</a>  | <a href="{{ path('big_elibre_new_docs') }}" title="{% trans %}new_docs.descr{% endtrans %}">{% trans %}new_docs.label{% endtrans %}</a>
+          {% if is_granted('ROLE_USER') %}
+            | <a href="{{ path('big_elibre_history') }}">{% trans %}history.label{% endtrans %}</a>
+          {% endif %}
+          {% if is_granted('ROLE_ADMIN') %}
+            | <a href="{{ path('big_elibre_admin') }}">{% trans %}admin_page.label{% endtrans %}</a>
+          {% endif %}
+
         </div>
 
       </div><!-- #footer -->

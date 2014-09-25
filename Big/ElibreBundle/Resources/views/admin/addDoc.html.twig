@@ -22,7 +22,7 @@
 
 <div id="editMenuOrderWindow" class="modalWindow">
   <div class="modalWindowHeader">
-    Header
+    {% trans %}theme.add.descr{% endtrans %}
   </div>
   <div class="modalWindowContent">
 {{ form_start(addDocForm) }}
@@ -30,23 +30,23 @@
     {{ form_widget(addDocForm.id) }}
     <table>
       <tr>
-        <td>Path:</td>
-        <td>{{ form_widget(addDocForm.path) }} <a id="openFMBtn" href="#">Choose...</a></td>
+        <td>{% trans %}doc.path.label{% endtrans %}:</td>
+        <td>{{ form_widget(addDocForm.path) }} <a id="openFMBtn" href="#">{% trans %}btn.browse{% endtrans %}...</a></td>
       </tr>
       <tr>
-        <td>Title:</td>
+        <td>{% trans %}doc.title.label{% endtrans %}:</td>
         <td>{{ form_widget(addDocForm.title) }}</td>
       </tr>
       <tr>
-        <td>Annotation:</td>
+        <td>{% trans %}doc.annotation.label{% endtrans %}:</td>
         <td>{{ form_widget(addDocForm.annotation) }}</td>
       </tr>
       <tr>
-        <td>Tags:</td>
+        <td>{% trans %}doc.tags.label{% endtrans %}:</td>
         <td>{{ form_widget(addDocForm.tags) }}</td>
       </tr>
       <tr>
-        <td>Theme:</td>
+        <td>{% trans %}theme.label{% endtrans %}:</td>
         <td>{{ form_widget(addDocForm.theme) }} {{ theme.title }}</td>
       </tr>
     </table>

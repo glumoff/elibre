@@ -1,0 +1,89 @@
+elibre:
+  label: Электронная библиотека
+  label.part1: Электронная
+  label.part2: библиотека
+
+register:
+  label: Регистрация
+  
+new_docs:
+  label: Новинки
+  descr: Новые поступления
+  
+main_page:
+  label: Главная
+
+login:
+  label: Вход
+
+search:
+  label: Поиск
+
+contacts:
+  label: Контакты
+
+history:
+  label: История
+
+admin_page:
+  label: Админ
+  full.label: Админ-консоль
+
+page:
+  edit:
+    label: Редактировать
+    descr: Редактировать эту страницу
+
+theme:
+  label: Тема
+  plural.label: Темы
+  order:
+    label: Порядок
+    descr: Изменить порядок тем
+  add:
+    label: Добавить
+    descr: Добавить документ
+  nodocs.label: нет документов
+  create.label: Создать
+  modified.label: Тема была изменена
+
+doc:
+  annotation.label: Аннотация
+  delete.label: Удалить документ
+  delete:
+    dlg:
+      label: Удалить документ
+      descr: Документ будет безвозвратно удалён из библиотеки. <p>Вы уверены?</p>
+      delete_all: Удалить всё
+      delete_dbonly: Удалить, но оставить файл на диске
+  download.label: Скачать документ
+  path.label: Путь
+  title.label: Название
+  tags.label: Тэги
+  
+btn: 
+  ok: OK
+  cancel: Отмена
+  save: Сохранить
+  search: Поиск
+  browse: Выбрать
+  no: Нет
+  yes: Да
+
+fm:
+  title.label: Обзор файлов
+  upload.label: Загрузить
+  dir.label: Папка
+
+users:
+  label: Пользователи
+  username.label: Имя
+  email.label: E-mail
+  isenabled.label: Включён ?
+  disabled.label: Выключен
+  enabled.label: Включён
+  password.label: Пароль
+  password_retype.label: Повтор пароля
+  notify.label: Notify user about account (de)activation
+  notify.label: Уведомить пользователя об (де)активации учётной записи
+ 

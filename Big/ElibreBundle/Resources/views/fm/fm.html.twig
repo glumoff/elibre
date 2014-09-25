@@ -39,7 +39,7 @@ $(function() {
 
     {% block header %}
   <div class="FMHeader">
-    File manager {#<div id="closeBtn">close</div>#}
+    {% trans %}fm.title.label{% endtrans %}
   </div>
     {% endblock %}
 
@@ -49,7 +49,7 @@ $(function() {
 {#    <a href="#" onclick="new FileManager().delete();
         return false;">Delete</a>
     <br>
-#}    Directory: <span id="currentPath">{{ path }}</span>
+#}    {% trans %}fm.dir.label{% endtrans %}: <span id="currentPath">{{ path }}</span>
   </div>
     {% endblock %}
 
@@ -69,7 +69,7 @@ $(function() {
 
     {% block upload %}
   <div class="uploadFileArea">
-    <div id="fileuploader">Upload</div>
+    <div id="fileuploader">{% trans %}fm.upload.label{% endtrans %}</div>
   </div>
     {% endblock %}
 

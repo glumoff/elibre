@@ -37,7 +37,7 @@ input {
 }
 
 #wrapper {
-  width: 1024px;
+  width: 1021px;
   margin: 0 auto;
   min-height: 100%;
   /*min-height: 1500px;*/
@@ -64,11 +64,12 @@ div.docTitle {
 /* Header
 -----------------------------------------------------------------------------*/
 #header {
-  /*height: 5px;*/
+  height: 261px;
   /*background: #080808;*/
   color: white;
   /*background-color: ;*/
-  /*background-image: url('./elibre/images/header_bg.png');*/
+  /*background-image: url('./elibre/images/header_new.png');*/
+  background-image: url('../images/header_new.png');
   /*background-repeat: repeat-x;*/
   position: relative;
 }
@@ -81,8 +82,12 @@ div.docTitle {
 
 #headerLinks {
   margin-left: 329px;
-  background-color: #324c57;
+  /*background-color: #324c57;*/
   color: #dedbbd;
+  /*border: 1px dashed red;*/
+  /*height: 48px;*/
+  /*padding-top: 6px;*/
+  padding-left: 3px;
   /*    position: absolute;
       height: 48px;
       line-height: 48px;
@@ -113,10 +118,20 @@ div.docTitle {
 }
 
 #headerTop {
-  padding-top: 20px;
+  padding-top: 26px;
   /*border: 1px dashed red;*/
-  background-color: #dedbbd;
+  /*background-color: #dedbbd;*/
   /*background-color: #9da597;*/
+}
+
+#langLinks {
+  position: absolute;
+  right: 5px;
+  top: 2px;
+  color: #016f23;
+}
+#langLinks a {
+  color: #04263c;
 }
 
 #rightLinks {
@@ -202,7 +217,7 @@ div.docTitle {
   color: #04263c;
   position: absolute;
   right: 0;
-  top: 20px;
+  top: 23px;
 }
 
 #titlePart1 a {
@@ -213,7 +228,7 @@ div.docTitle {
   color: #dedbbd;
   position: absolute;
   left: 10px;
-  top: 47px;
+  top: 50px;
 }
 
 #titlePart2 a {
@@ -316,6 +331,7 @@ div.docTitle {
 
 #footerLinks a {
   color: #dedbbd;
+  padding: 0 5px 0 5px;
 }
 
 #footerSeparator:after {
@@ -537,21 +553,35 @@ p.tooltip {
 }
 
 .toolBox {
-  position: absolute;
+  /*position: absolute;*/
   /*right: 10px;*/
-  left: 101%;
+  /*top: -10px;*/
+  /*left: 101%;*/
   /*overflow: visible;*/
   /*border: 1px solid greenyellow;*/
   /*width: 165px;*/
+  padding-bottom: 40px;
+  color: white;
 }
 
-.toolBox div {
+.toolBox a {
+  margin-left: 5px;
+  margin-bottom: 3px;  
+  /*height: 25px;*/
+  /*width: 165px;*/
   border: 1px solid black;
   padding-left: 4px;
   padding-right: 4px;
-  margin-bottom: 3px;
   text-align: center;
   font-weight: bold;
+  /*float: right;*/
+  color: white;
+  border-radius: 4px;
+}
+
+.toolBox:last-child:after {
+  /*clear: both;*/
+  /*content: '';*/
 }
 
 .editBtn {
@@ -561,7 +591,7 @@ p.tooltip {
 }
 
 .editBtn, .editBtn a {
-  color: #dedbbd;
+  /*color: #dedbbd;*/
 }
 
 .menuToolBox {
@@ -668,4 +698,12 @@ form table td {
   /*background-color: rgba(55, 55, 55, 1);*/
   /*padding: 2px;*/
   /*filter:progid:DXImageTransform.Microsoft.Glow(Color=white,Strength=5);*/
+}
+
+
+/*File manager*/
+.fmIcon {
+  height: 22px;
+  width: 22px;
+  vertical-align: middle;
 }

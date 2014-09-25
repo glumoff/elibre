@@ -16,13 +16,13 @@
                   {{ hdoc.dt|date('H:i, d.m.Y') }}
               </div>
             {% endif %}
-            <a href="{{ path('big_elibre_doc', {'doc_id': hdoc.document.id,  'action' : 'view' }) }}" title="{{ attribute(hdoc.document, 'title') }}{% if hdoc.document.annotation %}<p>Аннотация: {{ attribute(hdoc.doc, 'annotation') }}</p>{% endif %}">
+            <a href="{{ path('big_elibre_doc', {'doc_id': hdoc.document.id,  'action' : 'view' }) }}" title="{{ attribute(hdoc.document, 'title') }}{% if hdoc.document.annotation %}<p>{% trans %}doc.annotation.label{% endtrans %}: {{ attribute(hdoc.document, 'annotation') }}</p>{% endif %}">
               {{ attribute(hdoc.document, 'title') }}
             </a>
             <span class="nowrap">
               (<a href="{{ path('big_elibre_theme', {'theme_code': hdoc.document.theme.code,  'action' : 'view' }) }}" title="{% trans %}theme.goto{% endtrans %}">{{ hdoc.document.getTheme().getTitle() }}</a>)
             </span>
-            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': hdoc.document.id,  'action' : 'download' }) }}" title="Скачать документ"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ hdoc.document.icon }}"></a>
+            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': hdoc.document.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ hdoc.document.icon }}"></a>
           </li>        
         {%endfor%}
       </ul>

@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <title>
-      Админ косоль | Электронная библиотека | Николаевский центр подготовки плавсостава
+      {% trans %}admin_page.label{% endtrans %} | {% trans %}elibre.label{% endtrans %} | Николаевский центр подготовки плавсостава
     </title>
     <meta name="keywords" content="" />
     <meta name="description" content="" />
@@ -21,7 +21,7 @@
   <body>
     {% block header %}
       <div class="header">
-        <h1>Admin console <a href="{{ path('big_elibre_page') }}">Электронной библиотеки</a></h1>
+        <h1>{% trans %}admin_page.full.label{% endtrans %} (<a href="{{ path('big_elibre_page') }}">{% trans %}elibre.label{% endtrans %}</a>)</h1>
       </div><!-- .header-->
     {% endblock %}
 
@@ -38,9 +38,9 @@
 
       {% block menu %}
         <div class="left-sidebar">
-          <a href="{{ path('big_elibre_admin', {'mode': 'themes'}) }}">Themes</a><br>
+          <a href="{{ path('big_elibre_admin', {'mode': 'themes'}) }}">{% trans %}theme.plural.label{% endtrans %}</a><br>
 {#          <a href="{{ path('big_elibre_admin', {'mode': 'docs'}) }}">Documents</a><br>#}
-          <a href="{{ path('big_elibre_admin', {'mode': 'user'}) }}">Users</a><br>
+          <a href="{{ path('big_elibre_admin', {'mode': 'user'}) }}">{% trans %}users.label{% endtrans %}</a><br>
         </div><!-- .left-sidebar -->
       {% endblock %}
 

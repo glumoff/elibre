@@ -37,11 +37,11 @@
 
 {% block content %}
 
-<div id="save_action">Themes were modified: <input type="button" value="Save"/> </div>
+<div id="save_action">{% trans %}theme.modified.label{% endtrans %}: <input type="button" value="{% trans %}btn.save{% endtrans %}"/> </div>
 
 <div id="event_result"></div>
 <div class="toolbar">
-  <a id="createRootButton" href="#editThemeWindow" class="create" title="Create new root item">Create</a>
+  <a id="createRootButton" href="#editThemeWindow" class="create">{% trans %}theme.create.label{% endtrans %}</a>
 </div>
 <div id="themesTreeContainer"></div>
 

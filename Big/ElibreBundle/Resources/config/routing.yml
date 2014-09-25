@@ -32,7 +32,7 @@ register_wait_approvement:
     
 big_elibre_admin:
     pattern: /admin/{mode}/{action}
-    defaults: { _controller: BigElibreBundle:Admin:index, mode: board, action: view }
+    defaults: { _controller: BigElibreBundle:Admin:index, mode: user, action: view }
     options:
         expose: true
     #requirements:

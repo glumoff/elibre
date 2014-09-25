@@ -1,0 +1,89 @@
+elibre:
+  label: Elibre
+  label.part1: Electronic library
+  label.part2: Elibre
+
+register:
+  label: Register
+
+new_docs:
+  label: New docs
+  descr: New docs in library
+
+main_page:
+  label: Home
+
+login:
+  label: Login
+
+search:
+  label: Search
+
+contacts:
+  label: Contacts
+
+history:
+  label: History
+
+admin_page:
+  label: Admin
+  full.label: Admin console
+  
+ 
+page:
+  edit:
+    label: Edit
+    descr: Edit this page
+
+theme:
+  label: Theme
+  plural.label: Themes
+  order:
+    label: Order
+    descr: Change order of themes
+  add:
+    label: Add
+    descr: Add document to theme
+  nodocs.label: no documents
+  create.label: Create
+  modified.label: Theme was modified
+
+doc:
+  annotation.label: Annotation
+  delete.label: Delete document
+  delete:
+    dlg:
+      label: Delete document
+      descr: This document will be permanently deleted from library and cannot be recovered.<p>Are you sure?</p>
+      delete_all: Delete all
+      delete_dbonly: Delete, but leave files
+  download.label: Download document
+  path.label: Path
+  title.label: Title
+  tags.label: Tags
+  
+btn: 
+  ok: OK
+  cancel: Cancel
+  save: Save
+  search: Search
+  browse: Choose
+  no: No
+  yes: Yes
+
+fm:
+  title.label: File manager
+  upload.label: Upload
+  dir.label: Directory
+
+users:
+  label: Users list
+  username.label: Username
+  email.label: E-mail
+  isenabled.label: Is enabled
+  disabled.label: Disabled
+  enabled.label: Enabled
+  password.label: Password
+  password_retype.label: Retype password
+  notify.label: Notify user about account (de)activation
+  

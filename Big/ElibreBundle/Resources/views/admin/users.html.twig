@@ -1,16 +1,77 @@
 {% extends isAjax ? 'BigElibreBundle:admin:index_ajax.html.twig' : 'BigElibreBundle:admin:index.html.twig' %}
 
 {% block additional_scripts %}
-<link href="{{ asset('bundles/bigelibre/js/jtable/themes/metro/lightgray/jtable.min.css') }}" rel="stylesheet" type="text/css" />
-<script src="{{ asset('bundles/bigelibre/js/jtable/jquery.jtable.js') }}" type="text/javascript"></script>
-<script src="{{ asset('bundles/bigelibre/js/admin/users.js') }}"></script>
-<script>
-</script>
+  <link href="{{ asset('bundles/bigelibre/js/jtable/themes/metro/lightgray/jtable.min.css') }}" rel="stylesheet" type="text/css" />
+  <script src="{{ asset('bundles/bigelibre/js/jtable/jquery.jtable.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/bigelibre/js/jtable/localization/jquery.jtable.en' + app.session.get('_locale') + '.js') }}" type="text/javascript"></script>
+  <script src="{{ asset('bundles/bigelibre/js/admin/users.js') }}"></script>
+  <script>
+    $(function () {
+  //  alert(Routing.generate('big_elibre_admin', {mode: 'user', action: 'list'}));
+      $('#UsersTableContainer').jtable({
+        title: '{% trans %}users.label{% endtrans %}',
+        actions: {
+          listAction: Routing.generate('big_elibre_admin', {mode: 'user', action: 'list'}),
+          createAction: Routing.generate('big_elibre_admin', {mode: 'user', action: 'create'}),
+          updateAction: Routing.generate('big_elibre_admin', {mode: 'user', action: 'update'}),
+          deleteAction: Routing.generate('big_elibre_admin', {mode: 'user', action: 'delete'})
+        },
+        fields: {
+          UserId: {
+            key: true,
+            list: false
+          },
+          Name: {
+            title: '{% trans %}users.username.label{% endtrans %}',
+  //        width: '40%'
+          },
+          Email: {
+            title: '{% trans %}users.email.label{% endtrans %}',
+  //        width: '20%'
+          },
+  //      RegDate: {
+  //        title: 'Reg date',
+  //        width: '30%',
+  //        type: 'date',
+  //        create: false,
+  //        edit: false
+  //      },
+          isEnabled: {
+            title: '{% trans %}users.isenabled.label{% endtrans %}',
+            width: '2%',
+            type: 'checkbox',
+            values: {'false': '{% trans %}users.disabled.label{% endtrans %}', 'true': '{% trans %}users.enabled.label{% endtrans %}'}
+  //        create: false,
+  //        edit: false
+          },
+          Password: {
+            title: '{% trans %}users.password.label{% endtrans %}',
+            type: 'password',
+            list: false,
+          },
+          PasswordRetype: {
+            title: '{% trans %}users.password_retype.label{% endtrans %}',
+            type: 'password',
+            list: false,
+          },
+          sendMail: {
+            title: '{% trans %}users.notify.label{% endtrans %}',
+            type: 'checkbox',
+            values: {'false': '{% trans %}btn.no{% endtrans %}', 'true': '{% trans %}btn.yes{% endtrans %}'},
+            defaultValue: 'false',
+            list: false,
+          },
+        }
+      });
+      $('#UsersTableContainer').jtable('load');
+    });
+
+  </script>
 {% endblock %}
 
 
 {% block content %}
 
-<div id="UsersTableContainer"></div>
+  <div id="UsersTableContainer"></div>
 
 {% endblock %}

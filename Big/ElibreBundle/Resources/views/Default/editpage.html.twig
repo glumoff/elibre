@@ -5,9 +5,9 @@
 <script src="{{ asset('bundles/bigelibre/js/tinymce/tinymce.min.js') }}"></script>
 
 <form action="{{ path('big_elibre_page', {'page': page, 'action': 'save'}) }}" method="post" id="EditPageForm">
-  <input type="submit" value="{% trans from "messages" %}Save{% endtrans %}">
+  <input type="submit" value="{% trans %}btn.save{% endtrans %}">
   <textarea name="content" id="contentEdit">{{ content }}</textarea>
-  <input type="submit" value="{% trans from "messages" %}Save{% endtrans %}">
+  <input type="submit" value="{% trans %}btn.save{% endtrans %}">
 </form>
 
 <script>

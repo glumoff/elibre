@@ -25,7 +25,7 @@ class SearchController extends Controller {
   }
 
   protected function getTemplateParams() {
-    $this->get('translator')->setLocale($this->getRequest()->getPreferredLanguage());
+//    $this->get('translator')->setLocale($this->getRequest()->getPreferredLanguage());
 
     if ($this->templateParams === NULL) {
       $this->templateParams = array();

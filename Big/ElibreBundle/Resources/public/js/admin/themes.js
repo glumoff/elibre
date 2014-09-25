@@ -44,7 +44,7 @@ function initThemesTree(treeContainer, treeData) {
 //    var tree = treeContainer.jstree(true);
 //    alert(JSON.stringify(tree.get_json(tree.get_node('#'))));
 
-    $('#event_result').html('Moved <b>' + data.node + '</b> <b>' + data.old_parent + '</b> to <b>' + data.parent + '</b> at ' + data.position);
+//    $('#event_result').html('Moved <b>' + data.node + '</b> <b>' + data.old_parent + '</b> to <b>' + data.parent + '</b> at ' + data.position);
 //    $('#event_result').html('Theme was modifi');
     var act = new ThemeAction("move", data.node.id);
     act.moveOldParentID = data.old_parent;
@@ -89,7 +89,7 @@ function getDeleteAction(themeID) {
 }
 
 function getEditAction(themeID) {
-  return '<a href="' + pageRoot + '/edit?theme=' + themeID + '">\n\
+  return '<a href="#" onclick="editThemeDlg(this, ' + themeID + ')">\n\
           <img src="' + pageRoot + '../../../../bundles/bigelibre/images/admin/edit.png"></a>';
 }
 
@@ -122,14 +122,20 @@ function createRootThemeDlg(e, treeContainer, sender) {
     }
   });
   e.preventDefault();
+}
 
-//  alert(tree.get_selected());
-//  
-
-
-//  return;
-//  $.fn.custombox(sender, {
-
+function editThemeDlg(e, themeID) {
+//  var tree = treeContainer.jstree(true);
+  //alert(tree.get_selected());
+  $.fn.custombox({
+    effect: 'fadein',
+    overlayClose: false,
+    url: pageRoot + '/edit?theme=' + themeID,
+//    complete: function() {
+//      $('#form_parent_id').val(tree.get_selected());
+//    }
+  });
+  e.preventDefault();
 }
 
 function createRootTheme(treeContainer) {

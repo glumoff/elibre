@@ -2,166 +2,161 @@
 
 {% block content %}
   {% if is_granted('ROLE_ADMIN') %}
-{#<link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />#}
-<link href="{{ asset('bundles/bigelibre/css/fm.css') }}" rel="stylesheet" />
-<link href="{{ asset('bundles/bigelibre/css/uploadfile.css') }}" rel="stylesheet">
-<script src="{{ asset('bundles/bigelibre/js/jquery.uploadfile.min.js') }}"></script>
-<script src="{{ asset('bundles/bigelibre/js/admin/docs.js') }}"></script>
-<script src="{{ asset('bundles/bigelibre/js/admin/fm.js') }}"></script>
+    {#<link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />#}
+    <link href="{{ asset('bundles/bigelibre/css/fm.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/bigelibre/css/uploadfile.css') }}" rel="stylesheet">
+    <script src="{{ asset('bundles/bigelibre/js/jquery.uploadfile.min.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/js/admin/docs.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/js/admin/fm.js') }}"></script>
 
-<div class="toolBox">
-  <div class="orderBtn">
-    <a href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" alt="{% trans from "messages" %}Change themes tree{% endtrans %}" title="{% trans from "messages" %}Change themes tree{% endtrans %}">{% trans from "messages" %}Order{% endtrans %}</a>
-  </div>
-{#  <div class="editBtn">
-    <a href="{{ path('big_elibre_theme', {'theme_code': selectedTheme.code, 'action': 'edit'}) }}" alt="{% trans from "messages" %}Edit this theme{% endtrans %}" title="{% trans from "messages" %}Edit this theme{% endtrans %}">{% trans from "messages" %}Edit{% endtrans %}</a>
-  </div>
-#}  <div class="addDocBtn">
-{#    <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" alt="{% trans from "messages" %}Add document to this theme{% endtrans %}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">#}
-    <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">
-      {% trans from "messages" %}Add{% endtrans %}
-    </a>
-{#    <a id="addDocBtn" href="#addDocDlg" id="dds">addd</a>#}
-  </div>
+    <div class="toolBox">
+      <a class="orderBtn" href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" title="{% trans %}theme.order.descr{% endtrans %}">{% trans %}theme.order.label{% endtrans %}</a>
+      {#      <div class="addDocBtn">#}
+      {#    <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" alt="{% trans from "messages" %}Add document to this theme{% endtrans %}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">#}
+      <a class="addDocBtn" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
+        {% trans %}theme.add.label{% endtrans %}
+      </a>
+      {#        <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
+                <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/>
+              </a>
+      #}{#      </div>#}
 
-{#  <div id="addDocDlg" class="hidden">
-    ewew
-  </div>#}
+      {#  <div id="addDocDlg" class="hidden">
+          ewew
+        </div>#}
 
-  <script>
-    $(function() {
-{#      $('.addDocBtn a').on('click', function(e) {
-        var divObj = ($(this.getAttribute('href')));
-        var url = "{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}";
-        divObj.load(url, function() {
-          //alert("Load was performed.");
+      <script>
+        $(function () {
+        {#      $('.addDocBtn a').on('click', function(e) {
+                var divObj = ($(this.getAttribute('href')));
+                var url = "{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}";
+                divObj.load(url, function() {
+                  //alert("Load was performed.");
 
-        });
-          $.fn.custombox(this, {
-            effect: 'fadein'
-          });
-        e.preventDefault();
-      });
-#}{#      var divObj = ($($('.addDocBtn a').attr('href')));
-      if (divObj) {
+                });
+                  $.fn.custombox(this, {
+                    effect: 'fadein'
+                  });
+                e.preventDefault();
+              });
+        #}{#      var divObj = ($($('.addDocBtn a').attr('href')));
+              if (divObj) {
         
-      }#}
-{#      alert(obj);#}
-{#      for(var i in obj) {
-        alert(i + '=' + obj[i]);
-      }      
-#}
-      $('.ui-autocomplete').css({
-{#        fon#}
-      });
+              }#}
+        {#      alert(obj);#}
+        {#      for(var i in obj) {
+                alert(i + '=' + obj[i]);
+              }      
+        #}
+{#            $('.ui-autocomplete').css({});#}
 
-      $('.addDocBtn a').on('click', function(e) {
-        $.fn.custombox(this, {
-          effect: 'fadein',
-          zIndex: 5000,
-          customClass: 'addDocModal',
-        });
-        e.preventDefault();
-      });
+            $('a.addDocBtn').on('click', function (e) {
+              $.fn.custombox(this, {
+                effect: 'fadein',
+                zIndex: 5000,
+                customClass: 'addDocModal',
+              });
+              e.preventDefault();
+            });
 
-      var deleteDocDlgName = "#delete-confirm";
-      
-      $.widget( "custom.confirmDialog", $.ui.dialog, {
-        open: function(docID) {
-          //for (var i in docID) {
-            //alert(i + '=' + docID[i]);
-          //}
-          this.option("docID", docID.getAttribute('href'));          
-          // Invoke the parent widget's open().
-          return this._super();
-        }
-      });
+            var deleteDocDlgName = "#delete-confirm";
 
-      $(deleteDocDlgName).confirmDialog({
-        resizable: false,
-        width: 500,
-        height: 140,
-        modal: true,
-        autoOpen: false,
-        //docID: -1,
-        buttons: {
-          "Delete all": function() {
-            var url = Routing.generate('big_elibre_admin', {'mode': 'docs',  'action' : 'del', 'doc': $(this).confirmDialog("option", "docID")});
-            window.location.href = url;
-            $(this).confirmDialog("close");
-          },
-          "Delete, but leave files": function() {
-            var url = Routing.generate('big_elibre_admin', {'mode': 'docs',  'action' : 'del', 'doc': $(this).confirmDialog("option", "docID"), 'leave': 1 });
-            window.location.href = url;
-            $(this).confirmDialog("close");
-          },
-          "Cancel": function() {
-            $(this).confirmDialog("close");
-          }
-        }
-      });
+            $.widget("custom.confirmDialog", $.ui.dialog, {
+              open: function (docID) {
+                //for (var i in docID) {
+                //alert(i + '=' + docID[i]);
+                //}
+                this.option("docID", docID.getAttribute('href'));
+                // Invoke the parent widget's open().
+                return this._super();
+              }
+            });
 
-      $('a.delete').on('click', function(e) {
-        e.preventDefault();
-        //if ($(deleteDocDlgName).dialog) {
-        $(deleteDocDlgName).confirmDialog('open', this);
-        //}
-{#        else {
-          //var url = this;
-        }#}
-        //deleteDocConfirm(this, $(deleteDocDlgName)));
-      });
+            $(deleteDocDlgName).confirmDialog({
+              resizable: false,
+              width: 600,
+              height: 240,
+              modal: true,
+              autoOpen: false,
+              //docID: -1,
+              buttons: {
+                "{% trans %}doc.delete.dlg.delete_all{% endtrans %}": function () {
+                  var url = Routing.generate('big_elibre_admin', {'mode': 'docs', 'action': 'del', 'doc': $(this).confirmDialog("option", "docID")});
+                  window.location.href = url;
+                  $(this).confirmDialog("close");
+                },
+                "{% trans %}doc.delete.dlg.delete_dbonly{% endtrans %}": function () {
+                  var url = Routing.generate('big_elibre_admin', {'mode': 'docs', 'action': 'del', 'doc': $(this).confirmDialog("option", "docID"), 'leave': 1});
+                  window.location.href = url;
+                  $(this).confirmDialog("close");
+                },
+                "{% trans %}btn.cancel{% endtrans %}": function () {
+                  $(this).confirmDialog("close");
+                }
+              }
+            });
 
-    });
-  </script>
-  <link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>
+            $('a.delete').on('click', function (e) {
+              e.preventDefault();
+              //if ($(deleteDocDlgName).dialog) {
+              $(deleteDocDlgName).confirmDialog('open', this);
+              //}
+        {#        else {
+                  //var url = this;
+                }#}
+                      //deleteDocConfirm(this, $(deleteDocDlgName)));
+                    });
 
-</div>
+                  });
+      </script>
+      <link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>
+
+    </div>
   {% endif %}
 
-<h3 class="themeTitle">Тема: {{ selectedTheme.getTitle() }}
-{#{% if is_granted('ROLE_ADMIN') %}
-  <div class="addDocBtn">
-    <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">
-      {% trans from "messages" %}Add{% endtrans %}
-    </a>
-  </div>
-{% endif %}
-#}
-</h3>
-
-
-
-<ul class="themesList">
-  {% for cur_theme in subthemes %}
-  <li>
-    <a href="{{ path('big_elibre_theme', {'theme_code': cur_theme.code,  'action' : 'view' }) }}" >
-      <img src="{{ asset('bundles/bigelibre/images/icons/folder3.png') }}" class="icon"> {{ cur_theme.title }}
-    </a>
-  </li>
-  {% endfor %}
-</ul>
-<ul class="docList">
-  {% for doc in documents %}
-  <li><a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>Аннотация: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
-    {# {% if doc.icon %}
-                            <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon">
-    {% endif %} #}
-                            {{ attribute(doc, 'title') }}
-    </a>
-    <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
-    {% if is_granted('ROLE_ADMIN') %}
-    <a class="delete" href="{{ doc.id }}" title="Удалить документ"><img src="{{ asset('bundles/bigelibre/images/admin/delete-2.png') }}"></a>
+  <h3 class="themeTitle">{% trans %}theme.label{% endtrans %}: {{ selectedTheme.getTitle() }}
+    {#{% if is_granted('ROLE_ADMIN') %}
+      <div class="addDocBtn">
+        <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">
+          {% trans from "messages" %}Add{% endtrans %}
+        </a>
+      </div>
     {% endif %}
-  </li>
-  {% else %}
-  нет документов
-  {% endfor %}
-</ul>
+    #}
+  </h3>
+
+
+
+  <ul class="themesList">
+    {% for cur_theme in subthemes %}
+      <li>
+        <a href="{{ path('big_elibre_theme', {'theme_code': cur_theme.code,  'action' : 'view' }) }}" >
+          <img src="{{ asset('bundles/bigelibre/images/icons/folder3.png') }}" class="icon"> {{ cur_theme.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  <ul class="docList">
+    {% for doc in documents %}
+      <li><a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>{% trans %}doc.annotation.label{% endtrans %}: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
+          {# {% if doc.icon %}
+                                  <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon">
+          {% endif %} #}
+          {{ attribute(doc, 'title') }}
+        </a>
+        <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
+          {% if is_granted('ROLE_ADMIN') %}
+          <a class="delete" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/admin/delete-2.png') }}"></a>
+          {% endif %}
+      </li>
+    {% else %}
+      {% trans %}theme.nodocs.label{% endtrans %}
+    {% endfor %}
+  </ul>
 
   {% if is_granted('ROLE_ADMIN') %}
-    <div id="delete-confirm" title="Delete this document?">
-      <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>This document will be permanently deleted from library and cannot be recovered.</p><p>Are you sure?</p>
+    <div id="delete-confirm" title="{% trans %}doc.delete.label{% endtrans %}">
+      <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><p>{% trans %}doc.delete.dlg.descr{% endtrans %}</p>
     </div>
   {% endif %}
 

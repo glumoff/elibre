@@ -7,7 +7,7 @@
     <div>
       <form>
         <input type="text" name="needle" value="{{ needle }}"/>
-        <input type="submit" value="Search"/>
+        <input type="submit" value="{% trans %}btn.search{% endtrans %}"/>
       </form>
     </div>
   </center>
@@ -19,10 +19,10 @@
       <ul class="docList">
         {% for doc in results %}
           <li>
-            <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>Аннотация: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
+            <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>{% trans %}doc.annotation.label{% endtrans %}: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
               {{ attribute(doc, 'title') }}
             </a>
-            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
+            <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
           </li>        
         {%endfor%}
       </ul>

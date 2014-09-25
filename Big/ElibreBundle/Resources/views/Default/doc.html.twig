@@ -5,7 +5,7 @@
     <div class="docTitle">
       <a href="{{ path('big_elibre_theme', {'theme_code': doc.theme.code,  'action' : 'view' }) }}">{{ doc.theme.title }}</a> / {{ attribute(doc, 'title') }}
     </div>
-    <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ">
+    <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
       {% if doc.icon %} 
         <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon big"/>
       {% else %}
@@ -13,8 +13,8 @@
       {% endif %}
     </a>
 
-        <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="Скачать документ">
-          Загрузить документ
+        <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
+          {% trans %}doc.download.label{% endtrans %}
         </a>
 
     <div class="docAnnotation">

@@ -54,6 +54,7 @@ class FMController extends Controller {
   }
 
   function getFileList($path) {
+    $path = '/'.$path;
     // sorting file and directories separately
     $dlist = array();
     $flist = array();
