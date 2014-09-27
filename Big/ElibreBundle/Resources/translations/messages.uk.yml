@@ -1,0 +1,88 @@
+elibre:
+  label: Электрона біліотека
+  label.part1: Электрона
+  label.part2: бібліотека
+
+register:
+  label: Реєстрація
+  
+new_docs:
+  label: Новинки
+  descr: Нові надходження
+  
+main_page:
+  label: Головна
+
+login:
+  label: Вхід
+
+search:
+  label: Пошук
+
+contacts:
+  label: Контакти
+
+history:
+  label: Історія
+
+admin_page:
+  label: Адмін
+  full.label: Адмін-консоль
+
+page:
+  edit:
+    label: Редагувати
+    descr: Редагувати цю сторінку
+
+theme:
+  label: Тема
+  plural.label: Теми
+  order:
+    label: Порядок
+    descr: Змінити порядок тем
+  add:
+    label: Додати
+    descr: Додати документ
+  nodocs.label: немає документів
+  create.label: Створити
+  modified.label: Тема була змінена
+
+doc:
+  annotation.label: Анотація
+  delete.label: Видалити документ
+  delete:
+    dlg:
+      label: Видалити документ
+      descr: Документ буде видалено з бібліотеки назавжди. <p>Ви впевненні?</p>
+      delete_all: Видалити все
+      delete_dbonly: Видалити, але залишити файл на диску
+  download.label: Завантажити документ
+  path.label: Шлях
+  title.label: Назва
+  tags.label: Теги
+  
+btn: 
+  ok: OK
+  cancel: Відміна
+  save: Зберегти
+  search: Пошук
+  browse: Вибрати
+  no: Ні
+  yes: Так
+
+fm:
+  title.label: Перегляд файлів
+  upload.label: Відвантажити
+  dir.label: Тека
+
+users:
+  label: Користувачі
+  username.label: Ім’я
+  email.label: E-mail
+  isenabled.label: Увімкнено ?
+  disabled.label: Вимкнено 
+  enabled.label: Увімкнено
+  password.label: Пароль
+  password_retype.label: Пароль ще раз
+  notify.label: Повідомити користувача про (де)активацію облікового рахунку
+ 

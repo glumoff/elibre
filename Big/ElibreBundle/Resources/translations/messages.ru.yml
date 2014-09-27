@@ -84,6 +84,5 @@ users:
   enabled.label: Включён
   password.label: Пароль
   password_retype.label: Повтор пароля
-  notify.label: Notify user about account (de)activation
   notify.label: Уведомить пользователя об (де)активации учётной записи
  
