@@ -102,7 +102,7 @@ function FileManager() {
         });
         $('.FMFileList li.dir a').on('click', function (e) {
 //          alert($(this).attr('href') + '/');
-          new FileManager().changeDir($(this).attr('href') + '/');
+          new FileManager().changeDir($(this).attr('href') + DIRECTORY_SEPARATOR);
           e.preventDefault();
         });
         $('.FMFileList li.dirUp a').on('click', function (e) {
@@ -120,9 +120,9 @@ function FileManager() {
   };
   this.goUp = function () {
     var newPath;
-    var p = this.currentPath.lastIndexOf('/', this.currentPath.length - 2); // -2 to cut / at the end
+    var p = this.currentPath.lastIndexOf(DIRECTORY_SEPARATOR, this.currentPath.length - 2); // -2 to cut / at the end
     if (p >= 0) {
-      newPath = this.currentPath.substring(0, p) + '/';
+      newPath = this.currentPath.substring(0, p) + DIRECTORY_SEPARATOR;
       //alert(newPath);
     } else {
       newPath = '/';

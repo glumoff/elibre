@@ -41,7 +41,7 @@ class ThemesTree {
 //    echo "----------------------<br>";
   }
 
-  private function parseArray($arr, $root = 0, $level = NULL) {
+  private function parseArray(&$arr, $root = 0, $level = NULL) {
 //    echo 'ROOT1: ' . $root . '<br>';
     $res = NULL;
     if (($this->maxDepthLevel !== NULL) && ($level >= $this->maxDepthLevel)) {
@@ -63,7 +63,7 @@ class ThemesTree {
 //          echo $k . ': ' . $v['title'] . "; parent: " . var_export($v['parent_id'], TRUE) . '<br>';
           $res[] = $t;
 //          $tl = new ThemesTree();
-          $res[count($res) - 1]->setChildren(new ThemesTree($this->parseArray(&$arr, $v['id'], $level + 1)));
+          $res[count($res) - 1]->setChildren(new ThemesTree($this->parseArray($arr, $v['id'], $level + 1)));
         }
       }
     }

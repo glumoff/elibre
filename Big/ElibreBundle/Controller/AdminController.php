@@ -459,9 +459,9 @@ class AdminController extends Controller {
     if ($moved) {
       $doc->setPath(FSHelper::getBaseName($themeDocPath));
 
-      $finfo = finfo_open(FILEINFO_MIME_TYPE);
-      $doc->setMimeType(finfo_file($finfo, $themeDocPath_enc));
-      finfo_close($finfo);
+      $finfo = \finfo_open(FILEINFO_MIME_TYPE);
+      $doc->setMimeType(\finfo_file($finfo, $themeDocPath_enc));
+      \finfo_close($finfo);
 
       //$res = 
       $dbm->persist($doc->getTheme());
@@ -525,6 +525,8 @@ class AdminController extends Controller {
             'Name' => $user->getUsername(),
             'Email' => $user->getEmail(),
             'isEnabled' => $user->isEnabled(),
+            'isConfirmed' => $user->getConfirmationToken() == '',
+//            'isConfirmed' => 0,
         );
       }
     }

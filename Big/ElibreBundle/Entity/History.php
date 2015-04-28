@@ -37,13 +37,13 @@ class History {
 
   /**
    * @ORM\ManyToOne(targetEntity="Document")
-   * @ORM\JoinColumn(name="doc_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="doc_id", referencedColumnName="id",onDelete="CASCADE")
    */
   private $document;
 
   /**
    * @ORM\ManyToOne(targetEntity="User")
-   * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="user_id", referencedColumnName="id",onDelete="CASCADE")
    */
   private $user;
 

@@ -22,7 +22,7 @@ function openFileManager(e, target, fmURL) {
       complete: function() {
 //        new FileManager().setTargetControl(target);
         new FileManager().onSelect = function (selectedValue) {
-//          alert('FM.onSelect');
+//          alert(DIRECTORY_SEPARATOR);
           target.val(selectedValue);
           propouseNameFromFile(selectedValue);
         }
@@ -46,7 +46,7 @@ function propouseNameFromFile(fpath) {
   if (titleWidget && !titleWidget.val()) {
     var title;
     // get basename
-    var p = fpath.lastIndexOf('/', fpath.length - 1);
+    var p = fpath.lastIndexOf(DIRECTORY_SEPARATOR, fpath.length - 1);
     if (p >= 0) {
       title = fpath.substring(p + 1);
     }

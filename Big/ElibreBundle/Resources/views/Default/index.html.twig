@@ -16,7 +16,9 @@
     </title>
   </head>
   <body>
-
+    <script>
+      var DIRECTORY_SEPARATOR = '{{ DIRECTORY_SEPARATOR|e('js') }}';
+    </script>
     <div id="wrapper" class="leftPageBG">
       <div class="rightPageBG">
         {% block header %}
@@ -28,12 +30,20 @@
               </div>
               <div id="headerLinks">
                 {#                <img class="corner" src="{{ asset('bundles/bigelibre/images/links_corner.png') }}"/>#}
-                <a href="{{ path('big_elibre_page') }}">{% trans %}main_page.label{% endtrans %}</a> | <a href="{{ path('fos_user_security_login') }}">{% trans %}login.label{% endtrans %}</a> | <a href="{{ path('big_elibre_search') }}">{% trans %}search.label{% endtrans %}</a> | <a href="{{ path('big_elibre_page', {'page': 'contacts'}) }}">{% trans %}contacts.label{% endtrans %}</a>  | <a href="{{ path('big_elibre_new_docs') }}" title="{% trans %}new_docs.descr{% endtrans %}">{% trans %}new_docs.label{% endtrans %}</a>
+                <a href="{{ path('big_elibre_page') }}">{% trans %}main_page.label{% endtrans %}</a> 
+                | <a href="{{ path('big_elibre_search') }}">{% trans %}search.label{% endtrans %}</a> 
+                | <a href="{{ path('big_elibre_page', {'page': 'contacts'}) }}">{% trans %}contacts.label{% endtrans %}</a>  
+                | <a href="{{ path('big_elibre_new_docs') }}" title="{% trans %}new_docs.descr{% endtrans %}">{% trans %}new_docs.label{% endtrans %}</a>
                 {% if is_granted('ROLE_USER') %}
                   | <a href="{{ path('big_elibre_history') }}">{% trans %}history.label{% endtrans %}</a>
                 {% endif %}
                 {% if is_granted('ROLE_ADMIN') %}
                   | <a href="{{ path('big_elibre_admin') }}">{% trans %}admin_page.label{% endtrans %}</a>
+                {% endif %}
+                {% if is_granted('ROLE_USER') %}
+                | <a href="{{ path('fos_user_security_logout') }}">{% trans %}logout.label{% endtrans %}</a> 
+                {% else %}
+                | <a href="{{ path('fos_user_security_login') }}">{% trans %}login.label{% endtrans %}</a> 
                 {% endif %}
               </div>
               <div id="langLinks">
@@ -62,15 +72,15 @@
 
           <div id="container">
             <div id="content">
-              {% block content %} 
+              {% block content %}
                 {% if is_granted('ROLE_ADMIN') %}
                   <div class="toolBox">
-{#                    <div >#}
-                      <a class="editBtn" href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans %}page.edit.descr{% endtrans %}" title="{% trans %}page.edit.descr{% endtrans %}">
-                        <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/> {% trans %}page.edit.label{% endtrans %}
-                      </a>
-                      
-{#                    </div>#}
+                    {#                    <div >#}
+                    <a class="editBtn" href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans %}page.edit.descr{% endtrans %}" title="{% trans %}page.edit.descr{% endtrans %}">
+                      <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/> {% trans %}page.edit.label{% endtrans %}
+                    </a>
+
+                    {#                    </div>#}
                   </div>
                 {% endif %}
 
@@ -113,7 +123,7 @@
                 //alert(ind);
 
               {#              $('#wrapper').height(100);#}
-{#                  $('#wrapper > div').height($('#wrapper').height());#}
+              {#                  $('#wrapper > div').height($('#wrapper').height());#}
 
                 });
             </script>

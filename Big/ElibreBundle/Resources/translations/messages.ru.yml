@@ -16,6 +16,9 @@ main_page:
 login:
   label: Вход
 
+logout:
+  label: Выход
+
 search:
   label: Поиск
 
@@ -82,7 +85,14 @@ users:
   isenabled.label: Включён ?
   disabled.label: Выключен
   enabled.label: Включён
+  isconfirmed.label: Подтверждение
+  confirmed.label: ""
+  notconfirmed.label: Нет
   password.label: Пароль
   password_retype.label: Повтор пароля
   notify.label: Уведомить пользователя об (де)активации учётной записи
  
+lang:
+  en: English
+  uk: Українська
+  ru: Русский

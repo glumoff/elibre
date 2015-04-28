@@ -13,9 +13,9 @@
       {% endif %}
     </a>
 
-        <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
-          {% trans %}doc.download.label{% endtrans %}
-        </a>
+    <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
+      {% trans %}doc.download.label{% endtrans %}
+    </a>
 
     <div class="docAnnotation">
       {#<h3>Аннотация:</h3>#}
@@ -34,9 +34,8 @@
           <video>
             <source type="{{ doc.getMimeType() }}" src="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}"/>
           </video>
-
         </div>
-
+                  
         {#    <script type="text/javascript" src="{{ asset('bundles/bigelibre/js/flowplayer-flash/flowplayer-3.2.13.min.js') }}"></script>
             <a  href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}"
               style="display:block;width:100%;height:330px"  

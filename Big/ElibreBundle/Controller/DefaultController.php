@@ -30,6 +30,7 @@ class DefaultController extends Controller {
       $this->templateParams = array();
       $this->templateParams['menuThemes'] = $this->getThemesMenuArray();
     }
+    $this->templateParams['DIRECTORY_SEPARATOR'] = DIRECTORY_SEPARATOR;
     return $this->templateParams;
   }
 

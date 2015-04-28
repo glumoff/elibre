@@ -16,6 +16,9 @@ main_page:
 login:
   label: Login
 
+logout:
+  label: Logout
+
 search:
   label: Search
 
@@ -83,7 +86,14 @@ users:
   isenabled.label: Is enabled
   disabled.label: Disabled
   enabled.label: Enabled
+  isconfirmed.label: Confirmation
+  confirmed.label: ""
+  notconfirmed.label: No
   password.label: Password
   password_retype.label: Retype password
   notify.label: Notify user about account (de)activation
-  
+ 
+lang:
+  en: English
+  uk: Українська
+  ru: Русский

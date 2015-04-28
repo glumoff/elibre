@@ -44,6 +44,14 @@
   //        create: false,
   //        edit: false
           },
+          isConfirmed: {
+            title: '{% trans %}users.isconfirmed.label{% endtrans %}',
+            width: '2%',
+            type: 'checkbox',
+            values: {'false': '{% trans %}users.notconfirmed.label{% endtrans %}', 'true': '{% trans %}users.confirmed.label{% endtrans %}'},
+            create: false,
+            edit: false
+          },
           Password: {
             title: '{% trans %}users.password.label{% endtrans %}',
             type: 'password',

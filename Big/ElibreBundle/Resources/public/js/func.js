@@ -36,3 +36,5 @@ function getCurrentPath(inclTrailingSlash) {
   }
   return inclTrailingSlash ? path + "/" : path;
 }
+
+//var DIRECTORY_SEPARATOR = ""
