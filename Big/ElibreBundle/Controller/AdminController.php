@@ -27,7 +27,7 @@ class AdminController extends Controller {
 //    $str = "<pre>";
     switch ($mode) {
       case 'themes':
-        if (($action == 'edit') || ($action == 'save') || ($action == 'active') || ($action == 'delete')) {
+        if (($action == 'edit') || ($action == 'save') || ($action == 'active') || ($action == 'delete') || ($action == 'public')) {
           $request = $this->getRequest();
           $dbm = $this->getDoctrine()->getManager();
           $formArr = $request->request->get('form');
@@ -77,6 +77,12 @@ class AdminController extends Controller {
                                 'action' => 'view')));
           } elseif ($action == 'active') {
             $theme->setIsActive(!$theme->isActive());
+            $res = $dbm->persist($theme);
+            $dbm->flush();
+            return $this->redirect($this->generateUrl('big_elibre_admin', array('mode' => $mode,
+                                'action' => 'view')));
+          } elseif ($action == 'public') {
+            $theme->setIsPublic(!$theme->isPublic());
             $res = $dbm->persist($theme);
             $dbm->flush();
             return $this->redirect($this->generateUrl('big_elibre_admin', array('mode' => $mode,
@@ -165,6 +171,7 @@ class AdminController extends Controller {
         break;
 
       case 'user':
+        /* @var $um \FOS\UserBundle\Model\UserManager */
         $um = $this->container->get('fos_user.user_manager');
         if ($action == 'list') {
           $dbm = $this->getDoctrine()->getManager();
@@ -176,6 +183,7 @@ class AdminController extends Controller {
           $sendNotify = $request->get('sendMail', FALSE);
           $newUsername = $request->get('Name');
           $newPassword = $request->get('Password');
+          $newRole = $request->get('Role');
           if ($newIsEnabled) {
             $actionMessage = 'register.account_activated';
           } else {
@@ -187,7 +195,7 @@ class AdminController extends Controller {
               $sendNotify = FALSE;
             }
           }
-
+          /* @var $editUser \Big\ElibreBundle\Entity\User */
           try {
             if ($isNewUser) {
               $editUser = $um->createUser();
@@ -201,6 +209,7 @@ class AdminController extends Controller {
             $res = array();
             $editUser->setUsername($request->get('Name'));
             $editUser->setEmail($request->get('Email'));
+            $editUser->setRoles([$this->formatUserRoleFromJTable($newRole)]);
             $password = $request->get('Password');
             if ($password) {
               $editUser->setPlainPassword($password);
@@ -224,6 +233,7 @@ class AdminController extends Controller {
             $res['Record'] = array('UserId' => $editUser->getId(),
                 'Name' => $editUser->getUsername(),
                 'Email' => $editUser->getEmail(),
+                'Role' => $this->formatUserRoleForJTable($editUser),
                 'isEnabled' => $editUser->isEnabled());
 
             if ($sendNotify) {
@@ -271,6 +281,7 @@ class AdminController extends Controller {
             'text' => $theme->getTitle(),
             'code' => $theme->getCode(),
             'active' => $theme->isActive(),
+            'public' => $theme->isPublic(),
         );
       }
     }
@@ -422,7 +433,7 @@ class AdminController extends Controller {
       $doc->setTheme($theme);
 //      exit;
     }
-    
+
     if ($doc->getCreateDt()) {
       $doc->setCreateDt(new \DateTime());
     }
@@ -525,6 +536,7 @@ class AdminController extends Controller {
             'Name' => $user->getUsername(),
             'Email' => $user->getEmail(),
             'isEnabled' => $user->isEnabled(),
+            'Role' => $this->formatUserRoleForJTable($user),
             'isConfirmed' => $user->getConfirmationToken() == '',
 //            'isConfirmed' => 0,
         );
@@ -549,6 +561,27 @@ class AdminController extends Controller {
               ->setTo($user->getEmail())
               ->setBody($translator->trans($msgText));
       $this->get('mailer')->send($message);
+    }
+  }
+
+  /**
+   * 
+   * @param User $user
+   */
+  private function formatUserRoleForJTable($user) {
+    $role = is_array($user->getRoles()) ? $user->getRoles()[0] : 'ROLE_USER';
+    switch ($role) {
+      case 'ROLE_ADMIN': return 'admin';
+      case 'ROLE_TEACHER': return 'teacher';
+      default: return 'user';
+    }
+  }
+
+  private function formatUserRoleFromJTable($role) {
+    switch ($role) {
+      case 'admin': return 'ROLE_ADMIN';
+      case 'teacher': return 'ROLE_TEACHER';
+      default: return 'ROLE_USER';
     }
   }
 

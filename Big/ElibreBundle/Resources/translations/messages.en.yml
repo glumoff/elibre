@@ -92,6 +92,10 @@ users:
   password.label: Password
   password_retype.label: Retype password
   notify.label: Notify user about account (de)activation
+  role.label: Role
+  role_user.label: Regular user
+  role_teacher.label: Teacher
+  role_admin.label: Administrator
  
 lang:
   en: English

@@ -20,16 +20,24 @@ class DocumentController extends DefaultController {
   public function showDocAction($action) {
     $this->docs_path = $this->container->getParameter('big_elibre.rootDir');
     //action: view|download|edit
-    
     //update user`s history
-        
+    $doc = $this->getSelectedDoc();
+    if ($doc) {
+      $role = $this->getUserRole();
+      if ($role && (($role == 'ROLE_USER') || ($role == 'IS_AUTHENTICATED_ANONYMOUSLY'))) {
+        if (!$doc->getTheme()->isPublic()) {
+          throw $this->createNotFoundException('The document does not exist');
+        }
+      }
+    }
 
     switch ($action) {
       case 'download':
         /* @var $hm HistoryManager */
-        $hm = $this->get('history_manager');
-        $doc = $this->getSelectedDoc();
-        $hm->saveHistory($this->getUser(), $doc);
+        if ($doc) {
+          $hm = $this->get('history_manager');
+          $hm->saveHistory($this->getUser(), $doc);
+        }
         return $this->doDownloadFile($doc);
         break;
 
@@ -71,6 +79,12 @@ class DocumentController extends DefaultController {
     return $this->templateParams;
   }
 
+  /**
+   * 
+   * @param \Big\ElibreBundle\Entity\Document $doc
+   * @return Response
+   * @throws type
+   */
   protected function doDownloadFile($doc = NULL) {
 //    return 
 //    return;    

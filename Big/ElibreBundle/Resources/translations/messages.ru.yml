@@ -91,6 +91,10 @@ users:
   password.label: Пароль
   password_retype.label: Повтор пароля
   notify.label: Уведомить пользователя об (де)активации учётной записи
+  role.label: Роль
+  role_user.label: Обычный пользователь
+  role_teacher.label: Преподаватель
+  role_admin.label: Администратор
  
 lang:
   en: English

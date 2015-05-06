@@ -20,16 +20,24 @@ class ElibreDBDelegate extends DBDelegateA {
     return new ElibreDBConnection();
   }
 
-  public function getThemes($level = NULL) {
+  public function getThemes($level = NULL, $role = NULL) {
     $res = false;
+    $accessLevel = '';
+    if ($role) {
+      if (($role == 'ROLE_USER') || ($role == 'IS_AUTHENTICATED_ANONYMOUSLY')) {
+        $accessLevel = ' AND is_public=1';
+      }
+    }
     $query = 'SELECT  *,
                       (SELECT COUNT(*) 
                        FROM documents
                        WHERE documents.theme_id = themes.id) AS docsCount
               FROM themes
-              WHERE is_active=1
-              ORDER BY parent_id, show_order, id';
+              WHERE is_active=1'
+            . $accessLevel
+            . ' ORDER BY parent_id, show_order, id';
     $dbm = $this->getDBM();
+//    echo $role;
     $res = $dbm->selectQuery($query);
     $tl = new ThemesTree();
     $tl->setMaxLevel($level);
@@ -38,15 +46,22 @@ class ElibreDBDelegate extends DBDelegateA {
     return $tl;
   }
 
-  public function getSubThemes($themeCode) {
+  public function getSubThemes($themeCode, $role = NULL) {
     //$res = false;
+    $accessLevel = '';
+    if ($role) {
+      if (($role == 'ROLE_USER') || ($role == 'IS_AUTHENTICATED_ANONYMOUSLY')) {
+        $accessLevel = ' AND t2.is_public=1';
+      }
+    }
     $query = "SELECT t2.*
               FROM themes t1
               INNER JOIN themes t2
                       ON t2.parent_id = t1.id
               WHERE t1.code = '" . $themeCode . "'
-                 AND t2.is_active=1
-              ORDER BY title, code";
+                 AND t2.is_active=1"
+            . $accessLevel
+            . " ORDER BY title, code";
 //    echo $query;
     $dbm = $this->getDBM();
     $res = $dbm->selectQuery($query, FALSE);
@@ -69,7 +84,7 @@ class ElibreDBDelegate extends DBDelegateA {
     $t = NULL;
     $query = "SELECT *
               FROM themes
-              WHERE id = '" . $themeID. "'
+              WHERE id = '" . $themeID . "'
               ORDER BY title, code";
     $dbm = $this->getDBM();
     $res = $dbm->selectQuery($query);
@@ -82,13 +97,20 @@ class ElibreDBDelegate extends DBDelegateA {
     }
     return $t;
   }
-  
-  public function getThemeByCode($themeCode) {
+
+  public function getThemeByCode($themeCode, $role = NULL) {
     $t = NULL;
+    $accessLevel = '';
+    if ($role) {
+      if (($role == 'ROLE_USER') || ($role == 'IS_AUTHENTICATED_ANONYMOUSLY')) {
+        $accessLevel = ' AND is_public=1';
+      }
+    }
     $query = "SELECT *
               FROM themes
-              WHERE code = '" . $themeCode . "'
-              ORDER BY title, code";
+              WHERE code = '" . $themeCode . "'"
+            . $accessLevel
+            . " ORDER BY title, code";
 //    echo $query;
 //    exit;
     $dbm = $this->getDBM();
@@ -104,12 +126,20 @@ class ElibreDBDelegate extends DBDelegateA {
     return $t;
   }
 
-  public function getDocuments($themeID) {
+  public function getDocuments($themeID, $role = NULL) {
     $res = false;
-    $query = 'SELECT * 
-              FROM documents
-              WHERE theme_id=' . $themeID . '
-              ORDER BY title, id';
+    $accessLevel = '';
+    if ($role) {
+      if (($role == 'ROLE_USER') || ($role == 'IS_AUTHENTICATED_ANONYMOUSLY')) {
+        $accessLevel = ' AND themes.is_public=1';
+      }
+    }
+    $query = 'SELECT documents.* '
+            . 'FROM documents, themes '
+            . 'WHERE themes.id=documents.theme_id '
+            . 'AND theme_id=' . $themeID . ' '
+            . $accessLevel
+            . ' ORDER BY title, id;';
     $dbm = $this->getDBM();
     $res = $dbm->selectQuery($query, FALSE);
 
@@ -128,7 +158,7 @@ class ElibreDBDelegate extends DBDelegateA {
    * @param int $docID
    * @return \Big\ElibreBundle\Model\Document
    */
-  public function getDocument($docID) {
+  public function getDocument($docID, $role = NULL) {
     $d = NULL;
     $query = 'SELECT * 
               FROM documents
@@ -148,8 +178,8 @@ class ElibreDBDelegate extends DBDelegateA {
     $dbm = $this->getDBM();
     $res = $dbm->executeQuery($query);
   }
-  
- /**
+
+  /**
    * 
    * @param integer $theme_id
    */
@@ -171,16 +201,13 @@ class ElibreDBDelegate extends DBDelegateA {
     return $path;
   }
 
-
 }
-
-
 
 class ElibreDBConnection {
 
   var $host = 'localhost';
   var $user = 'elibre';
-  var $pwd = 'MoisBeag';
+  var $pwd = 'KorgIget';
   var $dataBase = 'elibre';
 
 }

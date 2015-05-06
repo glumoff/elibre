@@ -35,6 +35,7 @@ function initThemesTree(treeContainer, treeData) {
         {width: 24, header: "Active", source: "callback", func: getActiveAction, value: "id"},
         {width: 24, header: "Edit", source: "callback", func: getEditAction, value: "id"},
         {width: 24, header: "Delete", source: "callback", func: getDeleteAction, value: "id"},
+        {width: 24, header: "Public", source: "callback", func: getPublicAction, value: "id"},
       ],
       showHeaders: false
     }
@@ -73,6 +74,22 @@ function getActiveAction(themeID) {
     }
   }
   return '<a href="' + pageRoot + '/active?theme=' + themeID + '">' + actionIcon + '</a>';
+}
+
+function getPublicAction(themeID) {
+  var actionIcon = "";
+  var allThemes = themesData;
+  if (allThemes) {
+    var theme = findTheme(themeID, allThemes);
+    if (theme) {
+      if (theme.public) {
+        actionIcon = '<img src="' + pageRoot + '../../../../bundles/bigelibre/images/admin/share.png">';
+      } else {
+        actionIcon = '<img src="' + pageRoot + '../../../../bundles/bigelibre/images/admin/teachers.png">';
+      }
+    }
+  }
+  return '<a href="' + pageRoot + '/public?theme=' + themeID + '">' + actionIcon + '</a>';
 }
 
 function getDeleteAction(themeID) {

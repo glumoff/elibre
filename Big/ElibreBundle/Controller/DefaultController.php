@@ -76,8 +76,18 @@ class DefaultController extends Controller {
 
   protected function getThemesMenuArray() {
     $db = new ElibreDBDelegate();
-    $themesList = $db->getThemes(2);
+    $themesList = $db->getThemes(2, $this->getUserRole());
     return $themesList->getThemesArray();
+  }
+
+  protected function getUserRole() {
+    if (!$this->get('security.context')->isGranted('IS_AUTHENTICATED_FULLY')) {
+      return 'IS_AUTHENTICATED_ANONYMOUSLY';
+    } else {
+      $user = $this->getUser();
+      $roles = $user->getRoles();
+      return $roles[0];
+    }
   }
 
 }

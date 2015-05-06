@@ -57,6 +57,13 @@ class Theme {
   private $isActive;
 
   /**
+   * @var boolean
+   *
+   * @ORM\Column(name="is_public", type="boolean")
+   */
+  private $isPublic;
+
+  /**
    * @var integer
    *
    * @ORM\Column(name="show_order", type="integer")
@@ -71,6 +78,7 @@ class Theme {
   public function __construct() {
     $this->parentId = 0;
     $this->isActive = FALSE;
+    $this->isPublic = TRUE;
     $this->showOrder = -1;
   }
 
@@ -193,12 +201,33 @@ class Theme {
   }
 
   /**
+   * Set publicity
+   *
+   * @param boolean $isPublic
+   * @return Theme
+   */
+  public function setIsPublic($isPublic) {
+    $this->isPublic = $isPublic;
+
+    return $this;
+  }
+
+  /**
    * Get visibility
    *
    * @return boolean 
    */
   public function isActive() {
     return $this->isActive;
+  }
+
+  /**
+   * Get publicity
+   *
+   * @return boolean 
+   */
+  public function isPublic() {
+    return $this->isPublic;
   }
 
   /**
@@ -230,9 +259,9 @@ class Theme {
    */
   public function setDirName($dirName) {
     // sanitizing dirName
-    $dirName = preg_replace('/\s/','_', $dirName);
-    $dirName = preg_replace('/[^\w-\.,]/ui','', $dirName);
-            
+    $dirName = preg_replace('/\s/', '_', $dirName);
+    $dirName = preg_replace('/[^\w-\.,]/ui', '', $dirName);
+
     $this->dirName = $dirName;
 
     return $this;
@@ -258,15 +287,5 @@ class Theme {
   public function getFullDirName() {
     return $this->dirName;
   }
-  
 
-    /**
-     * Get isActive
-     *
-     * @return boolean 
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
 }

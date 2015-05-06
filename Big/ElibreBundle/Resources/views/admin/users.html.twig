@@ -7,7 +7,7 @@
   <script src="{{ asset('bundles/bigelibre/js/admin/users.js') }}"></script>
   <script>
     $(function () {
-  //  alert(Routing.generate('big_elibre_admin', {mode: 'user', action: 'list'}));
+      //  alert(Routing.generate('big_elibre_admin', {mode: 'user', action: 'list'}));
       $('#UsersTableContainer').jtable({
         title: '{% trans %}users.label{% endtrans %}',
         actions: {
@@ -23,26 +23,26 @@
           },
           Name: {
             title: '{% trans %}users.username.label{% endtrans %}',
-  //        width: '40%'
+            //        width: '40%'
           },
           Email: {
             title: '{% trans %}users.email.label{% endtrans %}',
-  //        width: '20%'
+            //        width: '20%'
           },
-  //      RegDate: {
-  //        title: 'Reg date',
-  //        width: '30%',
-  //        type: 'date',
-  //        create: false,
-  //        edit: false
-  //      },
+          //      RegDate: {
+          //        title: 'Reg date',
+          //        width: '30%',
+          //        type: 'date',
+          //        create: false,
+          //        edit: false
+          //      },
           isEnabled: {
             title: '{% trans %}users.isenabled.label{% endtrans %}',
             width: '2%',
             type: 'checkbox',
             values: {'false': '{% trans %}users.disabled.label{% endtrans %}', 'true': '{% trans %}users.enabled.label{% endtrans %}'}
-  //        create: false,
-  //        edit: false
+            //        create: false,
+            //        edit: false
           },
           isConfirmed: {
             title: '{% trans %}users.isconfirmed.label{% endtrans %}',
@@ -51,6 +51,16 @@
             values: {'false': '{% trans %}users.notconfirmed.label{% endtrans %}', 'true': '{% trans %}users.confirmed.label{% endtrans %}'},
             create: false,
             edit: false
+          },
+          Role: {
+            title: '{% trans %}users.role.label{% endtrans %}',
+            width: '5%',
+            type: 'radiobutton',
+            options: {
+              'user': '{% trans %}users.role_user.label{% endtrans %}',
+              'teacher': '{% trans %}users.role_teacher.label{% endtrans %}',
+              'admin': '{% trans %}users.role_admin.label{% endtrans %}'
+            },
           },
           Password: {
             title: '{% trans %}users.password.label{% endtrans %}',
