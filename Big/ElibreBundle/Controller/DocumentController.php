@@ -65,13 +65,20 @@ class DocumentController extends DefaultController {
 //          var_export($themePath);
 //          echo "</pre>";
         }
+        $themeFullPath = $this->getThemeFullDirName($doc->getTheme()->getId());
+        $fname = $this->docs_path . DIRECTORY_SEPARATOR . $themeFullPath . DIRECTORY_SEPARATOR . $doc->getPath();
+        $fname_enc = FSHelper::fixOSFileName($fname);
+        $this->templateParams['docFullPathDir'] = $fname_enc;
       }
 
       $this->templateParams['doc'] = $doc;
       $this->templateParams['selectedTheme'] = $selectedTheme;
+
+
       if ($themePath) {
         $this->templateParams['activeThemeRoot'] = (count($themePath) > 0) ? $themePath[max(count($themePath) - 1, 0)]->getID() : '-1';
         $this->templateParams['activeThemeRoot2'] = (count($themePath) > 1) ? $themePath[max(count($themePath) - 2, 0)]->getID() : $selectedTheme->getID();
+//        $this->templateParams['activeThemeRoot2'] = '-1';
 //        var_dump($this->templateParams['activeThemeRoot']);
 //        var_dump($this->templateParams['activeThemeRoot2']);
       }

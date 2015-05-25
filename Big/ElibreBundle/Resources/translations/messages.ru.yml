@@ -61,6 +61,7 @@ doc:
       delete_dbonly: Удалить, но оставить файл на диске
   download.label: Скачать документ
   path.label: Путь
+  fullpath.label: Полный путь
   title.label: Название
   tags.label: Тэги
   

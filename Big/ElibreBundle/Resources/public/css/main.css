@@ -282,7 +282,8 @@ div.docTitle {
 -----------------------------------------------------------------------------*/
 #menuSidebar {
   float: left;
-  width: 218px;
+  /*width: 218px;*/
+  width: 250px;
   margin-left: -100%;
   position: relative;
   padding-left: 20px;
@@ -435,7 +436,7 @@ ul.themesList li {
 }
 
 .icon {
-  height: 24px;
+  height: 14px;
   vertical-align: middle;
 }
 
@@ -706,4 +707,33 @@ form table td {
   height: 22px;
   width: 22px;
   vertical-align: middle;
+}
+
+
+/* bootstrap override */
+.list-group-item {
+  padding: 5px 0px;
+}
+
+.treeview span.icon {
+  margin-right: 2px !important;
+  margin-left: 1px !important;
+}
+
+.treeview li:hover {
+  /*color: #999;*/
+  color: black;
+}
+
+#menuSidebar .badge {
+  font-size: 7px;  
+  margin-right: 1px;
+}
+
+.treeview firstLevelNode {
+  background-color: red;
+}
+
+.treeview span.indent {
+  margin-left: 0 !important;
 }

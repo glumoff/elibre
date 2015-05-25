@@ -76,7 +76,7 @@ class DefaultController extends Controller {
 
   protected function getThemesMenuArray() {
     $db = new ElibreDBDelegate();
-    $themesList = $db->getThemes(2, $this->getUserRole());
+    $themesList = $db->getThemes(NULL, $this->getUserRole());
     return $themesList->getThemesArray();
   }
 

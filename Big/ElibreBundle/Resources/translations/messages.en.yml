@@ -62,6 +62,7 @@ doc:
       delete_dbonly: Delete, but leave files
   download.label: Download document
   path.label: Path
+  fullpath.label: Full path
   title.label: Title
   tags.label: Tags
   

@@ -12,7 +12,7 @@ class FSHelper {
         $fname = mb_convert_encoding($fname, "windows-1251", "utf-8");
       }
     }
-    return $fname;
+    return file_exists($fname) ? realpath($fname) : $fname;
   }
   
   static function getBaseName($fpath) {

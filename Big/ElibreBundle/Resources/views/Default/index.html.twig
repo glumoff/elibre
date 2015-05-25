@@ -4,11 +4,15 @@
   <head>
     {#    <link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />#}
     <link href="{{ asset('bundles/bigelibre/css/elibre/jquery-ui-1.10.4.custom.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/bigelibre/css/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('bundles/bigelibre/css/bootstrap-treeview/bootstrap-treeview.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('bundles/bigelibre/css/main.css') }}" rel="stylesheet" />
     <script src="{{ asset('bundles/bigelibre/js/jquery-1.9.1.js') }}"></script>
     <script src="{{ asset('bundles/bigelibre/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
     <script src="{{ asset('bundles/bigelibre/js/jquery.custombox.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/css/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/css/bootstrap-treeview/bootstrap-treeview.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
     <script src="{{ asset('bundles/bigelibre/js/func.js') }}"></script>
     <title>
@@ -41,9 +45,9 @@
                   | <a href="{{ path('big_elibre_admin') }}">{% trans %}admin_page.label{% endtrans %}</a>
                 {% endif %}
                 {% if is_granted('ROLE_USER') %}
-                | <a href="{{ path('fos_user_security_logout') }}">{% trans %}logout.label{% endtrans %}</a> 
+                  | <a href="{{ path('fos_user_security_logout') }}">{% trans %}logout.label{% endtrans %}</a> 
                 {% else %}
-                | <a href="{{ path('fos_user_security_login') }}">{% trans %}login.label{% endtrans %}</a> 
+                  | <a href="{{ path('fos_user_security_login') }}">{% trans %}login.label{% endtrans %}</a> 
                 {% endif %}
               </div>
               <div id="langLinks">
@@ -92,44 +96,80 @@
           {% block navigation %}
             <script>
               $(function () {
-                $(document).tooltip({
-                  content: function () {
-                    var element = $(this);
-                    /*alert(nl2br(element.attr('title')));*/
-                    //if (element.hasClass(''))
-                    return '<div class="tooltip">' + element.attr('title') + '</div>';
-                  }
-                });
+              {#                $(document).tooltip({
+                                content: function () {
+                                  var element = $(this);
+                                  /*alert(nl2br(element.attr('title')));*/
+                                  //if (element.hasClass(''))
+                                  return '<div class="tooltip">' + element.attr('title') + '</div>';
+                                }
+                              });#}
 
-                var ind = $("#menuSidebar > h3").index($("#menuSidebar > h3.active"));
-                //alert
-                $("#menuSidebar").accordion(
-                        {collapsible: true,
-                          active: (ind >= 0) ? ind : false,
-                          heightStyle: "content",
-                          /*header: "> li > :first-child, > :not(li):even"*/
-                          header: "> h3"
-                        });
-                //if (ind >= 0) {
-                //  $("#menuSidebar").accordion("option", "active", ind);
-                //}
-                var plainLinks = $("#menuSidebar > a");
-                plainLinks.addClass("ui-accordion-header ui-state-default ui-corner-all");
-                plainLinks.hover(function () {
-                  $(this).addClass("ui-state-hover");
-                }, function () {
-                  $(this).removeClass("ui-state-hover");
-                });
-                //alert(ind);
+                                  {#                                  var ind = $("#menuSidebar > h3").index($("#menuSidebar > h3.active"));
+                                                //alert
+                                                $("#menuSidebar").accordion(
+                                                        {collapsible: true,
+                                                          active: (ind >= 0) ? ind : false,
+                                                          heightStyle: "content",
+                                                          /*header: "> li > :first-child, > :not(li):even"*/
+                                                          header: "> h3"
+                                                        });
+              #}                                  //if (ind >= 0) {
+                                  //  $("#menuSidebar").accordion("option", "active", ind);
+                                  //}
+              {#                                  var plainLinks = $("#menuSidebar > a");
+                                                plainLinks.addClass("ui-accordion-header ui-state-default ui-corner-all");
+                                                plainLinks.hover(function () {
+                                                  $(this).addClass("ui-state-hover");
+                                                }, function () {
+                                                  $(this).removeClass("ui-state-hover");
+                                                });#}
+                                                    //alert(ind);
 
               {#              $('#wrapper').height(100);#}
               {#                  $('#wrapper > div').height($('#wrapper').height());#}
 
+{#                    console.log('{{ selectedTheme.code }}');#}
+                  var tree = [{% include "BigElibreBundle:Default:nav_menu.html.twig" with {'menuThemes': menuThemes, 'selectedTheme': selectedTheme} only %}];
+                  $('#themesTree').treeview({
+                    data: tree,
+                    levels: 0,{#                    backColor: '#324C57',#}
+                    backColor: 'white',
+                    onhoverColor: '#DEDBBD',
+                    color: '#222',{#                    color: '#DEDBBD',#}
+                    enableLinks: true,
+                    expandIcon: "glyphicon glyphicon-chevron-right",
+                    collapseIcon: "glyphicon glyphicon-chevron-down",
+                    borderColor: "#999",
+                    showTags: true,
+                    selectedBackColor: "#9DA597",
+{#                    selectedIcon: 'glyphicon glyphicon-arrow-right',#}
+                  });
+
+              {#                    alert($('treeview li.node-themesTree'));#}
+              {#                    console.log($('.treeview li.node-themesTree'));#}
+                  $('.treeview li.node-themesTree').each(function () {
+              {#                      $(this).css("background-color","red");#}
+                    if ($(this).children('span.indent').length == 0) {
+                      $(this).addClass('firstLevelNode');
+                    }
+
+
+                  });
+                  console.log($('#themesTree').treeview('getSelected', null));
+                  $('#themesTree').treeview('revealNode', [ $('#themesTree').treeview('getSelected', null), { silent: true } ]);
+              {#                    $('#themesTree').treeview('revealNode', [ nodeId, { silent: true } ]);#}
+{#                    $('#themesTree').treeview('search', ["{{ selectedTheme.title }}", {
+                        ignoreCase: false, // case insensitive
+                        exactMatch: false, // like or equals
+                        revealResults: true, // reveal matching nodes
+                      }]);#}
                 });
             </script>
 
             <div class="sidebar" id="menuSidebar">
-              {% include "BigElibreBundle:Default:nav_menu.html.twig" with {'menuThemes': menuThemes, 'activeThemeRoot': activeThemeRoot, 'activeThemeRoot2': activeThemeRoot2} only %}
+              {#              {% include "BigElibreBundle:Default:nav_menu.html.twig" with {'menuThemes': menuThemes, 'activeThemeRoot': activeThemeRoot, 'activeThemeRoot2': activeThemeRoot2} only %}#}
+              <div id="themesTree"></div>
             </div>
 
           {% endblock %}
