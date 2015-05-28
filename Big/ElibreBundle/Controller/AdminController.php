@@ -13,6 +13,7 @@ use Big\ElibreBundle\Entity\User;
 use Big\ElibreBundle\Entity\Document;
 use Big\ElibreBundle\Utils\FSHelper;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminController extends Controller {
 
@@ -146,6 +147,7 @@ class AdminController extends Controller {
                 ->add('path', 'text')
                 ->add('annotation', 'textarea', array('required' => FALSE))
                 ->add('tags', 'text')
+                ->add('picture', 'file')
 //                ->add('theme', 'hidden')
 //                  ->add('show_order', 'hidden')
                 ->add('save', 'submit')
@@ -426,7 +428,7 @@ class AdminController extends Controller {
 //    $str .= "before handleRequest: " . var_export($doc, TRUE) . "\n";
 //    $str .= "before handleRequest: " . var_export($doc->getCreateDt(), TRUE) . "\n";
     $form->handleRequest($request);
-//    $str .= "after handleRequest: " . var_export($doc, TRUE) . "\n";
+
 
     if (!$doc->getTheme() || !$doc->getTheme()->getCode()) {
       $theme = $dbm->getRepository("BigElibreBundle:Theme")->findOneById($doc->getTheme()->getId());
@@ -474,7 +476,14 @@ class AdminController extends Controller {
       $doc->setMimeType(\finfo_file($finfo, $themeDocPath_enc));
       \finfo_close($finfo);
 
-      //$res = 
+      /* @var $file UploadedFile */
+      $file = $form['picture']->getData();
+      // TODO: move hardcoded max file size to params
+      if ($file && file_exists($file->getPathname()) && ($file->getSize() <= 819200)) {
+        $doc->setPictureMimeType($file->getMimeType());
+        $doc->setPicture(file_get_contents($file->getPathname()));
+      }
+
       $dbm->persist($doc->getTheme());
       $dbm->persist($doc);
       $dbm->flush();

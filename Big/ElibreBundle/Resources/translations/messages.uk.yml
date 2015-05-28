@@ -64,6 +64,7 @@ doc:
   fullpath.label: Повний шлях
   title.label: Назва
   tags.label: Теги
+  picture.label: Зображення
   
 btn: 
   ok: OK

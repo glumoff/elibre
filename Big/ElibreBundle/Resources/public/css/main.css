@@ -561,39 +561,42 @@ p.tooltip {
   /*overflow: visible;*/
   /*border: 1px solid greenyellow;*/
   /*width: 165px;*/
-  padding-bottom: 40px;
-  color: white;
+  /*padding-bottom: 40px;*/
+  /*color: white;*/
+  /*height: 40px;*/
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.toolBox a {
+/*.toolBox a {
   margin-left: 5px;
   margin-bottom: 3px;  
-  /*height: 25px;*/
-  /*width: 165px;*/
+  height: 25px;
+  width: 165px;
   border: 1px solid black;
   padding-left: 4px;
   padding-right: 4px;
   text-align: center;
   font-weight: bold;
-  /*float: right;*/
+  float: right;
   color: white;
   border-radius: 4px;
-}
+}*/
 
 .toolBox:last-child:after {
   /*clear: both;*/
   /*content: '';*/
 }
 
-.editBtn {
-  /*color: white;*/
-  /*background-color: gray;*/
+/*.editBtn {
+  color: white;
+  background-color: gray;
   background-color: #35b059;
 }
 
 .editBtn, .editBtn a {
-  /*color: #dedbbd;*/
-}
+  color: #dedbbd;
+}*/
 
 .menuToolBox {
   position: absolute;
@@ -636,21 +639,21 @@ p.tooltip {
   overflow: auto;
 }
 
-.orderBtn {
+/*.orderBtn {
   background-color: #eeb84f;
 }
 
 .orderBtn, .orderBtn a {
   color: #363431;
-}
+}*/
 
-.addDocBtn {
+/*.addDocBtn {
   background-color: #6bff9c;
 }
 
 .addDocBtn, .addDocBtn a {
   color: #016f23;
-}
+}*/
 
 form table td {
   padding: 3px;

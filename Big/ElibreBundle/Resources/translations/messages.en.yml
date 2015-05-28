@@ -65,6 +65,7 @@ doc:
   fullpath.label: Full path
   title.label: Title
   tags.label: Tags
+  picture.label: Picture
   
 btn: 
   ok: OK

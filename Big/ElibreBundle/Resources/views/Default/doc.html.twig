@@ -5,6 +5,15 @@
     <div class="docTitle">
       <a href="{{ path('big_elibre_theme', {'theme_code': doc.theme.code,  'action' : 'view' }) }}">{{ doc.theme.title }}</a> / {{ attribute(doc, 'title') }}
     </div>
+
+    {% if doc.pictureMimeType %}
+      <div class="img-thumbnail">
+        {#        {{ doc.pictureMimeType }}#}
+        {#        {{ doc.picture }}#}
+        <img src="data:{{ doc.pictureMimeType }};base64,{{ doc.pictureBase64 }}" />
+      </div>
+    {% endif %}
+
     <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
       {% if doc.icon %} 
         <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon big"/>
@@ -13,21 +22,23 @@
       {% endif %}
     </a>
 
-{#    {% if is_granted('ROLE_ADMIN') %}
-      <p>
-        <b>{% trans %}doc.fullpath.label{% endtrans %}:</b>
-      </p>
-      <p>
-        {{ docFullPathDir|raw }}
-      </p>
-      <p></p>
-    {% endif %}
-#}
-    <p>
-      <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
-        {% trans %}doc.download.label{% endtrans %}
+    {#    {% if is_granted('ROLE_ADMIN') %}
+          <p>
+            <b>{% trans %}doc.fullpath.label{% endtrans %}:</b>
+          </p>
+          <p>
+            {{ docFullPathDir|raw }}
+          </p>
+          <p></p>
+        {% endif %}
+    #}
+    <br/>
+    <br/>
+    <div>
+      <a class="btn btn-primary btn-sm" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
+        <span class="glyphicon glyphicon-save"></span> {% trans %}doc.download.label{% endtrans %}
       </a>
-    </p>
+    </div>
 
     <div class="docAnnotation">
       {#<h3>Аннотация:</h3>#}

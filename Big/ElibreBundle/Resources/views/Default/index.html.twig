@@ -79,12 +79,11 @@
               {% block content %}
                 {% if is_granted('ROLE_ADMIN') %}
                   <div class="toolBox">
-                    {#                    <div >#}
-                    <a class="editBtn" href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans %}page.edit.descr{% endtrans %}" title="{% trans %}page.edit.descr{% endtrans %}">
-                      <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/> {% trans %}page.edit.label{% endtrans %}
-                    </a>
-
-                    {#                    </div>#}
+{#                    <div class="panel-body well">#}
+                      <a class="editBtn btn btn-sm btn-success" href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans %}page.edit.descr{% endtrans %}" title="{% trans %}page.edit.descr{% endtrans %}">
+                        <span class="glyphicon glyphicon-edit"></span>  {% trans %}page.edit.label{% endtrans %}
+                      </a>
+{#                    </div>#}
                   </div>
                 {% endif %}
 
@@ -106,15 +105,15 @@
                               });#}
 
                                   {#                                  var ind = $("#menuSidebar > h3").index($("#menuSidebar > h3.active"));
-                                                //alert
-                                                $("#menuSidebar").accordion(
-                                                        {collapsible: true,
-                                                          active: (ind >= 0) ? ind : false,
-                                                          heightStyle: "content",
-                                                          /*header: "> li > :first-child, > :not(li):even"*/
-                                                          header: "> h3"
-                                                        });
-              #}                                  //if (ind >= 0) {
+                            //alert
+                            $("#menuSidebar").accordion(
+                                    {collapsible: true,
+                                      active: (ind >= 0) ? ind : false,
+                                      heightStyle: "content",
+                                      /*header: "> li > :first-child, > :not(li):even"*/
+                                      header: "> h3"
+                                    });
+#}                                  //if (ind >= 0) {
                                   //  $("#menuSidebar").accordion("option", "active", ind);
                                   //}
               {#                                  var plainLinks = $("#menuSidebar > a");
@@ -129,7 +128,7 @@
               {#              $('#wrapper').height(100);#}
               {#                  $('#wrapper > div').height($('#wrapper').height());#}
 
-{#                    console.log('{{ selectedTheme.code }}');#}
+              {#                    console.log('{{ selectedTheme.code }}');#}
                   var tree = [{% include "BigElibreBundle:Default:nav_menu.html.twig" with {'menuThemes': menuThemes, 'selectedTheme': selectedTheme} only %}];
                   $('#themesTree').treeview({
                     data: tree,
@@ -142,9 +141,8 @@
                     collapseIcon: "glyphicon glyphicon-chevron-down",
                     borderColor: "#999",
                     showTags: true,
-                    selectedBackColor: "#9DA597",
-{#                    selectedIcon: 'glyphicon glyphicon-arrow-right',#}
-                  });
+                    selectedBackColor: "#9DA597",              {#                    selectedIcon: 'glyphicon glyphicon-arrow-right',#}
+                        });
 
               {#                    alert($('treeview li.node-themesTree'));#}
               {#                    console.log($('.treeview li.node-themesTree'));#}
@@ -157,14 +155,14 @@
 
                   });
                   console.log($('#themesTree').treeview('getSelected', null));
-                  $('#themesTree').treeview('revealNode', [ $('#themesTree').treeview('getSelected', null), { silent: true } ]);
+                  $('#themesTree').treeview('revealNode', [$('#themesTree').treeview('getSelected', null), {silent: true}]);
               {#                    $('#themesTree').treeview('revealNode', [ nodeId, { silent: true } ]);#}
-{#                    $('#themesTree').treeview('search', ["{{ selectedTheme.title }}", {
-                        ignoreCase: false, // case insensitive
-                        exactMatch: false, // like or equals
-                        revealResults: true, // reveal matching nodes
-                      }]);#}
-                });
+              {#                    $('#themesTree').treeview('search', ["{{ selectedTheme.title }}", {
+                                      ignoreCase: false, // case insensitive
+                                      exactMatch: false, // like or equals
+                                      revealResults: true, // reveal matching nodes
+                                    }]);#}
+                                      });
             </script>
 
             <div class="sidebar" id="menuSidebar">

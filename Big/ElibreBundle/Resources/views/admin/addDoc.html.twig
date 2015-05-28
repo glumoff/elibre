@@ -46,6 +46,10 @@
         <td>{{ form_widget(addDocForm.tags) }}</td>
       </tr>
       <tr>
+        <td>{% trans %}doc.picture.label{% endtrans %}:</td>
+        <td>{{ form_widget(addDocForm.picture) }}</td>
+      </tr>
+      <tr>
         <td>{% trans %}theme.label{% endtrans %}:</td>
         <td>{{ form_widget(addDocForm.theme) }} {{ theme.title }}</td>
       </tr>

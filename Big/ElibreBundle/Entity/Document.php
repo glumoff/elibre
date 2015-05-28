@@ -67,6 +67,16 @@ class Document {
   private $mimeType;
 
   /**
+   * @ORM\Column(name="picture", type="blob", nullable=TRUE)
+   */
+  private $picture;
+
+  /**
+   * @ORM\Column(name="pic_mimetype", type="string", length=100, nullable=TRUE)
+   */
+  private $pictureMimeType;
+
+  /**
    *
    * @var FileIcon
    */
@@ -125,8 +135,30 @@ class Document {
     return $this->mimeType;
   }
 
+  public function getPictureMimeType() {
+    return $this->pictureMimeType;
+  }
+
+  public function getPicture() {
+    return $this->picture;
+  }
+
+  public function getPictureBase64() {
+    return base64_encode(stream_get_contents($this->picture));
+  }
+
   public function setMimeType($mtype) {
     $this->mimeType = $mtype;
+    return $this;
+  }
+
+  public function setPictureMimeType($mtype) {
+    $this->pictureMimeType = $mtype;
+    return $this;
+  }
+
+  public function setPicture($picture) {
+    $this->picture = $picture;
     return $this;
   }
 

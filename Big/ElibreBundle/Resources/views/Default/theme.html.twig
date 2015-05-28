@@ -10,11 +10,13 @@
     <script src="{{ asset('bundles/bigelibre/js/admin/fm.js') }}"></script>
 
     <div class="toolBox">
-      <a class="orderBtn" href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" title="{% trans %}theme.order.descr{% endtrans %}">{% trans %}theme.order.label{% endtrans %}</a>
+      <a class="orderBtn btn btn-sm btn-warning" href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" title="{% trans %}theme.order.descr{% endtrans %}">
+        <span class="glyphicon glyphicon-random"></span> {% trans %}theme.order.label{% endtrans %}
+      </a>
       {#      <div class="addDocBtn">#}
       {#    <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" alt="{% trans from "messages" %}Add document to this theme{% endtrans %}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">#}
-      <a class="addDocBtn" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
-        {% trans %}theme.add.label{% endtrans %}
+      <a class="addDocBtn btn btn-sm btn-success" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
+        <span class="glyphicon glyphicon-plus"></span> {% trans %}theme.add.label{% endtrans %}
       </a>
       {#        <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
                 <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/>
@@ -48,7 +50,7 @@
                 alert(i + '=' + obj[i]);
               }      
         #}
-{#            $('.ui-autocomplete').css({});#}
+        {#            $('.ui-autocomplete').css({});#}
 
             $('a.addDocBtn').on('click', function (e) {
               $.fn.custombox(this, {
