@@ -13,16 +13,16 @@
       {% endif %}
     </a>
 
-    {% if is_granted('ROLE_ADMIN') %}
+{#    {% if is_granted('ROLE_ADMIN') %}
       <p>
         <b>{% trans %}doc.fullpath.label{% endtrans %}:</b>
       </p>
       <p>
-        {{ docFullPathDir }}
+        {{ docFullPathDir|raw }}
       </p>
       <p></p>
     {% endif %}
-
+#}
     <p>
       <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
         {% trans %}doc.download.label{% endtrans %}
