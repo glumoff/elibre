@@ -618,8 +618,8 @@ p.tooltip {
 .modalWindow {
   background-color: white;
   border-radius: 3px;
-  width: 500px;
-  height: 300px;
+/*  width: 500px;
+  height: 300px;*/
   -moz-transform: none;
   transform: none;
   /*height: 300px;*/
@@ -739,4 +739,10 @@ form table td {
 
 .treeview span.indent {
   margin-left: 0 !important;
+}
+
+
+.FMFileList ul {
+  padding-left: 15px;
+  list-style-type: none;
 }

@@ -1,76 +1,87 @@
-<link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />
+{#<link href="{{ asset('bundles/bigelibre/css/reset.css') }}" rel="stylesheet" />#}
 <link href="{{ asset('bundles/bigelibre/css/fm.css') }}" rel="stylesheet" />
 <link href="{{ asset('bundles/bigelibre/css/uploadfile.css') }}" rel="stylesheet">
-<link href="{{ asset('bundles/bigelibre/css/elibre/jquery-ui-1.10.3.custom.css') }}" rel="stylesheet" />
-<script src="{{ asset('bundles/bigelibre/js/jquery-1.9.1.js') }}"></script>
+{#<link href="{{ asset('bundles/bigelibre/css/elibre/jquery-ui-1.10.3.custom.css') }}" rel="stylesheet" />#}
+{#<script src="{{ asset('bundles/bigelibre/js/jquery-1.9.1.js') }}"></script>#}
 <script src="{{ asset('bundles/bigelibre/js/jquery.uploadfile.min.js') }}"></script>
-<script src="{{ asset('bundles/bigelibre/js/admin/fm.js') }}"></script>
-<script src="{{ asset('bundles/bigelibre/js/jquery-ui-1.10.3.custom.min.js') }}"></script>  
+{#<script src="{{ asset('bundles/bigelibre/js/admin/fm.js') }}"></script>#}
+{#<script src="{{ asset('bundles/bigelibre/js/jquery-ui-1.10.3.custom.min.js') }}"></script>  #}
 
 <script>
-$(function() {
-  //var FM = new FileManager();
-  new FileManager().init();
+  $(function () {
+    //var FM = new FileManager();
+    new FileManager().init();
 
-{#  console.log(new FileManager().currentPath);#}
+    $(".custom-close").on('click', function () {
+      $('#fmModal').modal('hide');
+    });
 
-  $("#fileuploader").uploadFile({
-    url: Routing.generate('big_elibre_fm_actions', { action: 'upload' }),
+  {#  console.log('fm.html.twig: ' + testSingleton.tt);#}
+
+  {#  console.log(new FileManager().currentPath);#}
+
+      $("#fileuploader").uploadFile({
+        url: Routing.generate('big_elibre_fm_actions', {action: 'upload'}),
 //    fileName: "myfile",
-    onSubmit: function(files) {
-      this.formData.path = new FileManager().currentPath;
-      this.data.path = new FileManager().currentPath;
-    },
-    onSuccess: function(files, data, xhr)
-    {
-      new FileManager().refreshFileList();
-    },
-    dynamicFormData: function()
-    {
-      var data = {path: new FileManager().currentPath};
-      return data;
-    },
-  });
-});
+        onSubmit: function (files) {
+          this.formData.path = new FileManager().currentPath;
+          this.data.path = new FileManager().currentPath;
+        },
+        onSuccess: function (files, data, xhr)
+        {
+          new FileManager().refreshFileList();
+        },
+        dynamicFormData: function ()
+        {
+          var data = {path: new FileManager().currentPath};
+          return data;
+        },
+      });
+    });
 </script>
 
 
-<div class="FMBody modalWindow">
-
-    {% block header %}
-  <div class="FMHeader">
-    {% trans %}fm.title.label{% endtrans %}
+{% block header %}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">{% trans %}fm.title.label{% endtrans %}</h4>
   </div>
-    {% endblock %}
+{% endblock %}
 
-    {% block toolbar %}
+{% block toolbar %}
   <div class="FMToolBox">
-{#    <a href="#" onclick="new FileManager().uploadDialog();return false;">Upload file...</a>#}
-{#    <a href="#" onclick="new FileManager().delete();
-        return false;">Delete</a>
-    <br>
-#}    {% trans %}fm.dir.label{% endtrans %}: <span id="currentPath">{{ path }}</span>
+    {#    <a href="#" onclick="new FileManager().uploadDialog();return false;">Upload file...</a>#}
+    {#    <a href="#" onclick="new FileManager().delete();
+            return false;">Delete</a>
+        <br>
+    #}
+    <ol class="breadcrumb">
+      <li class="active">
+        {% trans %}fm.dir.label{% endtrans %}: <span id="currentPath">{{ path }}</span>
+      </li>
+    </ol>
+    
   </div>
-    {% endblock %}
+{% endblock %}
 
-    {% block content %}
+{% block content %}
 
-    {% block filelist %}
-  <div class="FMFileList">
-    <ul>
-{#      {% for file in fileList %}
-        <li>{{ file.getFileName }}</li>
-      {% endfor %}
-#}      </ul>
-  </div>
-    {% endblock %}
+  {% block filelist %}
+    <div class="FMFileList">
+      <ul>
+      </ul>
+    </div>
+  {% endblock %}
 
-    {% endblock %}
+{% endblock %}
 
-    {% block upload %}
+{% block upload %}
   <div class="uploadFileArea">
     <div id="fileuploader">{% trans %}fm.upload.label{% endtrans %}</div>
   </div>
-    {% endblock %}
+{% endblock %}
 
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
+

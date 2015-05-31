@@ -15,9 +15,37 @@
       </a>
       {#      <div class="addDocBtn">#}
       {#    <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" alt="{% trans from "messages" %}Add document to this theme{% endtrans %}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">#}
-      <a class="addDocBtn btn btn-sm btn-success" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
+      {#      <a class="addDocBtn btn btn-sm btn-success" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
+              <span class="glyphicon glyphicon-plus"></span> {% trans %}theme.add.label{% endtrans %}
+            </a>#}
+
+      <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#editModal" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
         <span class="glyphicon glyphicon-plus"></span> {% trans %}theme.add.label{% endtrans %}
       </a>
+
+      <!-- Modal -->
+      <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+      <!-- Modal -->
+      <div class="modal fade" id="fmModal" tabindex="-1" role="dialog" aria-labelledby="fmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
+
       {#        <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
                 <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/>
               </a>
@@ -148,8 +176,10 @@
         </a>
         <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
           {% if is_granted('ROLE_ADMIN') %}
-          <a class="delete" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/admin/delete-2.png') }}"></a>
-          {% endif %}
+          <a class="delete text-danger" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}">
+            <span class="glyphicon glyphicon-remove"></span>
+          </a>
+        {% endif %}
       </li>
     {% else %}
       {% trans %}theme.nodocs.label{% endtrans %}

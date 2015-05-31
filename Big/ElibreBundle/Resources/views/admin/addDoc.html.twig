@@ -1,63 +1,82 @@
-{% extends isAjax ? 'BigElibreBundle:admin:index_ajax.html.twig' : 'BigElibreBundle:admin:index.html.twig' %}
+{#{% extends isAjax ? 'BigElibreBundle:admin:index_ajax.html.twig' : 'BigElibreBundle:admin:index.html.twig' %}#}
+{% extends 'BigElibreBundle:admin:index_ajax.html.twig' %}
 
 {% block additional_scripts %}
-{#<script src="{{ asset('bundles/bigelibre/js/admin/docs.js') }}"></script>#}
+  {#<script src="{{ asset('bundles/bigelibre/js/admin/docs.js') }}"></script>#}
 {% endblock %}
 
 
 {% block content %}
-<script>
-    var fmURL = '{{ path('big_elibre_fm_actions') }}';
-    $('#openFMBtn').on('click', function(e) {
-      openFileManager(e, $('#form_path'), fmURL);
-      e.preventDefault();
+  <script>
+    $(function () {
+      var fmURL = '{{ path('big_elibre_fm_actions') }}';
+      new FileManager().onSelect = function (selectedValue) {
+        $('#form_path').val(selectedValue);
+        propouseNameFromFile(selectedValue);
+      };
+      $(":input[type|='submit']").addClass('btn btn-success btn-sm');
+    {#      $("#fmButton").href;#}
+{#      $("#fmButton").attr('href', $("#fmButton").attr('href') + '?' + (new Date).getTime());#}
+    {#      $(":input[type|='text']").addClass('form-control');#}
     });
+  </script>
 
-
-{#  function openFileManager(e, target) {
-    alert('openFileManager');
-    e.preventDefault();
-  }#}
-</script>
-
-<div id="editMenuOrderWindow" class="modalWindow">
-  <div class="modalWindowHeader">
-    {% trans %}theme.add.descr{% endtrans %}
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">{% trans %}theme.add.descr{% endtrans %}</h4>
   </div>
-  <div class="modalWindowContent">
-{{ form_start(addDocForm) }}
-  {{ form_errors(addDocForm) }}
+  <div class="modal-body">
+    {{ form_start(addDocForm, {'attr': {'class': 'form-horizontal'} }) }}
+    {{ form_errors(addDocForm) }}
     {{ form_widget(addDocForm.id) }}
-    <table>
-      <tr>
-        <td>{% trans %}doc.path.label{% endtrans %}:</td>
-        <td>{{ form_widget(addDocForm.path) }} <a id="openFMBtn" href="#">{% trans %}btn.browse{% endtrans %}...</a></td>
-      </tr>
-      <tr>
-        <td>{% trans %}doc.title.label{% endtrans %}:</td>
-        <td>{{ form_widget(addDocForm.title) }}</td>
-      </tr>
-      <tr>
-        <td>{% trans %}doc.annotation.label{% endtrans %}:</td>
-        <td>{{ form_widget(addDocForm.annotation) }}</td>
-      </tr>
-      <tr>
-        <td>{% trans %}doc.tags.label{% endtrans %}:</td>
-        <td>{{ form_widget(addDocForm.tags) }}</td>
-      </tr>
-      <tr>
-        <td>{% trans %}doc.picture.label{% endtrans %}:</td>
-        <td>{{ form_widget(addDocForm.picture) }}</td>
-      </tr>
-      <tr>
-        <td>{% trans %}theme.label{% endtrans %}:</td>
-        <td>{{ form_widget(addDocForm.theme) }} {{ theme.title }}</td>
-      </tr>
-    </table>
+    <div class="form-group form-group-sm">
+      {{ form_label(addDocForm.path, 'doc.path.label', {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+      <div class="col-sm-10">
+        <div class="input-group">
+          {{ form_widget(addDocForm.path, {'attr': {'class': 'form-control '} }) }}
+          <span class="input-group-btn">
+            <button id="fmButton" type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#fmModal" href="{{ path('big_elibre_fm_actions') }}">{% trans %}btn.browse{% endtrans %}...</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group form-group-sm">
+      {{ form_label(addDocForm.title, 'doc.title.label', {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+      <div class="col-sm-10">
+        {{ form_widget(addDocForm.title, {'attr': {'class': 'form-control'} }) }}
+      </div>
+    </div>
+    <div class="form-group form-group-sm">
+      {{ form_label(addDocForm.annotation, 'doc.annotation.label', {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+      <div class="col-sm-10">
+        {{ form_widget(addDocForm.annotation, {'attr': {'class': 'form-control'} }) }}
+      </div>
+    </div>
+    <div class="form-group form-group-sm">
+      {{ form_label(addDocForm.tags, 'doc.tags.label', {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+      <div class="col-sm-10">
+        {{ form_widget(addDocForm.tags, {'attr': {'class': 'form-control'} }) }}
+      </div>
+    </div>
+    <div class="form-group form-group-sm">
+      {{ form_label(addDocForm.picture, 'doc.picture.label', {'label_attr': {'class': 'control-label col-sm-2'} }) }}
+      <div class="col-sm-10">
+        {{ form_widget(addDocForm.picture, {'required': false }) }}
+      </div>
+    </div>
+    <div class="form-group form-group-sm">
+      <label class="control-label col-sm-2">{% trans %}theme.label{% endtrans %}</label>
+      <div class="col-sm-10">
+        {{ theme.title }}
+      </div>
+    </div>
+    {{ form_widget(addDocForm.theme) }}
 
-{{ form_end(addDocForm) }}
+    <div class="modal-footer">
+      {{ form_end(addDocForm) }}
+    </div>
+
 
   </div>
-</div>
 
 {% endblock %}

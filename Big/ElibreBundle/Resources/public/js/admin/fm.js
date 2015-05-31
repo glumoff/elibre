@@ -22,6 +22,49 @@
 //  });
 //});
 
+//var testSingleton = {
+//  tt: "default"
+//};
+//
+//var newFileManager = (function (window, undefined) {
+//  var instance = null;
+//
+//
+//  function initInstance() {
+//    
+//    var testVar = 'default';
+//    
+//    function myMethod() {
+//      alert('my method');
+//    }
+//
+//    function myOtherMethod() {
+//      alert('my other method');
+//    }
+//
+//    return {
+//      someMethod: myMethod,
+//      someOtherMethod: myOtherMethod,
+//      testVar: testVar
+//    };
+//
+//  }
+//  ;
+//
+//  function getInstance() {
+//    if (!instance) {
+//      instance = new initInstance();
+//    }
+//    return instance;
+//  }
+//
+//  return {
+//    getInstance: getInstance
+//  };
+//
+//})(window);
+
+
 function FileManager() {
   // Singleton
   if (!FileManager.__instance)
@@ -31,6 +74,9 @@ function FileManager() {
 
   this.currentPath = '';
 
+  this.testVar = 'testVar';
+
+//  console.log('FileManager(): ' + new FileManager().onSelect);
 
   this.init = function () {
     this.currentPath = $('#currentPath').text();
@@ -58,34 +104,42 @@ function FileManager() {
         $('.FMFileList ul').empty();
 
         // go up link
-        $('.FMFileList ul').append('<li class="dirUp"><a href="#"><img src="../../bundles/bigelibre/images/icons/go_up.png" class="fmIcon"/></a>\n\
-                                        <a href="#">..</a>\n\
-                                      </li>\n');
+        $('.FMFileList ul').append('<li class="dirUp"><h4>\n\
+                                        <a href="#" class="text-info">\n\
+                                          <span class="glyphicon glyphicon-arrow-up"></span> ..</a>\n\
+                                      </h4></li>\n');
 //        alert(JSON.stringify(data));
-        var iconHref;
+        var iconHref, closeModal;
         for (var i in data) {
           curFile = data[i];
 //          alert(curFile.type);
           if (curFile.type == 'dir') {
-            iconHref = '../../bundles/bigelibre/images/icons/folder3.png';
+            iconHref = 'glyphicon glyphicon-folder-open';
+            closeModal = '';
           }
           else {
-            iconHref = '../../bundles/bigelibre/images/icons/unknown.png';
+            iconHref = 'glyphicon glyphicon-file';
+            closeModal = ' data-dismiss=\"modal\"';
           }
           if (curFile.fname) {
 //                                                    <input type="checkbox" value="' + curFile.fpath + '">\n\
 //                                        <a href="' + curFile.fpath + '">[' + curFile.type + ']</a>\n\
             $('.FMFileList ul').append('<li class="' + curFile.type + '">\n\
-                                        <a href="' + curFile.fpath + '"><img src="' + iconHref + '" class="fmIcon"/></a>\n\
-                                        <a href="' + curFile.fpath + '">' + curFile.fname + '</a>\n\
+                                        <a href="' + curFile.fpath + '"' + closeModal + ' class="text-info">\n\
+                                          <span class="' + iconHref + '"></span>&nbsp;&nbsp;' + curFile.fname + '\
+                                        </a>\n\
                                       </li>\n');
           }
         }
+//        console.log('fm.js: ' + new FileManager().onSelect);
         $('.FMFileList li.file a').on('click', function (e) {
+          e.preventDefault();
           if (jQuery.isFunction(new FileManager().onSelect)) {
             new FileManager().onSelect($(this).attr('href'));
           }
-          $.fn.custombox('close');
+//          console.log($('#fmModal').modal);
+//          $('#fmModal').modal('hide');
+//          $.fn.custombox('close');
 //          var target = new FileManager().targetControl;
 //          if (target) {
 //            target.val($(this).attr('href'));
@@ -98,7 +152,6 @@ function FileManager() {
 //              alert(i +' = ' + new FileManager().parentBox[i]);
 //            }
 //          }
-          e.preventDefault();
         });
         $('.FMFileList li.dir a').on('click', function (e) {
 //          alert($(this).attr('href') + '/');
