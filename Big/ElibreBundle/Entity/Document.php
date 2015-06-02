@@ -207,6 +207,13 @@ class Document {
     return $this->id;
   }
 
+  public function setId($id) {
+    $this->id = $id;
+
+    return $this;
+    
+  }
+  
   /**
    * Set create_dt
    *

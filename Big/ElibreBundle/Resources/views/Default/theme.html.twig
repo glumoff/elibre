@@ -45,114 +45,73 @@
       </div>
       <!-- /.modal -->
 
-
-      {#        <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.add.descr{% endtrans %}">
-                <img src="{{ asset('bundles/bigelibre/images/admin/edit.png') }}"/>
-              </a>
-      #}{#      </div>#}
-
-      {#  <div id="addDocDlg" class="hidden">
-          ewew
-        </div>#}
-
       <script>
         $(function () {
-        {#      $('.addDocBtn a').on('click', function(e) {
-                var divObj = ($(this.getAttribute('href')));
-                var url = "{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}";
-                divObj.load(url, function() {
-                  //alert("Load was performed.");
 
-                });
-                  $.fn.custombox(this, {
-                    effect: 'fadein'
-                  });
-                e.preventDefault();
-              });
-        #}{#      var divObj = ($($('.addDocBtn a').attr('href')));
-              if (divObj) {
-        
-              }#}
-        {#      alert(obj);#}
-        {#      for(var i in obj) {
-                alert(i + '=' + obj[i]);
-              }      
-        #}
-        {#            $('.ui-autocomplete').css({});#}
+          var deleteDocDlgName = "#delete-confirm";
 
-            $('a.addDocBtn').on('click', function (e) {
-              $.fn.custombox(this, {
-                effect: 'fadein',
-                zIndex: 5000,
-                customClass: 'addDocModal',
-              });
-              e.preventDefault();
-            });
-
-            var deleteDocDlgName = "#delete-confirm";
-
-            $.widget("custom.confirmDialog", $.ui.dialog, {
-              open: function (docID) {
-                //for (var i in docID) {
-                //alert(i + '=' + docID[i]);
-                //}
-                this.option("docID", docID.getAttribute('href'));
-                // Invoke the parent widget's open().
-                return this._super();
-              }
-            });
-
-            $(deleteDocDlgName).confirmDialog({
-              resizable: false,
-              width: 600,
-              height: 240,
-              modal: true,
-              autoOpen: false,
-              //docID: -1,
-              buttons: {
-                "{% trans %}doc.delete.dlg.delete_all{% endtrans %}": function () {
-                  var url = Routing.generate('big_elibre_admin', {'mode': 'docs', 'action': 'del', 'doc': $(this).confirmDialog("option", "docID")});
-                  window.location.href = url;
-                  $(this).confirmDialog("close");
-                },
-                "{% trans %}doc.delete.dlg.delete_dbonly{% endtrans %}": function () {
-                  var url = Routing.generate('big_elibre_admin', {'mode': 'docs', 'action': 'del', 'doc': $(this).confirmDialog("option", "docID"), 'leave': 1});
-                  window.location.href = url;
-                  $(this).confirmDialog("close");
-                },
-                "{% trans %}btn.cancel{% endtrans %}": function () {
-                  $(this).confirmDialog("close");
-                }
-              }
-            });
-
-            $('a.delete').on('click', function (e) {
-              e.preventDefault();
-              //if ($(deleteDocDlgName).dialog) {
-              $(deleteDocDlgName).confirmDialog('open', this);
+          $.widget("custom.confirmDialog", $.ui.dialog, {
+            open: function (docID) {
+              //for (var i in docID) {
+              //alert(i + '=' + docID[i]);
               //}
-        {#        else {
-                  //var url = this;
-                }#}
-                      //deleteDocConfirm(this, $(deleteDocDlgName)));
-                    });
+              this.option("docID", docID.getAttribute('href'));
+              // Invoke the parent widget's open().
+              return this._super();
+            }
+          });
 
-                  });
+          $(deleteDocDlgName).confirmDialog({
+            resizable: false,
+            width: 600,
+            height: 240,
+            modal: true,
+            autoOpen: false,
+            //docID: -1,
+            buttons: {
+              "{% trans %}doc.delete.dlg.delete_all{% endtrans %}": function () {
+                var url = Routing.generate('big_elibre_admin', {'mode': 'docs', 'action': 'del', 'doc': $(this).confirmDialog("option", "docID")});
+                window.location.href = url;
+                $(this).confirmDialog("close");
+              },
+              "{% trans %}doc.delete.dlg.delete_dbonly{% endtrans %}": function () {
+                var url = Routing.generate('big_elibre_admin', {'mode': 'docs', 'action': 'del', 'doc': $(this).confirmDialog("option", "docID"), 'leave': 1});
+                window.location.href = url;
+                $(this).confirmDialog("close");
+              },
+              "{% trans %}btn.cancel{% endtrans %}": function () {
+                $(this).confirmDialog("close");
+              }
+            }
+          });
+
+          $('a.delete').on('click', function (e) {
+            e.preventDefault();
+            $(deleteDocDlgName).confirmDialog('open', this);
+
+          });
+        {#
+                    $("a[data-target=#editModal]").click(function (e) {
+                      e.preventDefault();
+                      var target = 'http://172.18.1.12:8080/app_dev.php/admin/docs/add?theme=code3';
+
+                      // load the url and show modal on success
+                      $("#editModal .modal-content").load(target, function () {
+                        $('#editModal').modal("show");
+                      });
+                    });#}
+          $(document).on('hidden.bs.modal', function (e) {
+            $(e.target).removeData('bs.modal').find(".modal-content").html('');
+          });
+        });
       </script>
       <link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>
 
     </div>
   {% endif %}
 
-  <h3 class="themeTitle">{% trans %}theme.label{% endtrans %}: {{ selectedTheme.getTitle() }}
-    {#{% if is_granted('ROLE_ADMIN') %}
-      <div class="addDocBtn">
-        <a href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'add', 'theme': selectedTheme.code}) }}" title="{% trans from "messages" %}Add document to this theme{% endtrans %}">
-          {% trans from "messages" %}Add{% endtrans %}
-        </a>
-      </div>
-    {% endif %}
-    #}
+  <h3 class="themeTitle">
+    {% trans %}theme.label{% endtrans %}: {{ selectedTheme.getTitle() }}
   </h3>
 
 
@@ -176,6 +135,9 @@
         </a>
         <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
           {% if is_granted('ROLE_ADMIN') %}
+          <a class="edit text-warning" data-toggle="modal" data-target="#editModal" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'edit', 'theme': selectedTheme.code, 'doc': doc.id}) }}" title="{% trans %}theme.edit.descr{% endtrans %}">
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>
           <a class="delete text-danger" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}">
             <span class="glyphicon glyphicon-remove"></span>
           </a>

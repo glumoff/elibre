@@ -46,6 +46,9 @@ theme:
   add:
     label: Додати
     descr: Додати документ
+  edit:
+    label: Редагувати
+    descr: Редагувати документ
   nodocs.label: немає документів
   create.label: Створити
   modified.label: Тема була змінена

@@ -451,6 +451,13 @@ ul.themesList li {
   margin: 2px;
 }
 
+.edit {
+  position: absolute;
+  right: 50px;
+  top: 5px;
+  margin: 2px;
+}
+
 .delete img {
   height: 16px;
 }

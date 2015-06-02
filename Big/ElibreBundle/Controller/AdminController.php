@@ -51,7 +51,12 @@ class AdminController extends Controller {
                   ->add('title', 'text')
                   ->add('code', 'text')
                   ->add('descr', 'textarea', array('required' => FALSE))
-//                  ->add('show_order', 'hidden')
+//                  ->add('show_order', 'hidden')''
+//                  ->add('picture', 'file', array(
+//                      'data_class' => null,
+//                      'mapped' => FALSE,
+//                      'required' => FALSE
+//                  ))
                   ->add('save', 'submit')
                   ->getForm();
 
@@ -117,16 +122,17 @@ class AdminController extends Controller {
         $formArr = $request->request->get('form');
         $docID = $formArr["id"] ? $formArr["id"] : $request->query->get('doc');
 
+        $themeCode = $request->query->get('theme');
+        $theme = $dbm->getRepository("BigElibreBundle:Theme")->findOneByCode($themeCode);
+
         if ($docID) {
           $doc = $dbm->getRepository("BigElibreBundle:Document")->find($docID);
         } else {
           $doc = new Document();
 //          $doc->setTitle('New document');
-          $themeCode = $request->query->get('theme');
 //          return new \Symfony\Component\HttpFoundation\Response("request: " . var_export($_SERVER, TRUE));
           //exit();
-
-          $theme = $dbm->getRepository("BigElibreBundle:Theme")->findOneByCode($themeCode);
+//          $theme = $dbm->getRepository("BigElibreBundle:Theme")->findOneByCode($themeCode);
 //          return new \Symfony\Component\HttpFoundation\Response("theme: " . var_export($theme, TRUE));
 //          var_dump($themeCode);
           if ($theme) {
@@ -147,17 +153,25 @@ class AdminController extends Controller {
                 ->add('path', 'text')
                 ->add('annotation', 'textarea', array('required' => FALSE))
                 ->add('tags', 'text')
-                ->add('picture', 'file')
+                ->add('picture', 'file', array(
+                    'data_class' => null,
+                    'mapped' => FALSE,
+                    'required' => FALSE
+                ))
+
 //                ->add('theme', 'hidden')
 //                  ->add('show_order', 'hidden')
                 ->add('save', 'submit')
                 ->getForm();
 
-        if ($action == 'add') {
+        if (($action == 'add') || ($action == 'edit')) {
+//          var_dump($doc);
+//          exit;
           $response = $this->render('BigElibreBundle:admin:addDoc.html.twig', array(
               'themesJSON' => $this->getThemesJSON(),
               'isAjax' => $request->isXmlHttpRequest(),
               'theme' => $theme,
+//              'doc' => $doc,
               'addDocForm' => $form->createView()
 //            'isAjax' => FALSE
                   )
@@ -429,6 +443,7 @@ class AdminController extends Controller {
 //    $str .= "before handleRequest: " . var_export($doc->getCreateDt(), TRUE) . "\n";
     $form->handleRequest($request);
 
+//          var_dump($doc->getPicture());
 
     if (!$doc->getTheme() || !$doc->getTheme()->getCode()) {
       $theme = $dbm->getRepository("BigElibreBundle:Theme")->findOneById($doc->getTheme()->getId());
@@ -475,7 +490,9 @@ class AdminController extends Controller {
       $finfo = \finfo_open(FILEINFO_MIME_TYPE);
       $doc->setMimeType(\finfo_file($finfo, $themeDocPath_enc));
       \finfo_close($finfo);
-
+    }
+    
+    if ($form['picture']->getData()) {
       /* @var $file UploadedFile */
       $file = $form['picture']->getData();
       // TODO: move hardcoded max file size to params
@@ -483,11 +500,11 @@ class AdminController extends Controller {
         $doc->setPictureMimeType($file->getMimeType());
         $doc->setPicture(file_get_contents($file->getPathname()));
       }
-
-      $dbm->persist($doc->getTheme());
-      $dbm->persist($doc);
-      $dbm->flush();
     }
+
+    $dbm->persist($doc->getTheme());
+    $dbm->persist($doc);
+    $dbm->flush();
 //    $theme = $dbm->getRepository("BigElibreBundle:Theme")->findOneById($doc->getThemeId());
     $theme = $doc->getTheme();
 //    var_dump($theme->getCode());

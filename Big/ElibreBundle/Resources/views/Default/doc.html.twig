@@ -6,7 +6,7 @@
       <a href="{{ path('big_elibre_theme', {'theme_code': doc.theme.code,  'action' : 'view' }) }}">{{ doc.theme.title }}</a> / {{ attribute(doc, 'title') }}
     </div>
 
-    {% if doc.pictureMimeType %}
+    {% if doc.pictureMimeType and doc.picture %}
       <div class="img-thumbnail">
         {#        {{ doc.pictureMimeType }}#}
         {#        {{ doc.picture }}#}

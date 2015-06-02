@@ -47,6 +47,9 @@ theme:
   add:
     label: Add
     descr: Add document to theme
+  edit:
+    label: Edit
+    descr: Edit document
   nodocs.label: no documents
   create.label: Create
   modified.label: Theme was modified
