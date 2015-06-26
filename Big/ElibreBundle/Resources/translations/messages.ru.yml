@@ -70,7 +70,7 @@ doc:
   title.label: Название
   tags.label: Тэги
   picture.label: Изображение
-
+  file_absent.label: Файл отсутствует!
   
 btn: 
   ok: OK

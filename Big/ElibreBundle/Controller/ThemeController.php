@@ -42,13 +42,36 @@ class ThemeController extends DefaultController {
       $this->templateParams['activeThemeRoot2'] = (count($themePath) > 1) ? $themePath[max(count($themePath) - 2, 0)]->getID() : $selectedTheme->getID();
       $this->templateParams['subthemes'] = $subthemesList->getThemesArray();
       $this->templateParams['documents'] = $documentsList->getDocsArray();
-//    var_dump($this->templateParams['activeThemeRoot']);
+      $this->templateParams['fileList'] = $this->getFileList($selectedTheme);
+      
+//      echo "<pre>";
+//      var_dump($this->templateParams['fileList']);
+//      echo "</pre>";
 //    var_dump($this->templateParams['activeThemeRoot2']);
     }
     return $this->templateParams;
   }
 
-//  protected function getBreadCrumbs($param) {
-//    
-//  }
+  /**
+   * 
+   * @param Theme $theme
+   * @return array
+   */
+  private function getFileList($theme) {
+    if (!$theme) {
+      return array();
+    }
+    $rootDir = $this->container->getParameter('big_elibre.rootDir');
+    $path = $this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR;
+    $flist = array();
+    foreach (glob($rootDir . $path . "*") as $fname) {
+      if (is_file($fname)) {
+        $fname = basename($fname);
+        $f = new \Big\ElibreBundle\Model\File($fname);
+        $flist[$fname] = $f->toArray();
+      }
+    }
+    return $flist;
+  }
+
 }

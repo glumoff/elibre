@@ -72,6 +72,7 @@ doc:
   title.label: Title
   tags.label: Tags
   picture.label: Picture
+  file_absent.label: File is absent!
   
 btn: 
   ok: OK

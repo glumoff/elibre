@@ -137,25 +137,4 @@ class DocumentController extends DefaultController {
     return $doc;
   }
 
-  /**
-   * 
-   * @param integer $theme_id
-   */
-  private function getThemeFullDirName($theme_id) {
-    $dbm = $this->getDoctrine()->getManager();
-    $path = '';
-
-    do {
-      /* @var $theme Theme */
-      $theme = $dbm->getRepository("BigElibreBundle:Theme")->find($theme_id);
-      if (!$theme) {
-        break;
-      }
-      $path = DIRECTORY_SEPARATOR . $theme->getDirName() . $path;
-      $theme_id = $theme->getParentId();
-    } while ($theme_id > 0);
-
-    return $path;
-  }
-
 }

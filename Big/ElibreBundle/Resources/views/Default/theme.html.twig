@@ -113,10 +113,10 @@
             $(e.target).removeData('bs.modal').find(".modal-content").html('');
           });
 
-{#          $('#autoAddModal').on('show.bs.modal', function () {
-            getAutoDocManager().init('{{ selectedTheme.getCode() }}');
-          });#}
-        });
+        {#          $('#autoAddModal').on('show.bs.modal', function () {
+                    getAutoDocManager().init('{{ selectedTheme.getCode() }}');
+                  });#}
+                    });
       </script>
       <link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>
 
@@ -138,28 +138,42 @@
       </li>
     {% endfor %}
   </ul>
-  <ul class="docList">
+  <div class="container-fluid docList">
+    {#    <ul class="123">#}
     {% for doc in documents %}
-      <li><a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>{% trans %}doc.annotation.label{% endtrans %}: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
-          {# {% if doc.icon %}
-                                  <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon">
-          {% endif %} #}
-          {{ attribute(doc, 'title') }}
-        </a>
-        <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}"><img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}"></a>
+      <div class="row">
+        {#          <li>#}
+        <div class="col-xs-9">
+          <a href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'view' }) }}" title="{{ attribute(doc, 'title') }}{% if doc.annotation %}<p>{% trans %}doc.annotation.label{% endtrans %}: {{ attribute(doc, 'annotation') }}</p>{% endif %}">
+            {% if doc.icon %}
+              <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon">
+            {% endif %}
+            {{ attribute(doc, 'title') }}
+          </a>
+          {% if not fileList[doc.path] %}
+            <span class="glyphicon glyphicon-warning-sign text-danger" title="{% trans %}doc.file_absent.label{% endtrans %}"></span>
+          {% endif %}
+        </div>
+        <div class="tools col-xs-3 text-right">
+          <a class="text-primary" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
+            <span class="glyphicon glyphicon-download-alt"></span>
+          </a>
           {% if is_granted('ROLE_ADMIN') %}
-          <a class="edit text-warning" data-toggle="modal" data-target="#editModal" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'edit', 'theme': selectedTheme.code, 'doc': doc.id}) }}" title="{% trans %}theme.edit.descr{% endtrans %}">
-            <span class="glyphicon glyphicon-edit"></span>
-          </a>
-          <a class="delete text-danger" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}">
-            <span class="glyphicon glyphicon-remove"></span>
-          </a>
+            <a class="text-warning" data-toggle="modal" data-target="#editModal" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'edit', 'theme': selectedTheme.code, 'doc': doc.id}) }}" title="{% trans %}theme.edit.descr{% endtrans %}">
+              <span class="glyphicon glyphicon-edit"></span>
+            </a>
+            <a class="text-danger" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}">
+              <span class="glyphicon glyphicon-remove"></span>
+            </a>
+          </div>
         {% endif %}
-      </li>
+        {#          </li>#}
+      </div> {# row #}
     {% else %}
       {% trans %}theme.nodocs.label{% endtrans %}
     {% endfor %}
-  </ul>
+    {#    </ul>#}
+  </div>
 
   {% if is_granted('ROLE_ADMIN') %}
     <div id="delete-confirm" title="{% trans %}doc.delete.label{% endtrans %}">

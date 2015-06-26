@@ -71,6 +71,7 @@ doc:
   title.label: Назва
   tags.label: Теги
   picture.label: Зображення
+  file_absent.label: Файл відсутній!
   
 btn: 
   ok: OK
