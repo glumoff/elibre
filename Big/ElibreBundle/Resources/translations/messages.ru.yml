@@ -49,10 +49,12 @@ theme:
   edit:
     label: Редактировать
     descr: Редактировать документ
+  autoAddDocs:
+    label: Пакетное добавление
+    descr: Автоматическое добавление файлов из директории темы как новых документов
   nodocs.label: нет документов
   create.label: Создать
   modified.label: Тема была изменена
-
 doc:
   annotation.label: Аннотация
   delete.label: Удалить документ
@@ -106,3 +108,7 @@ lang:
   en: English
   uk: Українська
   ru: Русский
+
+loading.label: Загрузка...
+
+no_files_found.label: Файлов не найдено

@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <h4 class="modal-title">
+    {% trans %}theme.autoAddDocs.label{% endtrans %}<br/>
+    <small><small>{% trans %}theme.autoAddDocs.descr{% endtrans %}</small></small>
+  </h4>
+</div>
+<div class="modal-body">
+
+  {% block content %}
+
+    {% block filelist %}
+      <div id="AutoList">
+        <div id="loadingIndicator">
+          <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> {% trans %}loading.label{% endtrans %}
+        </div>
+      </div>
+      <div id="notFoundMessage">
+        {% trans %}no_files_found.label{% endtrans %}
+      </div>
+    {% endblock %}
+
+  {% endblock %}
+
+</div>
+
+<div class="modal-footer">
+  <button id="saveBtn" type="button" class="btn btn-success">Save</button>
+  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
+<script>
+  $(function () {
+    getAutoDocManager().init('{{ theme.getCode() }}');
+
+    $('#saveBtn').click(function (e) {
+      getAutoDocManager().saveBatch();
+    });
+  });
+</script>

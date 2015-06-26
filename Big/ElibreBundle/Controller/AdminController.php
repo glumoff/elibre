@@ -13,6 +13,7 @@ use Big\ElibreBundle\Entity\User;
 use Big\ElibreBundle\Entity\Document;
 use Big\ElibreBundle\Utils\FSHelper;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminController extends Controller {
@@ -181,6 +182,16 @@ class AdminController extends Controller {
         } elseif ($action == 'del') {
           $leaveFiles = $formArr["leave"] ? $formArr["leave"] : $request->query->get('leave');
           return $this->deleteDoc($doc, $leaveFiles);
+        } elseif ($action == 'auto') { // add docs from theme dir automatically
+          $response = $this->render('BigElibreBundle:admin:autoAdd.html.twig', array(
+              'isAjax' => $request->isXmlHttpRequest(),
+              'theme' => $theme,
+                  )
+          );
+        } elseif ($action == 'autolist') { // get list of files not in db
+          $response = new JsonResponse($this->getAutoList($theme));
+        } elseif ($action == 'autosave') { // add automatically files as docs
+          return $this->autoAddSave($theme);
         } else {
           $response = $this->render('BigElibreBundle:admin:index.html.twig', array('content' => $mode));
         }
@@ -491,7 +502,7 @@ class AdminController extends Controller {
       $doc->setMimeType(\finfo_file($finfo, $themeDocPath_enc));
       \finfo_close($finfo);
     }
-    
+
     if ($form['picture']->getData()) {
       /* @var $file UploadedFile */
       $file = $form['picture']->getData();
@@ -609,6 +620,114 @@ class AdminController extends Controller {
       case 'teacher': return 'ROLE_TEACHER';
       default: return 'ROLE_USER';
     }
+  }
+
+  /**
+   * 
+   * @param Theme $theme
+   * @return array
+   */
+  private function getAutoList($theme) {
+    if (!$theme) {
+      return array();
+    }
+
+    $rootDir = $this->container->getParameter('big_elibre.rootDir');
+
+    $path = $this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR;
+
+    $dbm = $this->getDoctrine()->getManager();
+
+    $flist = array();
+    foreach (glob($rootDir . $path . "*") as $fname) {
+      if (is_file($fname)) {
+        $fname = basename($fname);
+        $query = $dbm->createQuery(
+                        'SELECT d.id
+                      FROM BigElibreBundle:Document d
+                      WHERE d.path = :fname
+                        AND d.theme = :theme
+                      ORDER BY d.title ASC'
+                )->setParameter('fname', $fname)
+                ->setParameter('theme', $theme);
+        $docs = $query->getResult();
+        if ($docs && is_array($docs) && (count($docs) > 0)) {
+//          $f = new \Big\ElibreBundle\Model\File($fname . '+');
+//          $flist[] = $f->toArray();
+        } else {
+          $f = new \Big\ElibreBundle\Model\File($fname);
+          $flist[] = $f->toArray();
+        }
+      }
+    }
+    //exit;
+    return $flist;
+  }
+
+  /**
+   * 
+   * @param Theme $theme
+   * @return Response
+   */
+  private function autoAddSave($theme) {
+    $request = $this->getRequest();
+    $fileList = $request->request->get('flist');
+
+    $dbm = $this->getDoctrine()->getManager();
+
+    $rootDir = $this->container->getParameter('big_elibre.rootDir');
+    $path = $rootDir . $this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR;
+
+    $cnt = 0;
+
+    if (is_array($fileList)) {
+//      $debugStr = '+' . __LINE__ . '+';
+      foreach ($fileList as $fname) {
+//        $debugStr = '+' . __LINE__ . '+';
+//        $debugStr = '+' . $dir . $fname . '+';
+        if (file_exists($path . $fname)) {
+//          $debugStr = '+' . __LINE__ . '+';
+          $doc = new Document();
+          $fname = basename($fname);
+
+          $doc->setTitle($this->propouseDocNameFromFile($fname));
+          $doc->setPath($fname);
+          if ($theme) {
+            $doc->setTheme($theme);
+//            $debugStr = '+' . __LINE__ . '+';
+          }
+          $doc->setTags('batch');
+
+          $doc->setCreateDt(new \DateTime());
+          $doc->setEditDt(new \DateTime());
+
+          $dbm->persist($doc->getTheme());
+          $dbm->persist($doc);
+          $dbm->flush();
+
+//          $debugStr = '+' . __LINE__ . '+';
+          $cnt++;
+        }
+      }
+    }
+//          return new \Symfony\Component\HttpFoundation\Response("request: " . var_export($_SERVER, TRUE));
+    //exit();
+//          $theme = $dbm->getRepository("BigElibreBundle:Theme")->findOneByCode($themeCode);
+//          return new \Symfony\Component\HttpFoundation\Response("theme: " . var_export($theme, TRUE));
+//          var_dump($themeCode);
+
+
+    return new Response('added ' . $cnt . ' documents');
+  }
+
+  private function propouseDocNameFromFile($fname) {
+    $p = strrpos(basename($fname), '.');
+    if ($p === FALSE) {
+      $name = $fname;
+    } else {
+      $name = substr(basename($fname), 0, strrpos(basename($fname), '.'));
+    }
+    return $name;
   }
 
 }

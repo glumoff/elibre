@@ -8,6 +8,7 @@
     <script src="{{ asset('bundles/bigelibre/js/jquery.uploadfile.min.js') }}"></script>
     <script src="{{ asset('bundles/bigelibre/js/admin/docs.js') }}"></script>
     <script src="{{ asset('bundles/bigelibre/js/admin/fm.js') }}"></script>
+    <script src="{{ asset('bundles/bigelibre/js/admin/autoadd.js') }}"></script>
 
     <div class="toolBox">
       <a class="orderBtn btn btn-sm btn-warning" href="{{ path('big_elibre_admin', {'mode': 'themes',  'action' : 'view' } ) }}" id="editMenuOrder" title="{% trans %}theme.order.descr{% endtrans %}">
@@ -44,6 +45,23 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+
+
+      <a class="btn btn-sm btn-info" data-toggle="modal" data-target="#autoAddModal" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'auto', 'theme': selectedTheme.code}) }}" title="{% trans %}theme.autoAddDocs.descr{% endtrans %}">
+        <span class="glyphicon glyphicon-folder-open"></span> {% trans %}theme.autoAddDocs.label{% endtrans %}
+      </a>
+
+      <!-- Modal -->
+      <div class="modal fade" id="autoAddModal" tabindex="-1" role="dialog" aria-labelledby="autoAddModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
 
       <script>
         $(function () {
@@ -90,19 +108,14 @@
             $(deleteDocDlgName).confirmDialog('open', this);
 
           });
-        {#
-                    $("a[data-target=#editModal]").click(function (e) {
-                      e.preventDefault();
-                      var target = 'http://172.18.1.12:8080/app_dev.php/admin/docs/add?theme=code3';
 
-                      // load the url and show modal on success
-                      $("#editModal .modal-content").load(target, function () {
-                        $('#editModal').modal("show");
-                      });
-                    });#}
           $(document).on('hidden.bs.modal', function (e) {
             $(e.target).removeData('bs.modal').find(".modal-content").html('');
           });
+
+{#          $('#autoAddModal').on('show.bs.modal', function () {
+            getAutoDocManager().init('{{ selectedTheme.getCode() }}');
+          });#}
         });
       </script>
       <link rel="stylesheet" href="{{ asset('bundles/bigelibre/css/jquery.custombox.css') }}"/>

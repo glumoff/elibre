@@ -50,6 +50,9 @@ theme:
   edit:
     label: Edit
     descr: Edit document
+  autoAddDocs:
+    label: Batch add
+    descr: Automatically add file from theme's directory as new documents
   nodocs.label: no documents
   create.label: Create
   modified.label: Theme was modified
@@ -106,3 +109,7 @@ lang:
   en: English
   uk: Українська
   ru: Русский
+
+loading.label: Loading...
+
+no_files_found.label: No files found

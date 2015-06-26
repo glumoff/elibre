@@ -7,6 +7,8 @@ big_elibre_theme:
     defaults: { _controller: BigElibreBundle:Theme:showTheme, action: view }
     requirements:
         action: view|edit|add|move|del
+    options:
+        expose: true
       
 big_elibre_doc:
     pattern:  /doc/{doc_id}/{action}
