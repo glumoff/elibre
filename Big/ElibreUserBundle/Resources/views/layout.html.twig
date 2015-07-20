@@ -8,7 +8,10 @@
         {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
       </a>
     {% else %}
-      <a href="{{ path("fos_user_registration_register") }}">{{ 'register.title'|trans() }}</a> | <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
+{#      <a class="btn btn-sm btn-warning" href="{{ path("fos_user_registration_register") }}">
+        {{ 'register.title'|trans() }}
+      </a>#} 
+{#      | <a class="btn btn-sm btn-warning" href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>#}
     {% endif %}
   </div>
 

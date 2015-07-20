@@ -29,8 +29,17 @@
           <div id="header">
             <div id="headerTop">
               <div id="headerTitle">
-                <a id="titlePart1" href="{{ path('big_elibre_page') }}">{{ "elibre.label.part1" | trans }}</a>
-                <a id="titlePart2" href="{{ path('big_elibre_page') }}">{{ "elibre.label.part2" | trans }}</a>
+                  {#                <a id="titlePart1" href="{{ path('big_elibre_page') }}">#}
+{#                  <a id="titleLink">&nbsp;</a>#}
+                  <div id="titlePart1">
+                    {{ "elibre.label.part1" | trans }}
+                  </div>
+                  {#                </a>#}
+                  {#                <a id="titlePart2" href="{{ path('big_elibre_page') }}">#}
+                  <div id="titlePart2">
+                    {{ "elibre.label.part2" | trans }}
+                  </div>
+                {#                </a>#}
               </div>
               <div id="headerLinks">
                 {#                <img class="corner" src="{{ asset('bundles/bigelibre/images/links_corner.png') }}"/>#}
@@ -79,11 +88,11 @@
               {% block content %}
                 {% if is_granted('ROLE_ADMIN') %}
                   <div class="toolBox">
-{#                    <div class="panel-body well">#}
-                      <a class="editBtn btn btn-sm btn-success" href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans %}page.edit.descr{% endtrans %}" title="{% trans %}page.edit.descr{% endtrans %}">
-                        <span class="glyphicon glyphicon-edit"></span>  {% trans %}page.edit.label{% endtrans %}
-                      </a>
-{#                    </div>#}
+                    {#                    <div class="panel-body well">#}
+                    <a class="editBtn btn btn-sm btn-success" href="{{ path('big_elibre_page', {'page': page, 'action': 'edit'}) }}" alt="{% trans %}page.edit.descr{% endtrans %}" title="{% trans %}page.edit.descr{% endtrans %}">
+                      <span class="glyphicon glyphicon-edit"></span>  {% trans %}page.edit.label{% endtrans %}
+                    </a>
+                    {#                    </div>#}
                   </div>
                 {% endif %}
 
@@ -104,15 +113,15 @@
                                 }
                               });#}
 
-                                  {#                                  var ind = $("#menuSidebar > h3").index($("#menuSidebar > h3.active"));
-                            //alert
-                            $("#menuSidebar").accordion(
-                                    {collapsible: true,
-                                      active: (ind >= 0) ? ind : false,
-                                      heightStyle: "content",
-                                      /*header: "> li > :first-child, > :not(li):even"*/
-                                      header: "> h3"
-                                    });
+              {#                                  var ind = $("#menuSidebar > h3").index($("#menuSidebar > h3.active"));
+        //alert
+        $("#menuSidebar").accordion(
+                {collapsible: true,
+                  active: (ind >= 0) ? ind : false,
+                  heightStyle: "content",
+                  /*header: "> li > :first-child, > :not(li):even"*/
+                  header: "> h3"
+                });
 #}                                  //if (ind >= 0) {
                                   //  $("#menuSidebar").accordion("option", "active", ind);
                                   //}
@@ -141,8 +150,8 @@
                     collapseIcon: "glyphicon glyphicon-chevron-down",
                     borderColor: "#999",
                     showTags: true,
-                    selectedBackColor: "#9DA597",              {#                    selectedIcon: 'glyphicon glyphicon-arrow-right',#}
-                        });
+                    selectedBackColor: "#9DA597",{#                    selectedIcon: 'glyphicon glyphicon-arrow-right',#}
+                  });
 
               {#                    alert($('treeview li.node-themesTree'));#}
               {#                    console.log($('.treeview li.node-themesTree'));#}
@@ -154,7 +163,7 @@
 
 
                   });
-{#                  console.log($('#themesTree').treeview('getSelected', null));#}
+              {#                  console.log($('#themesTree').treeview('getSelected', null));#}
                   $('#themesTree').treeview('revealNode', [$('#themesTree').treeview('getSelected', null), {silent: true}]);
               {#                    $('#themesTree').treeview('revealNode', [ nodeId, { silent: true } ]);#}
               {#                    $('#themesTree').treeview('search', ["{{ selectedTheme.title }}", {

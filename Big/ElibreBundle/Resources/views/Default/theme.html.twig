@@ -150,7 +150,7 @@
             {% endif %}
             {{ attribute(doc, 'title') }}
           </a>
-          {% if not fileList[doc.path] %}
+          {% if not fileList[doc.path] and is_granted('ROLE_ADMIN') %}
             <span class="glyphicon glyphicon-warning-sign text-danger" title="{% trans %}doc.file_absent.label{% endtrans %}"></span>
           {% endif %}
         </div>
@@ -162,11 +162,11 @@
             <a class="text-warning" data-toggle="modal" data-target="#editModal" href="{{ path('big_elibre_admin', {'mode': 'docs', 'action': 'edit', 'theme': selectedTheme.code, 'doc': doc.id}) }}" title="{% trans %}theme.edit.descr{% endtrans %}">
               <span class="glyphicon glyphicon-edit"></span>
             </a>
-            <a class="text-danger" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}">
+            <a class="delete text-danger" href="{{ doc.id }}" title="{% trans %}doc.delete.label{% endtrans %}">
               <span class="glyphicon glyphicon-remove"></span>
             </a>
-          </div>
-        {% endif %}
+		  {% endif %}
+		</div>
         {#          </li>#}
       </div> {# row #}
     {% else %}

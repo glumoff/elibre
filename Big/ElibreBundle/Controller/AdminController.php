@@ -634,8 +634,8 @@ class AdminController extends Controller {
 
     $rootDir = $this->container->getParameter('big_elibre.rootDir');
 
-    $path = $this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR;
-
+    $path = FSHelper::fixOSFileName($this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR);
+	
     $dbm = $this->getDoctrine()->getManager();
 
     $flist = array();
@@ -648,7 +648,7 @@ class AdminController extends Controller {
                       WHERE d.path = :fname
                         AND d.theme = :theme
                       ORDER BY d.title ASC'
-                )->setParameter('fname', $fname)
+                )->setParameter('fname', FSHelper::fixOSFileName($fname, TRUE))
                 ->setParameter('theme', $theme);
         $docs = $query->getResult();
         if ($docs && is_array($docs) && (count($docs) > 0)) {
@@ -676,6 +676,7 @@ class AdminController extends Controller {
     $dbm = $this->getDoctrine()->getManager();
 
     $rootDir = $this->container->getParameter('big_elibre.rootDir');
+    //$path = FSHelper::fixOSFileName($rootDir . $this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR);
     $path = $rootDir . $this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR;
 
     $cnt = 0;
@@ -685,7 +686,10 @@ class AdminController extends Controller {
       foreach ($fileList as $fname) {
 //        $debugStr = '+' . __LINE__ . '+';
 //        $debugStr = '+' . $dir . $fname . '+';
-        if (file_exists($path . $fname)) {
+		//$fname = FSHelper::fixOSFileName($fname);
+		//var_dump($path . $fname);
+		//var_dump(file_exists(FSHelper::fixOSFileName($path . $fname)));
+        if (file_exists(FSHelper::fixOSFileName($path . $fname))) {
 //          $debugStr = '+' . __LINE__ . '+';
           $doc = new Document();
           $fname = basename($fname);

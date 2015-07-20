@@ -11,6 +11,7 @@ namespace Big\ElibreBundle\Controller;
 //use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Big\ElibreBundle\db\ElibreDBDelegate;
+use Big\ElibreBundle\Utils\FSHelper;
 
 class ThemeController extends DefaultController {
 
@@ -44,9 +45,9 @@ class ThemeController extends DefaultController {
       $this->templateParams['documents'] = $documentsList->getDocsArray();
       $this->templateParams['fileList'] = $this->getFileList($selectedTheme);
       
-//      echo "<pre>";
-//      var_dump($this->templateParams['fileList']);
-//      echo "</pre>";
+      echo "<pre>";
+      var_dump($this->templateParams['fileList']);
+      echo "</pre>";
 //    var_dump($this->templateParams['activeThemeRoot2']);
     }
     return $this->templateParams;
@@ -61,14 +62,16 @@ class ThemeController extends DefaultController {
     if (!$theme) {
       return array();
     }
-    $rootDir = $this->container->getParameter('big_elibre.rootDir');
-    $path = $this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR;
+    $rootDir = realpath($this->container->getParameter('big_elibre.rootDir'));
+    $path = FSHelper::fixOSFileName($this->getThemeFullDirName($theme->getId()) . DIRECTORY_SEPARATOR);
+
     $flist = array();
+
     foreach (glob($rootDir . $path . "*") as $fname) {
       if (is_file($fname)) {
         $fname = basename($fname);
         $f = new \Big\ElibreBundle\Model\File($fname);
-        $flist[$fname] = $f->toArray();
+        $flist[FSHelper::fixOSFileName($fname, TRUE)] = $f->toArray();
       }
     }
     return $flist;

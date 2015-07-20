@@ -239,6 +239,14 @@ div.docTitle {
   color: #dedbbd;
 }
 
+#titleLink {
+  width: 200px;
+  height: 50px;
+  border: 1px dashed red;
+  background-color: greenyellow;
+  display: block;
+}
+
 /* Middle
 -----------------------------------------------------------------------------*/
 #middle {
@@ -470,10 +478,10 @@ ul.themesList li {
 }
 
 .delete {
-  position: absolute;
+/*  position: absolute;
   right: 30px;
   top: 5px;
-  margin: 2px;
+  margin: 2px;*/
 }
 
 .edit {
@@ -484,7 +492,7 @@ ul.themesList li {
 }
 
 .delete img {
-  height: 16px;
+/*  height: 16px;*/
 }
 
 .docAnnotationHeader {
