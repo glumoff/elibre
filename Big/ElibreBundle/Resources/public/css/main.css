@@ -786,3 +786,29 @@ form table td {
   padding-left: 15px;
   list-style-type: none;
 }
+
+
+.border-default {
+  border-color: #ccc;
+}
+
+.border-primary {
+  border-color: #204d74;
+}
+
+.border-success {
+  border-color: #4cae4c;
+}
+
+.border-info {
+  border-color: #46b8da;
+}
+
+.border-warning {
+  border-color: #eea236;
+}
+
+.border-danger {
+  border-color: #d43f3a;
+}
+

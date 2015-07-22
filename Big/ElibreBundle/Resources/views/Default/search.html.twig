@@ -5,9 +5,13 @@
   <br>
   <center>
     <div>
-      <form>
-        <input type="text" name="needle" value="{{ needle }}"/>
-        <input type="submit" value="{% trans %}btn.search{% endtrans %}"/>
+      <form class="form-inline">
+        <div class="input-group">
+          <input type="text" name="needle" value="{{ needle }}" class="form-control border-info" placeholder="{% trans %}btn.search{% endtrans %}..." />
+          <span class="input-group-btn">
+            <button type="submit" class="btn btn-info" title="{% trans %}btn.search{% endtrans %}">&nbsp;<span class="glyphicon glyphicon-search"></span>&nbsp;</button>
+          </span>
+        </div>
       </form>
     </div>
   </center>

@@ -1,39 +1,56 @@
+{% use "BigElibreBundle:Default:bootstrap_3_layout.html.twig" %}
+
 {% trans_default_domain 'FOSUserBundle' %}
 
 
 
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register form-horizontal">
   <div id="fos_user_registration_form">
     <div class="error">
-    {{ form_errors(form) }}
-    {{ form_errors(form.email) }}
-    {{ form_errors(form.username) }}
-    {{ form_errors(form.plainPassword.first) }}
-    {{ form_errors(form.plainPassword.second) }}
+      {{ form_errors(form) }}
+      {{ form_errors(form.email) }}
+      {{ form_errors(form.username) }}
+      {{ form_errors(form.plainPassword.first) }}
+      {{ form_errors(form.plainPassword.second) }}
     </div>
-    
-    <table>
-      <tr>
-        <td>{{ form_label(form.email) }}</td>
-        <td>{{ form_widget(form.email) }}</td>
-      </tr>
-      <tr>
-        <td>{{ form_label(form.username) }}
-        <td>{{ form_widget(form.username) }}</td>
-      </tr>
-      <tr>
-        <td>{{ form_label(form.plainPassword.first) }}
-        <td>{{ form_widget(form.plainPassword.first) }}</td>
-      </tr>
-      <tr>
-        <td>{{ form_label(form.plainPassword.second) }}
-        <td>{{ form_widget(form.plainPassword.second) }}</td>
-      </tr>
-      {{ form_widget(form._token) }}
-    </table>
+
+    <div class="form-group">
+      <label for="fos_user_registration_form_email" class="col-sm-4 control-label">{{ 'form.email'|trans }}</label>
+      <div class="col-sm-6">
+        <input type="email" class="form-control input-sm" name="fos_user_registration_form[email]" id="fos_user_registration_form_email" required="required" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fos_user_registration_form_username" class="col-sm-4 control-label">{{ 'form.username'|trans }}</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control input-sm" name="fos_user_registration_form[username]" id="fos_user_registration_form_username" required="required" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fos_user_registration_form_plainPassword_first" class="col-sm-4 control-label">{{ 'form.password'|trans }}</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control input-sm" name="fos_user_registration_form[plainPassword][first]" id="fos_user_registration_form_plainPassword_first" required="required" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="fos_user_registration_form_plainPassword_second" class="col-sm-4 control-label">{{ 'form.password_confirmation'|trans }}</label>
+      <div class="col-sm-6">
+        <input type="password" class="form-control input-sm" name="fos_user_registration_form[plainPassword][second]" id="fos_user_registration_form_plainPassword_first" required="required" >
+      </div>
+    </div>
+    {{ form_widget(form._token) }}
+
   </div>
   {#  {{ form_widget(form) }} #}
   <div>
-    <input type="submit" value="{{ 'registration.submit'|trans }}" />
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-9">
+        <button type="submit" id="_submit" name="_submit" class="btn btn-sm btn-warning">
+          <span class="glyphicon glyphicon-check"></span> {{ 'registration.submit'|trans }}
+        </button>
+      </div>
+    </div>    
+
+
   </div>
 </form>
