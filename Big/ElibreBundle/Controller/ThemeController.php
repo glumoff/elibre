@@ -45,9 +45,9 @@ class ThemeController extends DefaultController {
       $this->templateParams['documents'] = $documentsList->getDocsArray();
       $this->templateParams['fileList'] = $this->getFileList($selectedTheme);
       
-      echo "<pre>";
-      var_dump($this->templateParams['fileList']);
-      echo "</pre>";
+//      echo "<pre>";
+//      var_dump($this->templateParams['fileList']);
+//      echo "</pre>";
 //    var_dump($this->templateParams['activeThemeRoot2']);
     }
     return $this->templateParams;
