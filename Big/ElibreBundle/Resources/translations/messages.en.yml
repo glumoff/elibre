@@ -67,6 +67,7 @@ doc:
       delete_all: Delete all
       delete_dbonly: Delete, but leave files
   download.label: Download document
+  open.label: Open document
   path.label: Path
   fullpath.label: Full path
   title.label: Title

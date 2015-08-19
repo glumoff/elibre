@@ -14,7 +14,7 @@
       </div>
     {% endif %}
 
-    <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
+    <a class="download" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'open' }) }}" title="{% trans %}doc.open.label{% endtrans %}">
       {% if doc.icon %} 
         <img src="{{ asset('bundles/bigelibre/images/icons/') }}{{ doc.icon }}" class="icon big"/>
       {% else %}
@@ -35,6 +35,9 @@
     <br/>
     <br/>
     <div>
+      <a class="btn btn-warning btn-sm" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'open' }) }}" title="{% trans %}doc.open.label{% endtrans %}">
+        <span class="glyphicon glyphicon-open"></span> {% trans %}doc.open.label{% endtrans %}
+      </a>
       <a class="btn btn-primary btn-sm" href="{{ path('big_elibre_doc', {'doc_id': doc.id,  'action' : 'download' }) }}" title="{% trans %}doc.download.label{% endtrans %}">
         <span class="glyphicon glyphicon-save"></span> {% trans %}doc.download.label{% endtrans %}
       </a>

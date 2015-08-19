@@ -14,7 +14,7 @@ big_elibre_doc:
     pattern:  /doc/{doc_id}/{action}
     defaults: { _controller: BigElibreBundle:Document:showDoc, action: view }
     requirements:
-        action: view|download|edit
+        action: view|download|edit|open
 
 
 register_wait_approvement:

@@ -41,6 +41,15 @@ class DocumentController extends DefaultController {
         return $this->doDownloadFile($doc);
         break;
 
+      case 'open':
+        /* @var $hm HistoryManager */
+        if ($doc) {
+          $hm = $this->get('history_manager');
+          $hm->saveHistory($this->getUser(), $doc);
+        }
+        return $this->doDownloadFile($doc, TRUE);
+        break;
+
       default:
         return $this->render('BigElibreBundle:Default:doc.html.twig', $this->getTemplateParams());
 //        break;
@@ -92,7 +101,7 @@ class DocumentController extends DefaultController {
    * @return Response
    * @throws type
    */
-  protected function doDownloadFile($doc = NULL) {
+  protected function doDownloadFile($doc = NULL, $open = FALSE) {
 //    return 
 //    return;    
 //          $response = new Response("");
@@ -110,7 +119,10 @@ class DocumentController extends DefaultController {
         // Set headers
         $response->headers->set('Cache-Control', 'private');
         $response->headers->set('Content-type', mime_content_type($fname_enc));
-        $response->headers->set('Content-Disposition', 'attachment; filename="' . FSHelper::getBaseName($fname) . '"');
+//        $response->headers->set('Content-type', 'application/force-download');
+        if (!$open) {
+          $response->headers->set('Content-Disposition', 'attachment; filename="' . FSHelper::getBaseName($fname) . '"');
+        }
         $response->headers->set('Content-length', filesize($fname_enc));
         // Send headers before outputting anything
         $response->sendHeaders();

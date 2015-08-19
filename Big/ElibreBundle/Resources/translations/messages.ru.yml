@@ -65,6 +65,7 @@ doc:
       delete_all: Удалить всё
       delete_dbonly: Удалить, но оставить файл на диске
   download.label: Скачать документ
+  open.label: Открыть документ
   path.label: Путь
   fullpath.label: Полный путь
   title.label: Название
